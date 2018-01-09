@@ -1,28 +1,20 @@
 package net.viperfish.latinQuiz.inflector;
 
 import net.viperfish.latinQuiz.core.Conjugator;
-import net.viperfish.latinQuiz.core.Tense;
 
-// TODO: Optimize
-public class AO2AmFixer implements Conjugator {
-
-	private Conjugator conj;
+public class AO2AmFixer extends FixerConjugator {
 
 	public AO2AmFixer(Conjugator c) {
-		this.conj = c;
+		super(c, 0, 0);
 	}
 
 	@Override
-	public String[][] inflect(String first, String stem, Tense t) {
-		String[][] result = conj.inflect(first, stem, t);
-		StringBuilder sb = new StringBuilder(result[0][0]);
+	protected void fix(StringBuilder sb) {
 		int begin = sb.lastIndexOf("ao");
 		if (begin == -1) {
-			return result;
+			return;
 		}
 		sb.replace(begin, begin + 2, "am");
-		result[0][0] = sb.toString();
-		return result;
 	}
 
 }

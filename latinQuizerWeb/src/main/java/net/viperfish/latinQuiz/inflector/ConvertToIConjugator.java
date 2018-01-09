@@ -13,8 +13,10 @@ public class ConvertToIConjugator implements Conjugator {
 
 	@Override
 	public String[][] inflect(String first, String stem, Tense t) {
-		stem = stem.substring(0, stem.length() - 1) + "i";
-		return src.inflect(first, stem, t);
+		StringBuilder sb = new StringBuilder(stem);
+		int begin = sb.lastIndexOf("e");
+		sb.setCharAt(begin, 'i');
+		return src.inflect(first, sb.toString(), t);
 	}
 
 }

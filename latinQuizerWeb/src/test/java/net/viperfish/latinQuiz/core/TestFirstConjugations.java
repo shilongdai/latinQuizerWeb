@@ -35,7 +35,7 @@ public class TestFirstConjugations {
 	@Test
 	public void testFirstConjugationPerfect() {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus");
-		String[][] expected = { { "cogitavi", "cogitavimus" }, { "cogitavisti", "cogitavitis" },
+		String[][] expected = { { "cogitavi", "cogitavimus" }, { "cogitavisti", "cogitavistis" },
 				{ "cogitavit", "cogitaverunt" } };
 		String[][] actual = verb.conjugate(Tense.PERFECT);
 		test(verb, expected, actual);

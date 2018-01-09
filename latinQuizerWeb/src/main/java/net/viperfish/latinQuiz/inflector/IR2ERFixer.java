@@ -2,10 +2,10 @@ package net.viperfish.latinQuiz.inflector;
 
 import net.viperfish.latinQuiz.core.Conjugator;
 
-public class IR2ORFixer extends FixerConjugator {
+public class IR2ERFixer extends FixerConjugator {
 
-	public IR2ORFixer(Conjugator c) {
-		super(c, 0, 0);
+	public IR2ERFixer(Conjugator c) {
+		super(c, 1, 0);
 	}
 
 	@Override
@@ -14,7 +14,7 @@ public class IR2ORFixer extends FixerConjugator {
 		if (begin == -1) {
 			return;
 		}
-		sb.replace(begin, begin + 2, "or");
+		sb.replace(begin, begin + 2, "er");
 	}
 
 }

@@ -18,9 +18,14 @@ import org.hibernate.validator.constraints.Range;
 import net.viperfish.latinQuiz.inflector.AO2AmFixer;
 import net.viperfish.latinQuiz.inflector.BaConjugator;
 import net.viperfish.latinQuiz.inflector.BiConjugator;
+import net.viperfish.latinQuiz.inflector.ConvertToIConjugator;
+import net.viperfish.latinQuiz.inflector.E2EMacronFixer;
+import net.viperfish.latinQuiz.inflector.EO2AMFixer;
+import net.viperfish.latinQuiz.inflector.ER2ARFixer;
 import net.viperfish.latinQuiz.inflector.EraConjugator;
 import net.viperfish.latinQuiz.inflector.EriConjugator;
 import net.viperfish.latinQuiz.inflector.IO2OFixer;
+import net.viperfish.latinQuiz.inflector.IR2ERFixer;
 import net.viperfish.latinQuiz.inflector.IR2ORFixer;
 import net.viperfish.latinQuiz.inflector.Int2UntFixer;
 import net.viperfish.latinQuiz.inflector.PassiveBerisFixer;
@@ -158,8 +163,8 @@ public class LatinVerb implements Serializable {
 
 	private void initConjugators() {
 		switch (conjugation) {
-		case 1:
-		case 2: {
+		case ConjugationMapper.FIRST_CONJ:
+		case ConjugationMapper.SECOND_CONJ: {
 			conjugatorMappings.put(Tense.PRESENT,
 					new PresentStrapStemConjugator(new StemPlusPresentActiveEndingsConjugator()));
 			conjugatorMappings.put(Tense.PRESENT_PASSIVE,
@@ -178,6 +183,27 @@ public class LatinVerb implements Serializable {
 					new AO2AmFixer(new EraConjugator(new StemPlusPresentActiveEndingsConjugator()))));
 			conjugatorMappings.put(Tense.FUTURE_PERFECT, new PerfectActiveStrapStemConjugator(
 					new IO2OFixer(new EriConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			break;
+		}
+		case ConjugationMapper.THIRD_CONJ_O: {
+			conjugatorMappings.put(Tense.PRESENT, new PresentStrapStemConjugator(
+					new Int2UntFixer(new ConvertToIConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.IMPERFECT, new PresentStrapStemConjugator(
+					new AO2AmFixer(new BaConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.FUTURE,
+					new PresentStrapStemConjugator(new EO2AMFixer(new StemPlusPresentActiveEndingsConjugator())));
+			conjugatorMappings.put(Tense.PERFECT,
+					new PerfectActiveStrapStemConjugator(new StemPlusPerfectActiveEndingsConjugator()));
+			conjugatorMappings.put(Tense.PLUPERFECT, new PerfectActiveStrapStemConjugator(
+					new AO2AmFixer(new EraConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.FUTURE_PERFECT, new PerfectActiveStrapStemConjugator(
+					new IO2OFixer(new EriConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.PRESENT_PASSIVE, new PresentStrapStemConjugator(new PassivePresentFixer(
+					new IR2ERFixer(new Int2UntFixer(new ConvertToIConjugator(new StemPlusPassiveEndings()))))));
+			conjugatorMappings.put(Tense.IMPERFECT_PASSIVE,
+					new PresentStrapStemConjugator(new BaConjugator(new StemPlusPassiveEndings())));
+			conjugatorMappings.put(Tense.FUTURE_PASSIVE,
+					new PresentStrapStemConjugator(new E2EMacronFixer(new ER2ARFixer(new StemPlusPassiveEndings()))));
 			break;
 		}
 		}

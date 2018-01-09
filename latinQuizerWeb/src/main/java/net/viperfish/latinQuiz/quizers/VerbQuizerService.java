@@ -1,6 +1,7 @@
 package net.viperfish.latinQuiz.quizers;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -66,7 +67,7 @@ public final class VerbQuizerService {
 			HashSet<String> choices = new HashSet<>();
 			String correctChoice = conjugated[personIndex][numberIndex];
 			choices.add(correctChoice);
-			generateChoices(conjugated, 4, choices);
+			generateChoices(l, 4, choices);
 			List<String> choiceList = new LinkedList<>(choices);
 			Collections.shuffle(choiceList);
 			MultipleChoiceQuestion question = createMultipleChoice(sb.toString(), choiceList, correctChoice);
@@ -101,11 +102,10 @@ public final class VerbQuizerService {
 		return l;
 	}
 
-	private void generateChoices(String[][] conjugated, int amount, Set<String> choices) {
+	private void generateChoices(LatinVerb v, int amount, Set<String> choices) {
+		List<String> mesh = createMesh(v);
 		while (choices.size() != amount) {
-			int personIndex = rand.nextInt(conjugated.length);
-			int numberIndex = rand.nextInt(conjugated[personIndex].length);
-			choices.add(conjugated[personIndex][numberIndex]);
+			choices.add(mesh.get(rand.nextInt(mesh.size())));
 		}
 	}
 
@@ -176,6 +176,31 @@ public final class VerbQuizerService {
 			throw new IllegalArgumentException(t.toString());
 		}
 		}
+	}
+
+	private List<String> createMesh(LatinVerb v) {
+		List<String> result = new LinkedList<>();
+		result.addAll(flatten(v.conjugate(Tense.PRESENT)));
+		result.addAll(flatten(v.conjugate(Tense.FUTURE)));
+		result.addAll(flatten(v.conjugate(Tense.IMPERFECT)));
+		result.addAll(flatten(v.conjugate(Tense.PERFECT)));
+		result.addAll(flatten(v.conjugate(Tense.PLUPERFECT)));
+		result.addAll(flatten(v.conjugate(Tense.FUTURE_PERFECT)));
+		result.addAll(flatten(v.conjugate(Tense.PRESENT_PASSIVE)));
+		result.addAll(flatten(v.conjugate(Tense.IMPERFECT_PASSIVE)));
+		result.addAll(flatten(v.conjugate(Tense.FUTURE_PASSIVE)));
+		return result;
+	}
+
+	private <T> List<T> flatten(T[][] src) {
+		List<T> result = new ArrayList<>();
+		for (int i = 0; i < src.length; ++i) {
+			for (int j = 0; j < src[i].length; ++j) {
+				result.add(src[i][j]);
+			}
+		}
+		return result;
+
 	}
 
 }
