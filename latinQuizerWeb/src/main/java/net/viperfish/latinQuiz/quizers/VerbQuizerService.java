@@ -180,15 +180,9 @@ public final class VerbQuizerService {
 
 	private List<String> createMesh(LatinVerb v) {
 		List<String> result = new LinkedList<>();
-		result.addAll(flatten(v.conjugate(Tense.PRESENT)));
-		result.addAll(flatten(v.conjugate(Tense.FUTURE)));
-		result.addAll(flatten(v.conjugate(Tense.IMPERFECT)));
-		result.addAll(flatten(v.conjugate(Tense.PERFECT)));
-		result.addAll(flatten(v.conjugate(Tense.PLUPERFECT)));
-		result.addAll(flatten(v.conjugate(Tense.FUTURE_PERFECT)));
-		result.addAll(flatten(v.conjugate(Tense.PRESENT_PASSIVE)));
-		result.addAll(flatten(v.conjugate(Tense.IMPERFECT_PASSIVE)));
-		result.addAll(flatten(v.conjugate(Tense.FUTURE_PASSIVE)));
+		for (Tense t : Tense.values()) {
+			result.addAll(flatten(v.conjugate(t)));
+		}
 		return result;
 	}
 
