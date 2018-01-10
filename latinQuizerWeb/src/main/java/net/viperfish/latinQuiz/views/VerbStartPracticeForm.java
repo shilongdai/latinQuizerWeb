@@ -1,22 +1,27 @@
 package net.viperfish.latinQuiz.views;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
 public class VerbStartPracticeForm {
 
 	@Range(min = 1, max = 100, message = "{verbForm.inappAmount}")
 	private int amount;
-	private boolean firstConj;
+	@NotEmpty(message = "{verbForm.emptyConj}")
+	private List<Integer> conjugations;
 
 	public VerbStartPracticeForm() {
 		amount = 10;
-		firstConj = true;
+		conjugations = new LinkedList<>();
 	}
 
-	public VerbStartPracticeForm(int amount, boolean firstConj) {
+	public VerbStartPracticeForm(int amount, List<Integer> conjugations) {
 		super();
 		this.amount = amount;
-		this.firstConj = firstConj;
+		this.conjugations = conjugations;
 	}
 
 	public int getAmount() {
@@ -27,12 +32,12 @@ public class VerbStartPracticeForm {
 		this.amount = amount;
 	}
 
-	public boolean isFirstConj() {
-		return firstConj;
+	public List<Integer> getConjugations() {
+		return conjugations;
 	}
 
-	public void setFirstConj(boolean firstConj) {
-		this.firstConj = firstConj;
+	public void setConjugations(List<Integer> conjugations) {
+		this.conjugations = conjugations;
 	}
 
 	@Override
@@ -40,7 +45,7 @@ public class VerbStartPracticeForm {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + amount;
-		result = prime * result + (firstConj ? 1231 : 1237);
+		result = prime * result + ((conjugations == null) ? 0 : conjugations.hashCode());
 		return result;
 	}
 
@@ -55,7 +60,10 @@ public class VerbStartPracticeForm {
 		VerbStartPracticeForm other = (VerbStartPracticeForm) obj;
 		if (amount != other.amount)
 			return false;
-		if (firstConj != other.firstConj)
+		if (conjugations == null) {
+			if (other.conjugations != null)
+				return false;
+		} else if (!conjugations.equals(other.conjugations))
 			return false;
 		return true;
 	}

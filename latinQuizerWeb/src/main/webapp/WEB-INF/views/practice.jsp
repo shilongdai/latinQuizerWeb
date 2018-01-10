@@ -30,8 +30,7 @@
 					modelAttribute="verbForm">
 
 					<c:set var="amountErrors">
-						<form:errors element="span" path="amount"
-							cssClass="help-block" />
+						<form:errors element="span" path="amount" cssClass="help-block" />
 					</c:set>
 
 					<c:choose>
@@ -61,10 +60,41 @@
 
 					<div class="form-group">
 						<div class="checkbox col-sm-offset-2 col-sm-8">
-							<label> <form:checkbox path="firstConj" /> <spring:message
-									code="practice.firstConj"></spring:message>
+							<label> <form:checkbox path="conjugations" value="1" />
+								<spring:message code="practice.firstConj"></spring:message>
 							</label>
 						</div>
+
+						<div class="checkbox-inline">
+							<label> <form:checkbox path="conjugations" value="2" />
+								<spring:message code="practice.secondConj"></spring:message>
+							</label>
+						</div>
+
+						<div class="ccheckbox-inline">
+							<label> <form:checkbox path="conjugations" value="3" />
+								<spring:message code="practice.thirdOConj"></spring:message>
+							</label>
+						</div>
+
+						<div class="checkbox-inline">
+							<label> <form:checkbox path="conjugations" value="5" />
+								<spring:message code="practice.thirdIOConj"></spring:message>
+							</label>
+						</div>
+
+						<div class="checkbox-inline">
+							<label> <form:checkbox path="conjugations" value="4" />
+								<spring:message code="practice.fourthConj"></spring:message>
+							</label>
+						</div>
+					</div>
+					<div class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<form:errors path="conjugations"></form:errors>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-2">

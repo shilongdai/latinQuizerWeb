@@ -1,8 +1,10 @@
 package net.viperfish.latinQuiz.core;
 
 import java.io.Serializable;
+import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -20,10 +22,12 @@ import net.viperfish.latinQuiz.inflector.BaConjugator;
 import net.viperfish.latinQuiz.inflector.BiConjugator;
 import net.viperfish.latinQuiz.inflector.ConvertToIConjugator;
 import net.viperfish.latinQuiz.inflector.E2EMacronFixer;
+import net.viperfish.latinQuiz.inflector.EConjugator;
 import net.viperfish.latinQuiz.inflector.EO2AMFixer;
 import net.viperfish.latinQuiz.inflector.ER2ARFixer;
 import net.viperfish.latinQuiz.inflector.EraConjugator;
 import net.viperfish.latinQuiz.inflector.EriConjugator;
+import net.viperfish.latinQuiz.inflector.INT2IUNTFixer;
 import net.viperfish.latinQuiz.inflector.IO2OFixer;
 import net.viperfish.latinQuiz.inflector.IR2ERFixer;
 import net.viperfish.latinQuiz.inflector.IR2ORFixer;
@@ -58,6 +62,9 @@ public class LatinVerb implements Serializable {
 	@Transient
 	private boolean initialized;
 
+	private static final Pattern DIACRITICS_AND_FRIENDS = Pattern
+			.compile("[\\p{InCombiningDiacriticalMarks}\\p{IsLm}\\p{IsSk}]+");
+
 	public LatinVerb(int conjugation, String presentFirst, String genitive, String perfectFirst, String passiveFirst) {
 		this();
 		this.conjugation = conjugation;
@@ -85,12 +92,14 @@ public class LatinVerb implements Serializable {
 		case FUTURE_PASSIVE:
 		case IMPERFECT:
 		case IMPERFECT_PASSIVE: {
-			return conjugatorMappings.get(tense).inflect(presentFirst, genitive, tense);
+			return conjugatorMappings.get(tense).inflect(stripDiacritics(presentFirst), stripDiacritics(genitive),
+					tense);
 		}
 		case PERFECT:
 		case PLUPERFECT:
 		case FUTURE_PERFECT: {
-			return conjugatorMappings.get(tense).inflect(presentFirst, perfectFirst, tense);
+			return conjugatorMappings.get(tense).inflect(stripDiacritics(presentFirst), stripDiacritics(perfectFirst),
+					tense);
 		}
 		default: {
 			throw new IllegalArgumentException(tense.toString());
@@ -206,6 +215,48 @@ public class LatinVerb implements Serializable {
 					new PresentStrapStemConjugator(new E2EMacronFixer(new ER2ARFixer(new StemPlusPassiveEndings()))));
 			break;
 		}
+		case ConjugationMapper.THIRD_CONJ_IO: {
+			conjugatorMappings.put(Tense.PRESENT, new PresentStrapStemConjugator(
+					new INT2IUNTFixer(new ConvertToIConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.IMPERFECT,
+					new PresentStrapStemConjugator(new AO2AmFixer(new ConvertToIConjugator(
+							new EConjugator(new BaConjugator(new StemPlusPresentActiveEndingsConjugator()))))));
+			conjugatorMappings.put(Tense.FUTURE, new PresentStrapStemConjugator(new EO2AMFixer(
+					new ConvertToIConjugator(new EConjugator(new StemPlusPresentActiveEndingsConjugator())))));
+			conjugatorMappings.put(Tense.PERFECT,
+					new PerfectActiveStrapStemConjugator(new StemPlusPerfectActiveEndingsConjugator()));
+			conjugatorMappings.put(Tense.PLUPERFECT, new PerfectActiveStrapStemConjugator(
+					new AO2AmFixer(new EraConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.FUTURE_PERFECT, new PerfectActiveStrapStemConjugator(
+					new IO2OFixer(new EriConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.PRESENT_PASSIVE, new PresentStrapStemConjugator(new PassivePresentFixer(
+					new IR2ERFixer(new INT2IUNTFixer(new ConvertToIConjugator(new StemPlusPassiveEndings()))))));
+			conjugatorMappings.put(Tense.IMPERFECT_PASSIVE, new PresentStrapStemConjugator(
+					new ConvertToIConjugator(new EConjugator(new BaConjugator(new StemPlusPassiveEndings())))));
+			conjugatorMappings.put(Tense.FUTURE_PASSIVE, new PresentStrapStemConjugator(new E2EMacronFixer(
+					new ER2ARFixer(new ConvertToIConjugator(new EConjugator(new StemPlusPassiveEndings()))))));
+			break;
+		}
+		case ConjugationMapper.FOURTH_CONJ: {
+			conjugatorMappings.put(Tense.PRESENT,
+					new PresentStrapStemConjugator(new INT2IUNTFixer(new StemPlusPresentActiveEndingsConjugator())));
+			conjugatorMappings.put(Tense.IMPERFECT, new PresentStrapStemConjugator(
+					new AO2AmFixer(new EConjugator(new BaConjugator(new StemPlusPresentActiveEndingsConjugator())))));
+			conjugatorMappings.put(Tense.FUTURE, new PresentStrapStemConjugator(
+					new EO2AMFixer(new EConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.PERFECT,
+					new PerfectActiveStrapStemConjugator(new StemPlusPerfectActiveEndingsConjugator()));
+			conjugatorMappings.put(Tense.PLUPERFECT, new PerfectActiveStrapStemConjugator(
+					new AO2AmFixer(new EraConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.FUTURE_PERFECT, new PerfectActiveStrapStemConjugator(
+					new IO2OFixer(new EriConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.PRESENT_PASSIVE, new PresentStrapStemConjugator(
+					new PassivePresentFixer(new INT2IUNTFixer(new StemPlusPassiveEndings()))));
+			conjugatorMappings.put(Tense.IMPERFECT_PASSIVE,
+					new PresentStrapStemConjugator(new EConjugator(new BaConjugator(new StemPlusPassiveEndings()))));
+			conjugatorMappings.put(Tense.FUTURE_PASSIVE,
+					new PresentStrapStemConjugator(new ER2ARFixer(new EConjugator(new StemPlusPassiveEndings()))));
+		}
 		}
 	}
 
@@ -256,6 +307,12 @@ public class LatinVerb implements Serializable {
 		} else if (!presentFirst.equals(other.presentFirst))
 			return false;
 		return true;
+	}
+
+	private static String stripDiacritics(String str) {
+		str = Normalizer.normalize(str, Normalizer.Form.NFD);
+		str = DIACRITICS_AND_FRIENDS.matcher(str).replaceAll("");
+		return str;
 	}
 
 }
