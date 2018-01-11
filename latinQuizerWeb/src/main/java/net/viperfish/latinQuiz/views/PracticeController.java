@@ -66,6 +66,9 @@ public class PracticeController {
 	@RequestMapping(value = "verb/{count}", method = RequestMethod.POST)
 	public String answerVerbPractice(Answer answer, HttpSession session, @PathVariable("count") int count) {
 		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
+		if (answer == null) {
+			return "redirect:/practice";
+		}
 		answers[count] = answer;
 		if (count == answers.length - 1) {
 			if (!(boolean) session.getAttribute("review")) {
@@ -80,6 +83,9 @@ public class PracticeController {
 	public String getVerbPractice(HttpSession session, @PathVariable("count") int count, Map<String, Object> model) {
 		MultipleChoiceQuestion[] questions = (MultipleChoiceQuestion[]) session.getAttribute("questions");
 		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
+		if (answers == null) {
+			return "redirect:/practice";
+		}
 		model.put("current", count);
 		model.put("count", questions.length);
 		model.put("question", questions[count]);
@@ -94,6 +100,9 @@ public class PracticeController {
 	public String verbReport(Map<String, Object> model, HttpSession session) {
 		MultipleChoiceQuestion[] questions = (MultipleChoiceQuestion[]) session.getAttribute("questions");
 		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
+		if (answers == null) {
+			return "redirect:/practice";
+		}
 		int total = answers.length;
 		int correct = 0;
 		for (int i = 0; i < answers.length; ++i) {
