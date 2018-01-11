@@ -7,14 +7,16 @@
 	<h1>
 		<spring:message code="underconstruction"></spring:message>
 	</h1>
+	
+	<img src="https://pbs.twimg.com/media/CgU9bWUWcAAFJNg.jpg:large"></img>
 
 	<p>
 		<spring:message code="redirecting"></spring:message>
-		<span id="timer">5</span>
+		<p id="timer">5</p>
 		<script>
 			window.setInterval(function() {
 				var txt = $("#timer").text();
-				if (txt == 0) {
+				if (txt == 1) {
 					window.location.replace("<c:url value='/'></c:url>");
 				}
 				$("#timer").html(txt - 1);

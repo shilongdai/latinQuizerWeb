@@ -33,11 +33,11 @@ public final class VerbQuizerService {
 		this.database = database;
 	}
 
-	public MultipleChoiceQuestion[] generateQuestions(int length, int[] conjugations)
+	public MultipleChoiceQuestion[] generateQuestions(int length, Integer[] conjugations)
 			throws InsufficientWordBankException {
 		checkParameters(length, conjugations);
 		if (conjugations.length == 0) {
-			conjugations = new int[4];
+			conjugations = new Integer[4];
 			for (int i = 0; i < 4; ++i) {
 				conjugations[i] = i + 1;
 			}
@@ -56,6 +56,10 @@ public final class VerbQuizerService {
 			sb.append(l.getDictionaryEntry()).append(" in ");
 			Tense t = Tense.values()[rand.nextInt(Tense.values().length)];
 			String[][] conjugated = l.conjugate(t);
+			while (conjugated == null) {
+				t = Tense.values()[rand.nextInt(Tense.values().length)];
+				conjugated = l.conjugate(t);
+			}
 			int personIndex = rand.nextInt(conjugated.length);
 			int numberIndex = rand.nextInt(conjugated[personIndex].length);
 			sb.append(personToEnglish(personIndex)).append(" ").append(numberToEnglish(numberIndex)).append(" ")
@@ -109,7 +113,7 @@ public final class VerbQuizerService {
 		}
 	}
 
-	private void checkParameters(int length, int[] conjugations) throws InsufficientWordBankException {
+	private void checkParameters(int length, Integer[] conjugations) throws InsufficientWordBankException {
 		if (database.count() == 0) {
 			throw new InsufficientWordBankException();
 		}

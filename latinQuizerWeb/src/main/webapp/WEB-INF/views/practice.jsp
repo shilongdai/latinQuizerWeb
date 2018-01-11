@@ -59,7 +59,7 @@
 					</c:choose>
 
 					<div class="form-group">
-						<div class="checkbox col-sm-offset-2 col-sm-8">
+						<div class="checkbox-inline col-sm-offset-2">
 							<label> <form:checkbox path="conjugations" value="1" />
 								<spring:message code="practice.firstConj"></spring:message>
 							</label>
@@ -71,7 +71,7 @@
 							</label>
 						</div>
 
-						<div class="ccheckbox-inline">
+						<div class="checkbox-inline">
 							<label> <form:checkbox path="conjugations" value="3" />
 								<spring:message code="practice.thirdOConj"></spring:message>
 							</label>
@@ -89,13 +89,8 @@
 							</label>
 						</div>
 					</div>
-					<div class="alert alert-danger alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<form:errors path="conjugations"></form:errors>
-					</div>
+					<form:errors path="conjugations" element="div"
+						cssClass="alert alert-danger alert-dismissible"></form:errors>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-2">
 							<div class="btn-group">

@@ -98,6 +98,9 @@ public class LatinVerb implements Serializable {
 		case PERFECT:
 		case PLUPERFECT:
 		case FUTURE_PERFECT: {
+			if (perfectFirst == null || perfectFirst.length() == 0) {
+				return null;
+			}
 			return conjugatorMappings.get(tense).inflect(stripDiacritics(presentFirst), stripDiacritics(perfectFirst),
 					tense);
 		}

@@ -44,7 +44,10 @@ public class PracticeController {
 			return "practice";
 		}
 		try {
-			MultipleChoiceQuestion[] generated = verbService.generateQuestions(verbForm.getAmount(), new int[0]);
+			Integer[] selectedConjugations = verbForm.getConjugations()
+					.toArray(new Integer[verbForm.getConjugations().size()]);
+			MultipleChoiceQuestion[] generated = verbService.generateQuestions(verbForm.getAmount(),
+					selectedConjugations);
 			Answer[] answers = new Answer[generated.length];
 			for (int i = 0; i < answers.length; ++i) {
 				answers[i] = new Answer();

@@ -30,7 +30,7 @@ public class FirstConjugationVerbQuizerTest {
 	public void testRegular() throws IOException, InsufficientWordBankException {
 		VerbQuizerService quizer = new VerbQuizerService();
 		quizer.setDatabase(db);
-		MultipleChoiceQuestion[] question = quizer.generateQuestions(10, new int[0]);
+		MultipleChoiceQuestion[] question = quizer.generateQuestions(10, new Integer[0]);
 		Assert.assertEquals(10, question.length);
 		for (MultipleChoiceQuestion m : question) {
 			System.out.println(m.getQuestion());
