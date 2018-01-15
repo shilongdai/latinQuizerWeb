@@ -131,7 +131,7 @@ public final class VerbQuizerService {
 		if (database.count() == 0) {
 			throw new InsufficientWordBankException();
 		}
-		if (conjugations.length > 5) {
+		if (conjugations.length > 6) {
 			throw new IllegalArgumentException(Arrays.toString(conjugations));
 		}
 	}
@@ -171,6 +171,9 @@ public final class VerbQuizerService {
 
 	private <T> List<T> flatten(T[][] src) {
 		List<T> result = new ArrayList<>();
+		if (src == null) {
+			return result;
+		}
 		for (int i = 0; i < src.length; ++i) {
 			for (int j = 0; j < src[i].length; ++j) {
 				result.add(src[i][j]);
