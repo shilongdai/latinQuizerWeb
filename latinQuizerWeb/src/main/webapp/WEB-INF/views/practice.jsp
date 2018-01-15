@@ -59,31 +59,31 @@
 					</c:choose>
 
 					<div class="form-group">
-						<div class="checkbox-inline col-sm-offset-2">
+						<div class="checkbox col-sm-offset-2">
 							<label> <form:checkbox path="conjugations" value="1" />
 								<spring:message code="practice.firstConj"></spring:message>
 							</label>
 						</div>
 
-						<div class="checkbox-inline">
+						<div class="checkbox col-sm-offset-2">
 							<label> <form:checkbox path="conjugations" value="2" />
 								<spring:message code="practice.secondConj"></spring:message>
 							</label>
 						</div>
 
-						<div class="checkbox-inline">
+						<div class="checkbox col-sm-offset-2">
 							<label> <form:checkbox path="conjugations" value="3" />
 								<spring:message code="practice.thirdOConj"></spring:message>
 							</label>
 						</div>
 
-						<div class="checkbox-inline">
+						<div class="checkbox col-sm-offset-2">
 							<label> <form:checkbox path="conjugations" value="5" />
 								<spring:message code="practice.thirdIOConj"></spring:message>
 							</label>
 						</div>
 
-						<div class="checkbox-inline">
+						<div class="checkbox col-sm-offset-2">
 							<label> <form:checkbox path="conjugations" value="4" />
 								<spring:message code="practice.fourthConj"></spring:message>
 							</label>

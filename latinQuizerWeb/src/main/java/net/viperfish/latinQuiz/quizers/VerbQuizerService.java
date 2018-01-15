@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import net.viperfish.latinQuiz.core.LatinVerb;
@@ -23,6 +25,7 @@ public final class VerbQuizerService {
 
 	private SecureRandom rand;
 	private LatinVerbDatabase database;
+	private MessageSource i18n;
 
 	public VerbQuizerService() {
 		rand = new SecureRandom();
@@ -33,49 +36,60 @@ public final class VerbQuizerService {
 		this.database = database;
 	}
 
+	@Autowired
+	public void setI18n(MessageSource i18n) {
+		this.i18n = i18n;
+	}
+
 	public MultipleChoiceQuestion[] generateQuestions(int length, Integer[] conjugations)
 			throws InsufficientWordBankException {
+		// make sure that there are words in the word bank and that there are the
+		// established conjugations
 		checkParameters(length, conjugations);
-		if (conjugations.length == 0) {
-			conjugations = new Integer[4];
-			for (int i = 0; i < 4; ++i) {
-				conjugations[i] = i + 1;
-			}
-		}
 		int currentConj = 0;
 		HashSet<String> buffer = new HashSet<>();
 		List<MultipleChoiceQuestion> result = new LinkedList<>();
 		for (int k = 0; k < length; ++k) {
+			// get a random verb from the current selecting conjugation
 			LatinVerb l = getVerb(conjugations[currentConj]);
 			if (l == null) {
 				currentConj = (currentConj + 1) % conjugations.length;
 				k--;
 				continue;
 			}
-			StringBuilder sb = new StringBuilder("Conjugate the verb ");
-			sb.append(l.getDictionaryEntry()).append(" in ");
+			// select and conjugate a random tense
 			Tense t = Tense.values()[rand.nextInt(Tense.values().length)];
 			String[][] conjugated = l.conjugate(t);
 			while (conjugated == null) {
 				t = Tense.values()[rand.nextInt(Tense.values().length)];
 				conjugated = l.conjugate(t);
 			}
+			// select the right answer
 			int personIndex = rand.nextInt(conjugated.length);
 			int numberIndex = rand.nextInt(conjugated[personIndex].length);
-			sb.append(personToEnglish(personIndex)).append(" ").append(numberToEnglish(numberIndex)).append(" ")
-					.append(tenseToEnglish(t));
-			if (buffer.contains(sb.toString())) {
+
+			// generate the question
+			String localizedTense = i18n.getMessage(t.name(), null, LocaleContextHolder.getLocale());
+			String localizedPerson = i18n.getMessage(personToKey(personIndex), null, LocaleContextHolder.getLocale());
+			String localizedNumber = i18n.getMessage(numberToKey(numberIndex), null, LocaleContextHolder.getLocale());
+			String question = i18n.getMessage("practice.verb.multipleChoice", new Object[] { l.getDictionaryEntry(),
+					localizedTense, "indicative", localizedPerson, localizedNumber }, LocaleContextHolder.getLocale());
+
+			// if this question exists, generate another one
+			if (buffer.contains(question)) {
 				--k;
 				continue;
 			}
 			HashSet<String> choices = new HashSet<>();
 			String correctChoice = conjugated[personIndex][numberIndex];
 			choices.add(correctChoice);
+			// create the choices
 			generateChoices(l, 4, choices);
 			List<String> choiceList = new LinkedList<>(choices);
 			Collections.shuffle(choiceList);
-			MultipleChoiceQuestion question = createMultipleChoice(sb.toString(), choiceList, correctChoice);
-			result.add(question);
+			MultipleChoiceQuestion questionResult = createMultipleChoice(question, choiceList, correctChoice);
+			result.add(questionResult);
+			buffer.add(question);
 			currentConj = (currentConj + 1) % conjugations.length;
 		}
 		Collections.shuffle(result);
@@ -117,12 +131,12 @@ public final class VerbQuizerService {
 		if (database.count() == 0) {
 			throw new InsufficientWordBankException();
 		}
-		if (conjugations.length > 4) {
+		if (conjugations.length > 5) {
 			throw new IllegalArgumentException(Arrays.toString(conjugations));
 		}
 	}
 
-	private String personToEnglish(int num) {
+	private String personToKey(int num) {
 		switch (num) {
 		case 0: {
 			return "first";
@@ -139,46 +153,11 @@ public final class VerbQuizerService {
 		}
 	}
 
-	private String numberToEnglish(int num) {
+	private String numberToKey(int num) {
 		if (num == 0) {
 			return "singular";
 		} else {
 			return "plural";
-		}
-	}
-
-	private String tenseToEnglish(Tense t) {
-		switch (t) {
-		case FUTURE: {
-			return "future active";
-		}
-		case FUTURE_PASSIVE: {
-			return "future passive";
-		}
-		case FUTURE_PERFECT: {
-			return "future-perfect active";
-		}
-		case IMPERFECT: {
-			return "imperfect active";
-		}
-		case IMPERFECT_PASSIVE: {
-			return "imperfect passive";
-		}
-		case PERFECT: {
-			return "perfect active";
-		}
-		case PLUPERFECT: {
-			return "pluperfect active";
-		}
-		case PRESENT: {
-			return "present active";
-		}
-		case PRESENT_PASSIVE: {
-			return "present passive";
-		}
-		default: {
-			throw new IllegalArgumentException(t.toString());
-		}
 		}
 	}
 

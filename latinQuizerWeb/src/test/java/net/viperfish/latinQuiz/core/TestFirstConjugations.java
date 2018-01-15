@@ -86,6 +86,20 @@ public class TestFirstConjugations {
 		test(verb, expected, actual);
 	}
 
+	@Test
+	public void testFirstConjugationPerfectPassive() {
+		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatum");
+		String[][] expected = { { "cogitatum sum", "cogitati sumus" }, { "cogitatum es", "cogitati estis" },
+				{ "cogitatum est", "cogitati sunt" } };
+		String[][] actual = verb.conjugate(Tense.PERFECT_PASSIVE);
+		for (int i = 0; i < actual.length; ++i) {
+			for (int j = 0; j < actual[i].length; ++j) {
+				System.out.printf("i:%d j:%d  result:%s\n", i, j, actual[i][j]);
+			}
+		}
+		test(verb, expected, actual);
+	}
+
 	private void test(LatinVerb verb, String[][] expected, String[][] actual) {
 		for (int i = 0; i < 3; ++i) {
 			Assert.assertArrayEquals(expected[i], actual[i]);

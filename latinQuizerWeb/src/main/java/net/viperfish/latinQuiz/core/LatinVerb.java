@@ -20,6 +20,7 @@ import org.hibernate.validator.constraints.Range;
 import net.viperfish.latinQuiz.inflector.AO2AmFixer;
 import net.viperfish.latinQuiz.inflector.BaConjugator;
 import net.viperfish.latinQuiz.inflector.BiConjugator;
+import net.viperfish.latinQuiz.inflector.CombiningConjugator;
 import net.viperfish.latinQuiz.inflector.ConvertToIConjugator;
 import net.viperfish.latinQuiz.inflector.E2EMacronFixer;
 import net.viperfish.latinQuiz.inflector.EConjugator;
@@ -32,6 +33,7 @@ import net.viperfish.latinQuiz.inflector.IO2OFixer;
 import net.viperfish.latinQuiz.inflector.IR2ERFixer;
 import net.viperfish.latinQuiz.inflector.IR2ORFixer;
 import net.viperfish.latinQuiz.inflector.Int2UntFixer;
+import net.viperfish.latinQuiz.inflector.NullConjugator;
 import net.viperfish.latinQuiz.inflector.PassiveBerisFixer;
 import net.viperfish.latinQuiz.inflector.PassivePresentFixer;
 import net.viperfish.latinQuiz.inflector.PerfectActiveStrapStemConjugator;
@@ -39,6 +41,8 @@ import net.viperfish.latinQuiz.inflector.PresentStrapStemConjugator;
 import net.viperfish.latinQuiz.inflector.StemPlusPassiveEndings;
 import net.viperfish.latinQuiz.inflector.StemPlusPerfectActiveEndingsConjugator;
 import net.viperfish.latinQuiz.inflector.StemPlusPresentActiveEndingsConjugator;
+import net.viperfish.latinQuiz.inflector.SumConjugator;
+import net.viperfish.latinQuiz.inflector.UM2IFixer;
 
 @Entity
 @Table(name = "Verbs")
@@ -102,6 +106,13 @@ public class LatinVerb implements Serializable {
 				return null;
 			}
 			return conjugatorMappings.get(tense).inflect(stripDiacritics(presentFirst), stripDiacritics(perfectFirst),
+					tense);
+		}
+		case PERFECT_PASSIVE: {
+			if (passiveFirst == null || passiveFirst.length() == 0) {
+				return null;
+			}
+			return conjugatorMappings.get(tense).inflect(stripDiacritics(presentFirst), stripDiacritics(passiveFirst),
 					tense);
 		}
 		default: {
@@ -174,6 +185,10 @@ public class LatinVerb implements Serializable {
 	}
 
 	private void initConjugators() {
+
+		Conjugator perfectPassiveConjugator = new CombiningConjugator(new UM2IFixer(new NullConjugator(3, 2)), " ",
+				new SumConjugator());
+
 		switch (conjugation) {
 		case ConjugationMapper.FIRST_CONJ:
 		case ConjugationMapper.SECOND_CONJ: {
@@ -195,6 +210,7 @@ public class LatinVerb implements Serializable {
 					new AO2AmFixer(new EraConjugator(new StemPlusPresentActiveEndingsConjugator()))));
 			conjugatorMappings.put(Tense.FUTURE_PERFECT, new PerfectActiveStrapStemConjugator(
 					new IO2OFixer(new EriConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.PERFECT_PASSIVE, perfectPassiveConjugator);
 			break;
 		}
 		case ConjugationMapper.THIRD_CONJ_O: {
@@ -216,6 +232,7 @@ public class LatinVerb implements Serializable {
 					new PresentStrapStemConjugator(new BaConjugator(new StemPlusPassiveEndings())));
 			conjugatorMappings.put(Tense.FUTURE_PASSIVE,
 					new PresentStrapStemConjugator(new E2EMacronFixer(new ER2ARFixer(new StemPlusPassiveEndings()))));
+			conjugatorMappings.put(Tense.PERFECT_PASSIVE, perfectPassiveConjugator);
 			break;
 		}
 		case ConjugationMapper.THIRD_CONJ_IO: {
@@ -238,6 +255,7 @@ public class LatinVerb implements Serializable {
 					new ConvertToIConjugator(new EConjugator(new BaConjugator(new StemPlusPassiveEndings())))));
 			conjugatorMappings.put(Tense.FUTURE_PASSIVE, new PresentStrapStemConjugator(new E2EMacronFixer(
 					new ER2ARFixer(new ConvertToIConjugator(new EConjugator(new StemPlusPassiveEndings()))))));
+			conjugatorMappings.put(Tense.PERFECT_PASSIVE, perfectPassiveConjugator);
 			break;
 		}
 		case ConjugationMapper.FOURTH_CONJ: {
@@ -259,6 +277,7 @@ public class LatinVerb implements Serializable {
 					new PresentStrapStemConjugator(new EConjugator(new BaConjugator(new StemPlusPassiveEndings()))));
 			conjugatorMappings.put(Tense.FUTURE_PASSIVE,
 					new PresentStrapStemConjugator(new ER2ARFixer(new EConjugator(new StemPlusPassiveEndings()))));
+			conjugatorMappings.put(Tense.PERFECT_PASSIVE, perfectPassiveConjugator);
 		}
 		}
 	}
