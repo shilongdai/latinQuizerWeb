@@ -111,12 +111,12 @@ public class PracticeController {
 			}
 		}
 		int incorrect = total - correct;
-		int score = correct / total * 100;
+		double score = ((double) correct) / ((double) total) * 100.0;
 		long timestampDelta = (long) session.getAttribute("end") - (long) session.getAttribute("begin");
 		String time = String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes(timestampDelta),
 				TimeUnit.MILLISECONDS.toSeconds(timestampDelta)
 						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timestampDelta)));
-		model.put("report", new VerbReport(total, correct, incorrect, score, time));
+		model.put("report", new VerbReport(total, correct, incorrect, (int) score, time));
 		session.setAttribute("review", true);
 		return "verbReport";
 	}

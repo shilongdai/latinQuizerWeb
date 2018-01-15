@@ -92,11 +92,24 @@ public class TestFirstConjugations {
 		String[][] expected = { { "cogitatum sum", "cogitati sumus" }, { "cogitatum es", "cogitati estis" },
 				{ "cogitatum est", "cogitati sunt" } };
 		String[][] actual = verb.conjugate(Tense.PERFECT_PASSIVE);
-		for (int i = 0; i < actual.length; ++i) {
-			for (int j = 0; j < actual[i].length; ++j) {
-				System.out.printf("i:%d j:%d  result:%s\n", i, j, actual[i][j]);
-			}
-		}
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationPluperfectPassive() {
+		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatum");
+		String[][] expected = { { "cogitatum eram", "cogitati eramus" }, { "cogitatum eras", "cogitati eratis" },
+				{ "cogitatum erat", "cogitati erant" } };
+		String[][] actual = verb.conjugate(Tense.PLUPERFECT_PASSIVE);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationFutureperfectPassive() {
+		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatum");
+		String[][] expected = { { "cogitatum ero", "cogitati erimus" }, { "cogitatum eris", "cogitati eritis" },
+				{ "cogitatum erit", "cogitati erunt" } };
+		String[][] actual = verb.conjugate(Tense.FUTURE_PERFECT_PASSIVE);
 		test(verb, expected, actual);
 	}
 

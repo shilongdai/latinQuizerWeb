@@ -108,6 +108,8 @@ public class LatinVerb implements Serializable {
 			return conjugatorMappings.get(tense).inflect(stripDiacritics(presentFirst), stripDiacritics(perfectFirst),
 					tense);
 		}
+		case PLUPERFECT_PASSIVE:
+		case FUTURE_PERFECT_PASSIVE:
 		case PERFECT_PASSIVE: {
 			if (passiveFirst == null || passiveFirst.length() == 0) {
 				return null;
@@ -188,6 +190,10 @@ public class LatinVerb implements Serializable {
 
 		Conjugator perfectPassiveConjugator = new CombiningConjugator(new UM2IFixer(new NullConjugator(3, 2)), " ",
 				new SumConjugator());
+		Conjugator pluperfectPassiveConjugator = new CombiningConjugator(new UM2IFixer(new NullConjugator(3, 2)), " ",
+				new EraConjugator());
+		Conjugator futurePerfectPassiveConjugator = new CombiningConjugator(new UM2IFixer(new NullConjugator(3, 2)),
+				" ", new Int2UntFixer(new EriConjugator()));
 
 		switch (conjugation) {
 		case ConjugationMapper.FIRST_CONJ:
@@ -206,11 +212,13 @@ public class LatinVerb implements Serializable {
 					new PassiveBerisFixer(new IR2ORFixer(new BiConjugator(new StemPlusPassiveEndings()))))));
 			conjugatorMappings.put(Tense.PERFECT,
 					new PerfectActiveStrapStemConjugator(new StemPlusPerfectActiveEndingsConjugator()));
-			conjugatorMappings.put(Tense.PLUPERFECT, new PerfectActiveStrapStemConjugator(
-					new AO2AmFixer(new EraConjugator(new StemPlusPresentActiveEndingsConjugator()))));
-			conjugatorMappings.put(Tense.FUTURE_PERFECT, new PerfectActiveStrapStemConjugator(
-					new IO2OFixer(new EriConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.PLUPERFECT, new CombiningConjugator(
+					new PerfectActiveStrapStemConjugator(new NullConjugator(3, 2)), "", new EraConjugator()));
+			conjugatorMappings.put(Tense.FUTURE_PERFECT, new CombiningConjugator(
+					new PerfectActiveStrapStemConjugator(new NullConjugator(3, 2)), "", new EriConjugator()));
 			conjugatorMappings.put(Tense.PERFECT_PASSIVE, perfectPassiveConjugator);
+			conjugatorMappings.put(Tense.PLUPERFECT_PASSIVE, pluperfectPassiveConjugator);
+			conjugatorMappings.put(Tense.FUTURE_PERFECT_PASSIVE, futurePerfectPassiveConjugator);
 			break;
 		}
 		case ConjugationMapper.THIRD_CONJ_O: {
@@ -222,10 +230,10 @@ public class LatinVerb implements Serializable {
 					new PresentStrapStemConjugator(new EO2AMFixer(new StemPlusPresentActiveEndingsConjugator())));
 			conjugatorMappings.put(Tense.PERFECT,
 					new PerfectActiveStrapStemConjugator(new StemPlusPerfectActiveEndingsConjugator()));
-			conjugatorMappings.put(Tense.PLUPERFECT, new PerfectActiveStrapStemConjugator(
-					new AO2AmFixer(new EraConjugator(new StemPlusPresentActiveEndingsConjugator()))));
-			conjugatorMappings.put(Tense.FUTURE_PERFECT, new PerfectActiveStrapStemConjugator(
-					new IO2OFixer(new EriConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.PLUPERFECT, new CombiningConjugator(
+					new PerfectActiveStrapStemConjugator(new NullConjugator(3, 2)), "", new EraConjugator()));
+			conjugatorMappings.put(Tense.FUTURE_PERFECT, new CombiningConjugator(
+					new PerfectActiveStrapStemConjugator(new NullConjugator(3, 2)), "", new EriConjugator()));
 			conjugatorMappings.put(Tense.PRESENT_PASSIVE, new PresentStrapStemConjugator(new PassivePresentFixer(
 					new IR2ERFixer(new Int2UntFixer(new ConvertToIConjugator(new StemPlusPassiveEndings()))))));
 			conjugatorMappings.put(Tense.IMPERFECT_PASSIVE,
@@ -233,6 +241,8 @@ public class LatinVerb implements Serializable {
 			conjugatorMappings.put(Tense.FUTURE_PASSIVE,
 					new PresentStrapStemConjugator(new E2EMacronFixer(new ER2ARFixer(new StemPlusPassiveEndings()))));
 			conjugatorMappings.put(Tense.PERFECT_PASSIVE, perfectPassiveConjugator);
+			conjugatorMappings.put(Tense.PLUPERFECT_PASSIVE, pluperfectPassiveConjugator);
+			conjugatorMappings.put(Tense.FUTURE_PERFECT_PASSIVE, futurePerfectPassiveConjugator);
 			break;
 		}
 		case ConjugationMapper.THIRD_CONJ_IO: {
@@ -245,10 +255,10 @@ public class LatinVerb implements Serializable {
 					new ConvertToIConjugator(new EConjugator(new StemPlusPresentActiveEndingsConjugator())))));
 			conjugatorMappings.put(Tense.PERFECT,
 					new PerfectActiveStrapStemConjugator(new StemPlusPerfectActiveEndingsConjugator()));
-			conjugatorMappings.put(Tense.PLUPERFECT, new PerfectActiveStrapStemConjugator(
-					new AO2AmFixer(new EraConjugator(new StemPlusPresentActiveEndingsConjugator()))));
-			conjugatorMappings.put(Tense.FUTURE_PERFECT, new PerfectActiveStrapStemConjugator(
-					new IO2OFixer(new EriConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.PLUPERFECT, new CombiningConjugator(
+					new PerfectActiveStrapStemConjugator(new NullConjugator(3, 2)), "", new EraConjugator()));
+			conjugatorMappings.put(Tense.FUTURE_PERFECT, new CombiningConjugator(
+					new PerfectActiveStrapStemConjugator(new NullConjugator(3, 2)), "", new EriConjugator()));
 			conjugatorMappings.put(Tense.PRESENT_PASSIVE, new PresentStrapStemConjugator(new PassivePresentFixer(
 					new IR2ERFixer(new INT2IUNTFixer(new ConvertToIConjugator(new StemPlusPassiveEndings()))))));
 			conjugatorMappings.put(Tense.IMPERFECT_PASSIVE, new PresentStrapStemConjugator(
@@ -256,6 +266,8 @@ public class LatinVerb implements Serializable {
 			conjugatorMappings.put(Tense.FUTURE_PASSIVE, new PresentStrapStemConjugator(new E2EMacronFixer(
 					new ER2ARFixer(new ConvertToIConjugator(new EConjugator(new StemPlusPassiveEndings()))))));
 			conjugatorMappings.put(Tense.PERFECT_PASSIVE, perfectPassiveConjugator);
+			conjugatorMappings.put(Tense.PLUPERFECT_PASSIVE, pluperfectPassiveConjugator);
+			conjugatorMappings.put(Tense.FUTURE_PERFECT_PASSIVE, futurePerfectPassiveConjugator);
 			break;
 		}
 		case ConjugationMapper.FOURTH_CONJ: {
@@ -267,10 +279,10 @@ public class LatinVerb implements Serializable {
 					new EO2AMFixer(new EConjugator(new StemPlusPresentActiveEndingsConjugator()))));
 			conjugatorMappings.put(Tense.PERFECT,
 					new PerfectActiveStrapStemConjugator(new StemPlusPerfectActiveEndingsConjugator()));
-			conjugatorMappings.put(Tense.PLUPERFECT, new PerfectActiveStrapStemConjugator(
-					new AO2AmFixer(new EraConjugator(new StemPlusPresentActiveEndingsConjugator()))));
-			conjugatorMappings.put(Tense.FUTURE_PERFECT, new PerfectActiveStrapStemConjugator(
-					new IO2OFixer(new EriConjugator(new StemPlusPresentActiveEndingsConjugator()))));
+			conjugatorMappings.put(Tense.PLUPERFECT, new CombiningConjugator(
+					new PerfectActiveStrapStemConjugator(new NullConjugator(3, 2)), "", new EraConjugator()));
+			conjugatorMappings.put(Tense.FUTURE_PERFECT, new CombiningConjugator(
+					new PerfectActiveStrapStemConjugator(new NullConjugator(3, 2)), "", new EriConjugator()));
 			conjugatorMappings.put(Tense.PRESENT_PASSIVE, new PresentStrapStemConjugator(
 					new PassivePresentFixer(new INT2IUNTFixer(new StemPlusPassiveEndings()))));
 			conjugatorMappings.put(Tense.IMPERFECT_PASSIVE,
@@ -278,6 +290,8 @@ public class LatinVerb implements Serializable {
 			conjugatorMappings.put(Tense.FUTURE_PASSIVE,
 					new PresentStrapStemConjugator(new ER2ARFixer(new EConjugator(new StemPlusPassiveEndings()))));
 			conjugatorMappings.put(Tense.PERFECT_PASSIVE, perfectPassiveConjugator);
+			conjugatorMappings.put(Tense.PLUPERFECT_PASSIVE, pluperfectPassiveConjugator);
+			conjugatorMappings.put(Tense.FUTURE_PERFECT_PASSIVE, futurePerfectPassiveConjugator);
 		}
 		}
 	}
