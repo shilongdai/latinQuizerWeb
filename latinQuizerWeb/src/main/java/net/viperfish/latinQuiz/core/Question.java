@@ -1,22 +1,22 @@
-package net.viperfish.latinQuiz.views;
+package net.viperfish.latinQuiz.core;
 
-public class Answer {
+public abstract class Question {
 
-	private String answer;
+	private Answer answer;
 
-	public Answer() {
+	public Question() {
 	}
 
-	public Answer(String answer) {
+	public Question(Answer answer) {
 		super();
 		this.answer = answer;
 	}
 
-	public String getAnswer() {
+	public Answer getAnswer() {
 		return answer;
 	}
 
-	public void setAnswer(String answer) {
+	public void setAnswer(Answer answer) {
 		this.answer = answer;
 	}
 
@@ -36,7 +36,7 @@ public class Answer {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Answer other = (Answer) obj;
+		Question other = (Question) obj;
 		if (answer == null) {
 			if (other.answer != null)
 				return false;

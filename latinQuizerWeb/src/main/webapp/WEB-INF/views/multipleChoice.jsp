@@ -12,25 +12,25 @@
 	<p>
 		<c:out value="${question.question}"></c:out>
 	</p>
-	<c:url value="/practice/verb/${current}" var="postUrl"></c:url>
+	<c:url value="/practice/verb/${current}/singleTextAnswer" var="postUrl"></c:url>
 	<form:form action="${postUrl }" method="post" modelAttribute="answer">
 		<c:forEach items="${question.choices }" var="i">
 			<c:choose>
 				<c:when test="${reviewing }">
 					<c:choose>
-						<c:when test="${question.answer == i && answer.answer == i}">
+						<c:when test="${question.answer.answer == i && answer.answer == i}">
 							<div class="checkbox has-success">
 								<label><form:radiobutton path="answer" value="${i}" />
 									<c:out value="${i}"></c:out></label>
 							</div>
 						</c:when>
-						<c:when test="${question.answer == i && answer.answer != i}">
+						<c:when test="${question.answer.answer == i && answer.answer != i}">
 							<div class="checkbox has-success disabled">
-								<label><form:radiobutton path="answer" value="${i}" />
+								<label><form:radiobutton path="answer" value="${i}" disabled="true" />
 									<c:out value="${i}"></c:out></label>
 							</div>
 						</c:when>
-						<c:when test="${answer.answer == i && question.answer != i}">
+						<c:when test="${answer.answer == i && question.answer.answer != i}">
 							<div class="checkbox has-error">
 								<label><form:radiobutton path="answer" value="${i}" />
 									<c:out value="${i}"></c:out></label>
@@ -38,7 +38,7 @@
 						</c:when>
 						<c:otherwise>
 							<div class="checkbox disabled">
-								<label><form:radiobutton path="answer" value="${i}" />
+								<label><form:radiobutton path="answer" value="${i}" disabled="true" />
 									<c:out value="${i}"></c:out></label>
 							</div>
 						</c:otherwise>

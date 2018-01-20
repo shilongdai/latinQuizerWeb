@@ -10,7 +10,7 @@ public class MultipleChoiceQuestionTest {
 		q.addChoice("1", false);
 		q.addChoice("2", true);
 		q.addChoice("3", false);
-		Assert.assertEquals("2", q.getAnswer());
+		Assert.assertEquals(new SingleTextualAnswer("2"), q.getAnswer());
 		Assert.assertEquals("What is 1+1?", q.getQuestion());
 	}
 }

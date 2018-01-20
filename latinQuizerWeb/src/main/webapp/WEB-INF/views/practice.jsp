@@ -58,39 +58,166 @@
 						</c:otherwise>
 					</c:choose>
 
-					<div class="form-group">
-						<div class="checkbox col-sm-offset-2">
-							<label> <form:checkbox path="conjugations" value="1" />
-								<spring:message code="practice.firstConj"></spring:message>
-							</label>
-						</div>
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="#collapse1"> <spring:message
+											code="practice.conjugation"></spring:message></a>
+								</h4>
+							</div>
+							<div id="collapse1" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<div class="form-group">
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="conjugations" value="1" />
+												<spring:message code="practice.firstConj"></spring:message>
+											</label>
+										</div>
 
-						<div class="checkbox col-sm-offset-2">
-							<label> <form:checkbox path="conjugations" value="2" />
-								<spring:message code="practice.secondConj"></spring:message>
-							</label>
-						</div>
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="conjugations" value="2" />
+												<spring:message code="practice.secondConj"></spring:message>
+											</label>
+										</div>
 
-						<div class="checkbox col-sm-offset-2">
-							<label> <form:checkbox path="conjugations" value="3" />
-								<spring:message code="practice.thirdOConj"></spring:message>
-							</label>
-						</div>
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="conjugations" value="3" />
+												<spring:message code="practice.thirdOConj"></spring:message>
+											</label>
+										</div>
 
-						<div class="checkbox col-sm-offset-2">
-							<label> <form:checkbox path="conjugations" value="5" />
-								<spring:message code="practice.thirdIOConj"></spring:message>
-							</label>
-						</div>
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="conjugations" value="5" />
+												<spring:message code="practice.thirdIOConj"></spring:message>
+											</label>
+										</div>
 
-						<div class="checkbox col-sm-offset-2">
-							<label> <form:checkbox path="conjugations" value="4" />
-								<spring:message code="practice.fourthConj"></spring:message>
-							</label>
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="conjugations" value="4" />
+												<spring:message code="practice.fourthConj"></spring:message>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="#collapse2"> <spring:message code="practice.tense"></spring:message></a>
+								</h4>
+							</div>
+							<div id="collapse2" class="panel-collapse collapse">
+								<div class="panel-body">
+
+									<div class="form-group">
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="tenses" value="PRESENT" />
+												<spring:message code="PRESENT"></spring:message>
+											</label>
+										</div>
+
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="tenses"
+													value="IMPERFECT" /> <spring:message code="IMPERFECT"></spring:message>
+											</label>
+										</div>
+
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="tenses" value="FUTURE" />
+												<spring:message code="FUTURE"></spring:message>
+											</label>
+										</div>
+
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="tenses" value="PERFECT" />
+												<spring:message code="PERFECT"></spring:message>
+											</label>
+										</div>
+
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="tenses"
+													value="FUTURE_PERFECT" /> <spring:message
+													code="FUTURE_PERFECT"></spring:message>
+											</label>
+										</div>
+
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="tenses"
+													value="PLUPERFECT" /> <spring:message code="PLUPERFECT"></spring:message>
+											</label>
+										</div>
+
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="tenses"
+													value="PRESENT_PASSIVE" /> <spring:message
+													code="PRESENT_PASSIVE"></spring:message>
+											</label>
+										</div>
+
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="tenses"
+													value="IMPERFECT_PASSIVE" /> <spring:message
+													code="IMPERFECT_PASSIVE"></spring:message>
+											</label>
+										</div>
+
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="tenses"
+													value="FUTURE_PASSIVE" /> <spring:message
+													code="FUTURE_PASSIVE"></spring:message>
+											</label>
+										</div>
+
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="tenses"
+													value="PERFECT_PASSIVE" /> <spring:message
+													code="PERFECT_PASSIVE"></spring:message>
+											</label>
+										</div>
+
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="tenses"
+													value="PLUPERFECT_PASSIVE" /> <spring:message
+													code="PLUPERFECT_PASSIVE"></spring:message>
+											</label>
+										</div>
+
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="tenses"
+													value="FUTURE_PERFECT_PASSIVE" /> <spring:message
+													code="FUTURE_PERFECT_PASSIVE"></spring:message>
+											</label>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="#collapse3"> <spring:message
+											code="practice.questionType"></spring:message></a>
+								</h4>
+							</div>
+							<div id="collapse3" class="panel-collapse collapse">
+								<div class="panel-body"></div>
+							</div>
 						</div>
 					</div>
+
 					<form:errors path="conjugations" element="div"
 						cssClass="alert alert-danger alert-dismissible"></form:errors>
+
+					<form:errors path="tenses" element="div"
+						cssClass="alert alert-danger alert-dismissible"></form:errors>
+
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-2">
 							<div class="btn-group">

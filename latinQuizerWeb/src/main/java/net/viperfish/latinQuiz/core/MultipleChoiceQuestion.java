@@ -3,10 +3,9 @@ package net.viperfish.latinQuiz.core;
 import java.util.HashSet;
 import java.util.Set;
 
-public final class MultipleChoiceQuestion {
+public final class MultipleChoiceQuestion extends Question {
 
 	private String question;
-	private String answer;
 	private Set<String> choices;
 
 	public MultipleChoiceQuestion(String question) {
@@ -17,12 +16,8 @@ public final class MultipleChoiceQuestion {
 	public void addChoice(String possibleAnswer, boolean isCorrect) {
 		choices.add(possibleAnswer);
 		if (isCorrect) {
-			answer = possibleAnswer;
+			this.setAnswer(new SingleTextualAnswer(possibleAnswer));
 		}
-	}
-
-	public String getAnswer() {
-		return answer;
 	}
 
 	public String getQuestion() {
@@ -36,8 +31,7 @@ public final class MultipleChoiceQuestion {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((answer == null) ? 0 : answer.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((choices == null) ? 0 : choices.hashCode());
 		result = prime * result + ((question == null) ? 0 : question.hashCode());
 		return result;
@@ -47,16 +41,11 @@ public final class MultipleChoiceQuestion {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		MultipleChoiceQuestion other = (MultipleChoiceQuestion) obj;
-		if (answer == null) {
-			if (other.answer != null)
-				return false;
-		} else if (!answer.equals(other.answer))
-			return false;
 		if (choices == null) {
 			if (other.choices != null)
 				return false;

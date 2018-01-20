@@ -6,22 +6,21 @@ import java.util.List;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
+import net.viperfish.latinQuiz.core.Tense;
+
 public class VerbStartPracticeForm {
 
 	@Range(min = 1, max = 100, message = "{verbForm.inappAmount}")
 	private int amount;
 	@NotEmpty(message = "{verbForm.emptyConj}")
 	private List<Integer> conjugations;
+	@NotEmpty(message = "{verbForm.emptyTense}")
+	private List<Tense> tenses;
 
 	public VerbStartPracticeForm() {
 		amount = 10;
 		conjugations = new LinkedList<>();
-	}
-
-	public VerbStartPracticeForm(int amount, List<Integer> conjugations) {
-		super();
-		this.amount = amount;
-		this.conjugations = conjugations;
+		tenses = new LinkedList<>();
 	}
 
 	public int getAmount() {
@@ -40,12 +39,21 @@ public class VerbStartPracticeForm {
 		this.conjugations = conjugations;
 	}
 
+	public List<Tense> getTenses() {
+		return tenses;
+	}
+
+	public void setTenses(List<Tense> tenses) {
+		this.tenses = tenses;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + amount;
 		result = prime * result + ((conjugations == null) ? 0 : conjugations.hashCode());
+		result = prime * result + ((tenses == null) ? 0 : tenses.hashCode());
 		return result;
 	}
 
@@ -64,6 +72,11 @@ public class VerbStartPracticeForm {
 			if (other.conjugations != null)
 				return false;
 		} else if (!conjugations.equals(other.conjugations))
+			return false;
+		if (tenses == null) {
+			if (other.tenses != null)
+				return false;
+		} else if (!tenses.equals(other.tenses))
 			return false;
 		return true;
 	}

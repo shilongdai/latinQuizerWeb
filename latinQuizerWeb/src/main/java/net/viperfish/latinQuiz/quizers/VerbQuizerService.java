@@ -41,7 +41,7 @@ public final class VerbQuizerService {
 		this.i18n = i18n;
 	}
 
-	public MultipleChoiceQuestion[] generateQuestions(int length, Integer[] conjugations)
+	public MultipleChoiceQuestion[] generateQuestions(int length, Integer[] conjugations, List<Tense> tenses)
 			throws InsufficientWordBankException {
 		// make sure that there are words in the word bank and that there are the
 		// established conjugations
@@ -58,7 +58,7 @@ public final class VerbQuizerService {
 				continue;
 			}
 			// select and conjugate a random tense
-			Tense t = Tense.values()[rand.nextInt(Tense.values().length)];
+			Tense t = tenses.get(rand.nextInt(tenses.size()));
 			String[][] conjugated = l.conjugate(t);
 			while (conjugated == null) {
 				t = Tense.values()[rand.nextInt(Tense.values().length)];
@@ -73,7 +73,7 @@ public final class VerbQuizerService {
 			String localizedPerson = i18n.getMessage(personToKey(personIndex), null, LocaleContextHolder.getLocale());
 			String localizedNumber = i18n.getMessage(numberToKey(numberIndex), null, LocaleContextHolder.getLocale());
 			String question = i18n.getMessage("practice.verb.multipleChoice", new Object[] { l.getDictionaryEntry(),
-					localizedTense, "indicative", localizedPerson, localizedNumber }, LocaleContextHolder.getLocale());
+					localizedTense, "Indicative", localizedPerson, localizedNumber }, LocaleContextHolder.getLocale());
 
 			// if this question exists, generate another one
 			if (buffer.contains(question)) {

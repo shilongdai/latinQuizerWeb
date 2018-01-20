@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import net.viperfish.latinQuiz.core.MultipleChoiceQuestion;
+import net.viperfish.latinQuiz.core.Answer;
+import net.viperfish.latinQuiz.core.Question;
+import net.viperfish.latinQuiz.core.SingleTextualAnswer;
+import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.errors.InsufficientWordBankException;
 import net.viperfish.latinQuiz.quizers.VerbQuizerService;
 
@@ -25,13 +28,24 @@ public class PracticeController {
 
 	@Autowired
 	private VerbQuizerService verbService;
+	private static final VerbStartPracticeForm DEFAULT;
+
+	static {
+		DEFAULT = new VerbStartPracticeForm();
+		for (int i = 0; i < 6; ++i) {
+			DEFAULT.getConjugations().add(i);
+		}
+		for (Tense t : Tense.values()) {
+			DEFAULT.getTenses().add(t);
+		}
+	}
 
 	public PracticeController() {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String startPracticePage(Map<String, Object> model) {
-		model.put("verbForm", new VerbStartPracticeForm());
+		model.put("verbForm", DEFAULT);
 		return "practice";
 	}
 
@@ -46,11 +60,11 @@ public class PracticeController {
 		try {
 			Integer[] selectedConjugations = verbForm.getConjugations()
 					.toArray(new Integer[verbForm.getConjugations().size()]);
-			MultipleChoiceQuestion[] generated = verbService.generateQuestions(verbForm.getAmount(),
-					selectedConjugations);
+			Question[] generated = verbService.generateQuestions(verbForm.getAmount(), selectedConjugations,
+					verbForm.getTenses());
 			Answer[] answers = new Answer[generated.length];
 			for (int i = 0; i < answers.length; ++i) {
-				answers[i] = new Answer();
+				answers[i] = new SingleTextualAnswer();
 			}
 			session.setAttribute("questions", generated);
 			session.setAttribute("userAnswers", answers);
@@ -63,13 +77,14 @@ public class PracticeController {
 		}
 	}
 
-	@RequestMapping(value = "verb/{count}", method = RequestMethod.POST)
-	public String answerVerbPractice(Answer answer, HttpSession session, @PathVariable("count") int count) {
+	@RequestMapping(value = "verb/{count}/singleTextAnswer", method = RequestMethod.POST)
+	public String answerVerbPractice(SingleTextualAnswer singleTextualAnswer, HttpSession session,
+			@PathVariable("count") int count) {
 		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
-		if (answer == null) {
+		if (answers == null) {
 			return "redirect:/practice";
 		}
-		answers[count] = answer;
+		answers[count] = singleTextualAnswer;
 		if (count == answers.length - 1) {
 			if (!(boolean) session.getAttribute("review")) {
 				session.setAttribute("end", new Date().getTime());
@@ -81,7 +96,7 @@ public class PracticeController {
 
 	@RequestMapping(value = "verb/{count}", method = RequestMethod.GET)
 	public String getVerbPractice(HttpSession session, @PathVariable("count") int count, Map<String, Object> model) {
-		MultipleChoiceQuestion[] questions = (MultipleChoiceQuestion[]) session.getAttribute("questions");
+		Question[] questions = (Question[]) session.getAttribute("questions");
 		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
 		if (answers == null) {
 			return "redirect:/practice";
@@ -98,7 +113,7 @@ public class PracticeController {
 
 	@RequestMapping(value = "verb/report", method = RequestMethod.GET)
 	public String verbReport(Map<String, Object> model, HttpSession session) {
-		MultipleChoiceQuestion[] questions = (MultipleChoiceQuestion[]) session.getAttribute("questions");
+		Question[] questions = (Question[]) session.getAttribute("questions");
 		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
 		if (answers == null) {
 			return "redirect:/practice";
@@ -106,7 +121,7 @@ public class PracticeController {
 		int total = answers.length;
 		int correct = 0;
 		for (int i = 0; i < answers.length; ++i) {
-			if (questions[i].getAnswer().equals(answers[i].getAnswer())) {
+			if (questions[i].getAnswer().equals(answers[i])) {
 				correct += 1;
 			}
 		}
