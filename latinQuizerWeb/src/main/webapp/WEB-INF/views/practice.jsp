@@ -150,49 +150,6 @@
 													value="PLUPERFECT" /> <spring:message code="PLUPERFECT"></spring:message>
 											</label>
 										</div>
-
-										<div class="checkbox col-sm-offset-2">
-											<label> <form:checkbox path="tenses"
-													value="PRESENT_PASSIVE" /> <spring:message
-													code="PRESENT_PASSIVE"></spring:message>
-											</label>
-										</div>
-
-										<div class="checkbox col-sm-offset-2">
-											<label> <form:checkbox path="tenses"
-													value="IMPERFECT_PASSIVE" /> <spring:message
-													code="IMPERFECT_PASSIVE"></spring:message>
-											</label>
-										</div>
-
-										<div class="checkbox col-sm-offset-2">
-											<label> <form:checkbox path="tenses"
-													value="FUTURE_PASSIVE" /> <spring:message
-													code="FUTURE_PASSIVE"></spring:message>
-											</label>
-										</div>
-
-										<div class="checkbox col-sm-offset-2">
-											<label> <form:checkbox path="tenses"
-													value="PERFECT_PASSIVE" /> <spring:message
-													code="PERFECT_PASSIVE"></spring:message>
-											</label>
-										</div>
-
-										<div class="checkbox col-sm-offset-2">
-											<label> <form:checkbox path="tenses"
-													value="PLUPERFECT_PASSIVE" /> <spring:message
-													code="PLUPERFECT_PASSIVE"></spring:message>
-											</label>
-										</div>
-
-										<div class="checkbox col-sm-offset-2">
-											<label> <form:checkbox path="tenses"
-													value="FUTURE_PERFECT_PASSIVE" /> <spring:message
-													code="FUTURE_PERFECT_PASSIVE"></spring:message>
-											</label>
-										</div>
-
 									</div>
 
 								</div>
@@ -202,12 +159,43 @@
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<a data-toggle="collapse" data-parent="#accordion"
-										href="#collapse3"> <spring:message
-											code="practice.questionType"></spring:message></a>
+										href="#collapse3"> <spring:message code="practice.mood"></spring:message></a>
 								</h4>
 							</div>
 							<div id="collapse3" class="panel-collapse collapse">
-								<div class="panel-body"></div>
+								<div class="panel-body">
+									<div class="form-group">
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="moods"
+													value="INDICATIVE" /> <spring:message code="INDICATIVE"></spring:message>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="#collapse4"> <spring:message code="practice.voice"></spring:message></a>
+								</h4>
+							</div>
+							<div id="collapse4" class="panel-collapse collapse">
+								<div class="panel-body">
+									<div class="form-group">
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="voices" value="ACTIVE" />
+												<spring:message code="ACTIVE"></spring:message>
+											</label>
+										</div>
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="voices" value="PASSIVE" />
+												<spring:message code="PASSIVE"></spring:message>
+											</label>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -216,6 +204,12 @@
 						cssClass="alert alert-danger alert-dismissible"></form:errors>
 
 					<form:errors path="tenses" element="div"
+						cssClass="alert alert-danger alert-dismissible"></form:errors>
+
+					<form:errors path="voices" element="div"
+						cssClass="alert alert-danger alert-dismissible"></form:errors>
+
+					<form:errors path="moods" element="div"
 						cssClass="alert alert-danger alert-dismissible"></form:errors>
 
 					<div class="form-group">

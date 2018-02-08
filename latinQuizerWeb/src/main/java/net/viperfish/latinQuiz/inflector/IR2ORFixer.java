@@ -1,10 +1,10 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 
-public class IR2ORFixer extends FixerConjugator {
+public class IR2ORFixer extends FixerRule {
 
-	public IR2ORFixer(Conjugator c) {
+	public IR2ORFixer(VerbRule c) {
 		super(c, 0, 0);
 	}
 

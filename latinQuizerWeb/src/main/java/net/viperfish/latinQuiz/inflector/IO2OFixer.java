@@ -1,11 +1,11 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 
 // TODO: Optimize
-public class IO2OFixer extends FixerConjugator {
+public class IO2OFixer extends FixerRule {
 
-	public IO2OFixer(Conjugator c) {
+	public IO2OFixer(VerbRule c) {
 		super(c, 0, 0);
 	}
 

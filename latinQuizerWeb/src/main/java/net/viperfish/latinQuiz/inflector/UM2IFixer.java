@@ -1,13 +1,13 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 import net.viperfish.latinQuiz.core.Tense;
 
-public class UM2IFixer implements Conjugator {
+public class UM2IFixer implements VerbRule {
 
-	private Conjugator conj;
+	private VerbRule conj;
 
-	public UM2IFixer(Conjugator conj) {
+	public UM2IFixer(VerbRule conj) {
 		super();
 		this.conj = conj;
 	}

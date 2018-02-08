@@ -1,17 +1,16 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 import net.viperfish.latinQuiz.core.Tense;
 
-public class StemPlusPassiveEndings implements Conjugator {
+public class StemPlusPresentActiveEndingsRule implements VerbRule {
 
-	public StemPlusPassiveEndings() {
-		// TODO Auto-generated constructor stub
+	public StemPlusPresentActiveEndingsRule() {
 	}
 
 	@Override
 	public String[][] inflect(String first, String stem, Tense t) {
-		String[][] endings = { { "r", "mur" }, { "ris", "mini" }, { "tur", "ntur" } };
+		String[][] endings = { { "o", "mus" }, { "s", "tis" }, { "t", "nt" } };
 		String[][] result = new String[endings.length][];
 		for (int i = 0; i < result.length; ++i) {
 			result[i] = new String[endings[i].length];

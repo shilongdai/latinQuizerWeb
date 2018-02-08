@@ -1,19 +1,19 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 import net.viperfish.latinQuiz.core.Tense;
 
-public class EConjugator implements Conjugator {
+public class BaRule implements VerbRule {
 
-	private Conjugator conj;
+	private VerbRule conj;
 
-	public EConjugator(Conjugator c) {
+	public BaRule(VerbRule c) {
 		this.conj = c;
 	}
 
 	@Override
 	public String[][] inflect(String first, String stem, Tense t) {
-		stem = stem + "e";
+		stem = stem + "ba";
 		return conj.inflect(first, stem, t);
 	}
 

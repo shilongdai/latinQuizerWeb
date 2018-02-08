@@ -1,16 +1,16 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 import net.viperfish.latinQuiz.core.Tense;
 
-public class StemPlusPresentActiveEndingsConjugator implements Conjugator {
+public class StemPlusPerfectActiveEndingsRule implements VerbRule {
 
-	public StemPlusPresentActiveEndingsConjugator() {
+	public StemPlusPerfectActiveEndingsRule() {
 	}
 
 	@Override
 	public String[][] inflect(String first, String stem, Tense t) {
-		String[][] endings = { { "o", "mus" }, { "s", "tis" }, { "t", "nt" } };
+		String[][] endings = { { "i", "imus" }, { "isti", "istis" }, { "it", "erunt" } };
 		String[][] result = new String[endings.length][];
 		for (int i = 0; i < result.length; ++i) {
 			result[i] = new String[endings[i].length];

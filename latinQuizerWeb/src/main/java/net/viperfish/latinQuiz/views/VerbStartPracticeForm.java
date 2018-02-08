@@ -6,7 +6,9 @@ import java.util.List;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
+import net.viperfish.latinQuiz.core.Mood;
 import net.viperfish.latinQuiz.core.Tense;
+import net.viperfish.latinQuiz.core.Voice;
 
 public class VerbStartPracticeForm {
 
@@ -16,11 +18,17 @@ public class VerbStartPracticeForm {
 	private List<Integer> conjugations;
 	@NotEmpty(message = "{verbForm.emptyTense}")
 	private List<Tense> tenses;
+	@NotEmpty(message = "{verbForm.emptyMood}")
+	private List<Mood> moods;
+	@NotEmpty(message = "{verbForm.emptyVoice}")
+	private List<Voice> voices;
 
 	public VerbStartPracticeForm() {
 		amount = 10;
 		conjugations = new LinkedList<>();
 		tenses = new LinkedList<>();
+		moods = new LinkedList<>();
+		voices = new LinkedList<>();
 	}
 
 	public int getAmount() {
@@ -47,13 +55,31 @@ public class VerbStartPracticeForm {
 		this.tenses = tenses;
 	}
 
+	public List<Mood> getMoods() {
+		return moods;
+	}
+
+	public void setMoods(List<Mood> moods) {
+		this.moods = moods;
+	}
+
+	public List<Voice> getVoices() {
+		return voices;
+	}
+
+	public void setVoices(List<Voice> voices) {
+		this.voices = voices;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + amount;
 		result = prime * result + ((conjugations == null) ? 0 : conjugations.hashCode());
+		result = prime * result + ((moods == null) ? 0 : moods.hashCode());
 		result = prime * result + ((tenses == null) ? 0 : tenses.hashCode());
+		result = prime * result + ((voices == null) ? 0 : voices.hashCode());
 		return result;
 	}
 
@@ -73,10 +99,20 @@ public class VerbStartPracticeForm {
 				return false;
 		} else if (!conjugations.equals(other.conjugations))
 			return false;
+		if (moods == null) {
+			if (other.moods != null)
+				return false;
+		} else if (!moods.equals(other.moods))
+			return false;
 		if (tenses == null) {
 			if (other.tenses != null)
 				return false;
 		} else if (!tenses.equals(other.tenses))
+			return false;
+		if (voices == null) {
+			if (other.voices != null)
+				return false;
+		} else if (!voices.equals(other.voices))
 			return false;
 		return true;
 	}

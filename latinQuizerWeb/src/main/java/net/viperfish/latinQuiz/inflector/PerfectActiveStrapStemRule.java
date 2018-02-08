@@ -1,13 +1,13 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 import net.viperfish.latinQuiz.core.Tense;
 
-public final class PerfectActiveStrapStemConjugator implements Conjugator {
+public final class PerfectActiveStrapStemRule implements VerbRule {
 
-	private Conjugator src;
+	private VerbRule src;
 
-	public PerfectActiveStrapStemConjugator(Conjugator src) {
+	public PerfectActiveStrapStemRule(VerbRule src) {
 		this.src = src;
 	}
 

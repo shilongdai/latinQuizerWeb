@@ -1,15 +1,15 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 import net.viperfish.latinQuiz.core.Tense;
 
-abstract class FixerConjugator implements Conjugator {
+abstract class FixerRule implements VerbRule {
 
-	private Conjugator conj;
+	private VerbRule conj;
 	private int row;
 	private int column;
 
-	public FixerConjugator(Conjugator c, int row, int column) {
+	public FixerRule(VerbRule c, int row, int column) {
 		this.conj = c;
 		this.row = row;
 		this.column = column;

@@ -1,15 +1,15 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 import net.viperfish.latinQuiz.core.Tense;
 
-public class CombiningConjugator implements Conjugator {
+public class CombiningRules implements VerbRule {
 
-	private Conjugator first;
-	private Conjugator second;
+	private VerbRule first;
+	private VerbRule second;
 	private String seperator;
 
-	public CombiningConjugator(Conjugator first, String seperator, Conjugator second) {
+	public CombiningRules(VerbRule first, String seperator, VerbRule second) {
 		this.first = first;
 		this.second = second;
 		this.seperator = seperator;

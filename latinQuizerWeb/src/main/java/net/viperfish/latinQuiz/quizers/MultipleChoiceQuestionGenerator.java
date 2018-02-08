@@ -11,9 +11,11 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
 import net.viperfish.latinQuiz.core.LatinVerb;
+import net.viperfish.latinQuiz.core.Mood;
 import net.viperfish.latinQuiz.core.MultipleChoiceQuestion;
 import net.viperfish.latinQuiz.core.Question;
 import net.viperfish.latinQuiz.core.Tense;
+import net.viperfish.latinQuiz.core.Voice;
 
 public class MultipleChoiceQuestionGenerator implements QuestionGenerator {
 
@@ -26,27 +28,34 @@ public class MultipleChoiceQuestionGenerator implements QuestionGenerator {
 	}
 
 	@Override
-	public Question generate(LatinVerb v, Integer[] conjugations, List<Tense> tenses) {
-		// select and conjugate a random tense
+	public Question generate(LatinVerb v, Integer[] conjugations, List<Tense> tenses, List<Voice> voices,
+			List<Mood> moods) {
+		// select and conjugate a random tense, mood, voice
 		Tense t = tenses.get(rand.nextInt(tenses.size()));
-		String[][] conjugated = v.conjugate(t);
-		while (conjugated == null) {
+		Voice randVoice = voices.get(rand.nextInt(voices.size()));
+		Mood randMood = moods.get(rand.nextInt(moods.size()));
+		String[][] conjugated = v.conjugate(randMood, randVoice, t);
+		while (conjugated == null || conjugated.length == 0) {
 			t = Tense.values()[rand.nextInt(Tense.values().length)];
-			conjugated = v.conjugate(t);
+			conjugated = v.conjugate(randMood, randVoice, t);
 		}
 		// select the right answer
 		int personIndex = rand.nextInt(conjugated.length);
 		int numberIndex = rand.nextInt(conjugated[personIndex].length);
 
 		// generate the question
+		String localizedMood = i18n.getMessage(randMood.name(), null, LocaleContextHolder.getLocale());
+		String localizedVoice = i18n.getMessage(randVoice.name(), null, LocaleContextHolder.getLocale());
 		String localizedTense = i18n.getMessage(t.name(), null, LocaleContextHolder.getLocale());
 		String localizedPerson = i18n.getMessage(QuestionHelper.personToKey(personIndex), null,
 				LocaleContextHolder.getLocale());
 		String localizedNumber = i18n.getMessage(QuestionHelper.numberToKey(numberIndex), null,
 				LocaleContextHolder.getLocale());
-		String question = i18n.getMessage("practice.verb.multipleChoice",
-				new Object[] { v.getDictionaryEntry(), localizedTense, "Indicative", localizedPerson, localizedNumber },
-				LocaleContextHolder.getLocale());
+		String question = i18n
+				.getMessage(
+						"practice.verb.multipleChoice", new Object[] { v.getDictionaryEntry(), localizedMood,
+								localizedVoice, localizedTense, localizedPerson, localizedNumber },
+						LocaleContextHolder.getLocale());
 
 		HashSet<String> choices = new HashSet<>();
 		String correctChoice = conjugated[personIndex][numberIndex];
@@ -81,8 +90,12 @@ public class MultipleChoiceQuestionGenerator implements QuestionGenerator {
 
 	private List<String> createMesh(LatinVerb v) {
 		List<String> result = new LinkedList<>();
-		for (Tense t : Tense.values()) {
-			result.addAll(QuestionHelper.flatten(v.conjugate(t)));
+		for (Mood m : Mood.values()) {
+			for (Voice voc : Voice.values()) {
+				for (Tense t : Tense.values()) {
+					result.addAll(QuestionHelper.flatten(v.conjugate(m, voc, t)));
+				}
+			}
 		}
 		return result;
 	}

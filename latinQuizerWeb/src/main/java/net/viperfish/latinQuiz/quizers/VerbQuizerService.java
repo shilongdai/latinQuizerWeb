@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 
 import net.viperfish.latinQuiz.core.LatinVerb;
 import net.viperfish.latinQuiz.core.LatinVerbDatabase;
+import net.viperfish.latinQuiz.core.Mood;
 import net.viperfish.latinQuiz.core.MultipleChoiceQuestion;
 import net.viperfish.latinQuiz.core.Question;
 import net.viperfish.latinQuiz.core.Tense;
+import net.viperfish.latinQuiz.core.Voice;
 import net.viperfish.latinQuiz.errors.InsufficientWordBankException;
 
 @Service("verbService")
@@ -41,8 +43,8 @@ public final class VerbQuizerService {
 		gen = new MultipleChoiceQuestionGenerator(i18n);
 	}
 
-	public Question[] generateQuestions(int length, Integer[] conjugations, List<Tense> tenses)
-			throws InsufficientWordBankException {
+	public Question[] generateQuestions(int length, Integer[] conjugations, List<Tense> tenses, List<Voice> voices,
+			List<Mood> moods) throws InsufficientWordBankException {
 		// make sure that there are words in the word bank and that there are the
 		// established conjugations
 		checkParameters(length, conjugations);
@@ -57,7 +59,7 @@ public final class VerbQuizerService {
 				k--;
 				continue;
 			}
-			Question q = gen.generate(l, conjugations, tenses);
+			Question q = gen.generate(l, conjugations, tenses, voices, moods);
 
 			// if this question exists, generate another one
 			if (buffer.contains(q.getQuestion())) {

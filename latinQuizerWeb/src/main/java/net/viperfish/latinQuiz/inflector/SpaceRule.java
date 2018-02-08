@@ -1,13 +1,13 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 import net.viperfish.latinQuiz.core.Tense;
 
-public class SpaceConjugator implements Conjugator {
+public class SpaceRule implements VerbRule {
 
-	private Conjugator c;
+	private VerbRule c;
 
-	public SpaceConjugator(Conjugator c) {
+	public SpaceRule(VerbRule c) {
 		super();
 		this.c = c;
 	}

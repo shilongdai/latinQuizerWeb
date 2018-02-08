@@ -1,11 +1,11 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 import net.viperfish.latinQuiz.core.Tense;
 
-public class SumConjugator implements Conjugator {
+public class SumRule implements VerbRule {
 
-	public SumConjugator() {
+	public SumRule() {
 		// TODO Auto-generated constructor stub
 	}
 

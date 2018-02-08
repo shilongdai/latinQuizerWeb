@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import net.viperfish.latinQuiz.core.Answer;
+import net.viperfish.latinQuiz.core.Mood;
 import net.viperfish.latinQuiz.core.Question;
 import net.viperfish.latinQuiz.core.SingleTextualAnswer;
 import net.viperfish.latinQuiz.core.Tense;
+import net.viperfish.latinQuiz.core.Voice;
 import net.viperfish.latinQuiz.errors.InsufficientWordBankException;
 import net.viperfish.latinQuiz.quizers.VerbQuizerService;
 
@@ -38,6 +40,9 @@ public class PracticeController {
 		for (Tense t : Tense.values()) {
 			DEFAULT.getTenses().add(t);
 		}
+		DEFAULT.getMoods().add(Mood.INDICATIVE);
+		DEFAULT.getVoices().add(Voice.ACTIVE);
+		DEFAULT.getVoices().add(Voice.PASSIVE);
 	}
 
 	public PracticeController() {
@@ -61,7 +66,7 @@ public class PracticeController {
 			Integer[] selectedConjugations = verbForm.getConjugations()
 					.toArray(new Integer[verbForm.getConjugations().size()]);
 			Question[] generated = verbService.generateQuestions(verbForm.getAmount(), selectedConjugations,
-					verbForm.getTenses());
+					verbForm.getTenses(), verbForm.getVoices(), verbForm.getMoods());
 			Answer[] answers = new Answer[generated.length];
 			for (int i = 0; i < answers.length; ++i) {
 				answers[i] = new SingleTextualAnswer();

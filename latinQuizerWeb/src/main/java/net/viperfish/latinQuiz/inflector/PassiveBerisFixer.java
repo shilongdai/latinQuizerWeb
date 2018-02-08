@@ -1,13 +1,13 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 import net.viperfish.latinQuiz.core.Tense;
 
-public class PassiveBerisFixer implements Conjugator {
+public class PassiveBerisFixer implements VerbRule {
 
-	private Conjugator conj;
+	private VerbRule conj;
 
-	public PassiveBerisFixer(Conjugator c) {
+	public PassiveBerisFixer(VerbRule c) {
 		this.conj = c;
 	}
 

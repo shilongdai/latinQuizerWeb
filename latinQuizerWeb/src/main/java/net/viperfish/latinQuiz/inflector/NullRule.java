@@ -1,14 +1,14 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Conjugator;
+import net.viperfish.latinQuiz.core.VerbRule;
 import net.viperfish.latinQuiz.core.Tense;
 
-public class NullConjugator implements Conjugator {
+public class NullRule implements VerbRule {
 
 	private int row;
 	private int column;
 
-	public NullConjugator(int row, int column) {
+	public NullRule(int row, int column) {
 		super();
 		this.row = row;
 		this.column = column;
