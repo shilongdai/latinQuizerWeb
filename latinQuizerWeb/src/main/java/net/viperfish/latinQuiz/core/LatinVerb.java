@@ -14,9 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
-
 import net.viperfish.latinQuiz.conjugators.FirstSecondIndicActiveConjugator;
 import net.viperfish.latinQuiz.conjugators.FirstSecondIndicPassiveConjugator;
 import net.viperfish.latinQuiz.conjugators.FourthIndicActiveConjugator;
@@ -35,20 +32,18 @@ public class LatinVerb implements Serializable {
 	 */
 	private static final long serialVersionUID = 586774505062107762L;
 	private long id;
-	@Range(min = 1, max = 4)
 	private int conjugation;
-	@NotBlank
 	private String presentFirst;
-	@NotBlank
 	private String genitive;
 	private String perfectFirst;
 	private String passiveFirst;
+	private VerbType type;
 	@Transient
 	private Map<Tense, VerbRule> conjugatorMappings;
 
 	private static final Pattern DIACRITICS_AND_FRIENDS = Pattern
 			.compile("[\\p{InCombiningDiacriticalMarks}\\p{IsLm}\\p{IsSk}]+");
-	private static final Map<Integer, Map<Mood, Map<Voice, Conjugator>>> conjugators;
+	private static final Map<VerbType, Map<Integer, Map<Mood, Map<Voice, Conjugator>>>> conjugators;
 
 	static {
 		conjugators = new HashMap<>();
@@ -59,23 +54,26 @@ public class LatinVerb implements Serializable {
 		initFourthDec();
 	}
 
-	public LatinVerb(int conjugation, String presentFirst, String genitive, String perfectFirst, String passiveFirst) {
+	public LatinVerb(int conjugation, String presentFirst, String genitive, String perfectFirst, String passiveFirst,
+			VerbType type) {
 		this();
 		this.conjugation = conjugation;
 		this.presentFirst = presentFirst;
 		this.genitive = genitive;
 		this.perfectFirst = perfectFirst;
 		this.passiveFirst = passiveFirst;
+		this.type = type;
 	}
 
 	public LatinVerb() {
 		super();
 		conjugatorMappings = new HashMap<>();
 		this.id = -1;
+		type = VerbType.REGULAR;
 	}
 
 	public String[][] conjugate(Mood mood, Voice voice, Tense tense) {
-		Conjugator c = conjugators.get(conjugation).get(mood).get(voice);
+		Conjugator c = conjugators.get(this.type).get(conjugation).get(mood).get(voice);
 		if (c == null) {
 			return new String[0][0];
 		}
@@ -136,6 +134,15 @@ public class LatinVerb implements Serializable {
 		this.passiveFirst = passiveFirst;
 	}
 
+	@Basic
+	public VerbType getType() {
+		return type;
+	}
+
+	public void setType(VerbType type) {
+		this.type = type;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
@@ -155,6 +162,7 @@ public class LatinVerb implements Serializable {
 		result = prime * result + ((passiveFirst == null) ? 0 : passiveFirst.hashCode());
 		result = prime * result + ((perfectFirst == null) ? 0 : perfectFirst.hashCode());
 		result = prime * result + ((presentFirst == null) ? 0 : presentFirst.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -189,6 +197,8 @@ public class LatinVerb implements Serializable {
 				return false;
 		} else if (!presentFirst.equals(other.presentFirst))
 			return false;
+		if (type != other.type)
+			return false;
 		return true;
 	}
 
@@ -199,42 +209,45 @@ public class LatinVerb implements Serializable {
 	}
 
 	private static void createMaps() {
-		for (int i = 0; i < 6; ++i) {
-			conjugators.put(i, new HashMap<Mood, Map<Voice, Conjugator>>());
-			conjugators.get(i).put(Mood.INDICATIVE, new HashMap<Voice, Conjugator>());
-			conjugators.get(i).put(Mood.SUBJUNCTIVE, new HashMap<Voice, Conjugator>());
+		for (VerbType v : VerbType.values()) {
+			conjugators.put(v, new HashMap<Integer, Map<Mood, Map<Voice, Conjugator>>>());
+			for (int i = 0; i < 6; ++i) {
+				conjugators.get(v).put(i, new HashMap<Mood, Map<Voice, Conjugator>>());
+				conjugators.get(v).get(i).put(Mood.INDICATIVE, new HashMap<Voice, Conjugator>());
+				conjugators.get(v).get(i).put(Mood.SUBJUNCTIVE, new HashMap<Voice, Conjugator>());
+			}
 		}
 	}
 
 	private static void initFirstSecondDec() {
-		conjugators.get(ConjugationMapper.FIRST_CONJ).get(Mood.INDICATIVE).put(Voice.ACTIVE,
+		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.FIRST_CONJ).get(Mood.INDICATIVE).put(Voice.ACTIVE,
 				new FirstSecondIndicActiveConjugator());
-		conjugators.get(ConjugationMapper.FIRST_CONJ).get(Mood.INDICATIVE).put(Voice.PASSIVE,
+		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.FIRST_CONJ).get(Mood.INDICATIVE).put(Voice.PASSIVE,
 				new FirstSecondIndicPassiveConjugator());
-		conjugators.get(ConjugationMapper.SECOND_CONJ).get(Mood.INDICATIVE).put(Voice.ACTIVE,
+		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.SECOND_CONJ).get(Mood.INDICATIVE).put(Voice.ACTIVE,
 				new FirstSecondIndicActiveConjugator());
-		conjugators.get(ConjugationMapper.SECOND_CONJ).get(Mood.INDICATIVE).put(Voice.PASSIVE,
+		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.SECOND_CONJ).get(Mood.INDICATIVE).put(Voice.PASSIVE,
 				new FirstSecondIndicPassiveConjugator());
 	}
 
 	private static void initThirdODec() {
-		conjugators.get(ConjugationMapper.THIRD_CONJ_O).get(Mood.INDICATIVE).put(Voice.ACTIVE,
+		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.THIRD_CONJ_O).get(Mood.INDICATIVE).put(Voice.ACTIVE,
 				new ThirdOIndicActiveConjugator());
-		conjugators.get(ConjugationMapper.THIRD_CONJ_O).get(Mood.INDICATIVE).put(Voice.PASSIVE,
+		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.THIRD_CONJ_O).get(Mood.INDICATIVE).put(Voice.PASSIVE,
 				new ThirdOIndicPassiveConjugator());
 	}
 
 	private static void initThirdIODec() {
-		conjugators.get(ConjugationMapper.THIRD_CONJ_IO).get(Mood.INDICATIVE).put(Voice.ACTIVE,
+		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.THIRD_CONJ_IO).get(Mood.INDICATIVE).put(Voice.ACTIVE,
 				new ThirdIOIndicActiveConjugator());
-		conjugators.get(ConjugationMapper.THIRD_CONJ_IO).get(Mood.INDICATIVE).put(Voice.PASSIVE,
+		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.THIRD_CONJ_IO).get(Mood.INDICATIVE).put(Voice.PASSIVE,
 				new ThirdIOIndicPassiveConjugator());
 	}
 
 	private static void initFourthDec() {
-		conjugators.get(ConjugationMapper.FOURTH_CONJ).get(Mood.INDICATIVE).put(Voice.ACTIVE,
+		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.FOURTH_CONJ).get(Mood.INDICATIVE).put(Voice.ACTIVE,
 				new FourthIndicActiveConjugator());
-		conjugators.get(ConjugationMapper.FOURTH_CONJ).get(Mood.INDICATIVE).put(Voice.PASSIVE,
+		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.FOURTH_CONJ).get(Mood.INDICATIVE).put(Voice.PASSIVE,
 				new FourthIndicPassiveConjugator());
 	}
 

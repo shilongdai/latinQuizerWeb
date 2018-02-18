@@ -29,34 +29,15 @@
 				<form:form action="${postUrl}" method="post" class="form-horizontal"
 					modelAttribute="verbForm">
 
-					<c:set var="amountErrors">
-						<form:errors element="span" path="amount" cssClass="help-block" />
-					</c:set>
-
-					<c:choose>
-						<c:when test="${not empty amountErrors }">
-							<div class="form-group has-error">
-								<form:label path="amount" cssClass="col-sm-2 control-label">
-									<spring:message code="practice.amount"></spring:message>
-								</form:label>
-								<div class="col-sm-8">
-									<form:input cssClass="form-control" path="amount" />
-									${amountErrors}
-								</div>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="form-group">
-								<form:label path="amount" cssClass="col-sm-2 control-label">
-									<spring:message code="practice.amount"></spring:message>
-								</form:label>
-								<div class="col-sm-8">
-									<form:input cssClass="form-control" path="amount"
-										placeholder="<spring:message code='practice.amount.placeholder'></spring:message>" />
-								</div>
-							</div>
-						</c:otherwise>
-					</c:choose>
+					<div class="form-group">
+						<form:label path="amount" cssClass="col-sm-2 control-label">
+							<spring:message code="practice.amount"></spring:message>
+						</form:label>
+						<div class="col-sm-8">
+							<form:input cssClass="form-control" path="amount"
+								placeholder="<spring:message code='practice.amount.placeholder'></spring:message>" />
+						</div>
+					</div>
 
 					<div class="panel-group" id="accordion">
 						<div class="panel panel-default">
@@ -198,6 +179,26 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="#collapse5"> <spring:message code="practice.type"></spring:message></a>
+								</h4>
+							</div>
+							<div id="collapse5" class="panel-collapse collapse">
+								<div class="panel-body">
+									<div class="form-group">
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="types" value="REGULAR" />
+												<spring:message code="ACTIVE"></spring:message>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 
 					<form:errors path="conjugations" element="div"
@@ -210,6 +211,12 @@
 						cssClass="alert alert-danger alert-dismissible"></form:errors>
 
 					<form:errors path="moods" element="div"
+						cssClass="alert alert-danger alert-dismissible"></form:errors>
+
+					<form:errors path="amount" element="div"
+						cssClass="alert alert-danger alert-dismissible"></form:errors>
+
+					<form:errors path="types" element="div"
 						cssClass="alert alert-danger alert-dismissible"></form:errors>
 
 					<div class="form-group">

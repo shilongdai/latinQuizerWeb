@@ -20,6 +20,7 @@ import net.viperfish.latinQuiz.core.Mood;
 import net.viperfish.latinQuiz.core.Question;
 import net.viperfish.latinQuiz.core.SingleTextualAnswer;
 import net.viperfish.latinQuiz.core.Tense;
+import net.viperfish.latinQuiz.core.VerbType;
 import net.viperfish.latinQuiz.core.Voice;
 import net.viperfish.latinQuiz.errors.InsufficientWordBankException;
 import net.viperfish.latinQuiz.quizers.VerbQuizerService;
@@ -43,6 +44,7 @@ public class PracticeController {
 		DEFAULT.getMoods().add(Mood.INDICATIVE);
 		DEFAULT.getVoices().add(Voice.ACTIVE);
 		DEFAULT.getVoices().add(Voice.PASSIVE);
+		DEFAULT.getTypes().add(VerbType.REGULAR);
 	}
 
 	public PracticeController() {
@@ -66,7 +68,7 @@ public class PracticeController {
 			Integer[] selectedConjugations = verbForm.getConjugations()
 					.toArray(new Integer[verbForm.getConjugations().size()]);
 			Question[] generated = verbService.generateQuestions(verbForm.getAmount(), selectedConjugations,
-					verbForm.getTenses(), verbForm.getVoices(), verbForm.getMoods());
+					verbForm.getTenses(), verbForm.getVoices(), verbForm.getMoods(), verbForm.getTypes());
 			Answer[] answers = new Answer[generated.length];
 			for (int i = 0; i < answers.length; ++i) {
 				answers[i] = new SingleTextualAnswer();

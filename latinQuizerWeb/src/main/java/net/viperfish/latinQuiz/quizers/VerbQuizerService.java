@@ -17,6 +17,7 @@ import net.viperfish.latinQuiz.core.Mood;
 import net.viperfish.latinQuiz.core.MultipleChoiceQuestion;
 import net.viperfish.latinQuiz.core.Question;
 import net.viperfish.latinQuiz.core.Tense;
+import net.viperfish.latinQuiz.core.VerbType;
 import net.viperfish.latinQuiz.core.Voice;
 import net.viperfish.latinQuiz.errors.InsufficientWordBankException;
 
@@ -44,7 +45,7 @@ public final class VerbQuizerService {
 	}
 
 	public Question[] generateQuestions(int length, Integer[] conjugations, List<Tense> tenses, List<Voice> voices,
-			List<Mood> moods) throws InsufficientWordBankException {
+			List<Mood> moods, List<VerbType> types) throws InsufficientWordBankException {
 		// make sure that there are words in the word bank and that there are the
 		// established conjugations
 		checkParameters(length, conjugations);
@@ -52,8 +53,9 @@ public final class VerbQuizerService {
 		HashSet<String> buffer = new HashSet<>();
 		List<Question> result = new LinkedList<>();
 		for (int k = 0; k < length; ++k) {
+			VerbType type = types.get(rand.nextInt(types.size()));
 			// get a random verb from the current selecting conjugation
-			LatinVerb l = getVerb(conjugations[currentConj]);
+			LatinVerb l = getVerb(conjugations[currentConj], type);
 			if (l == null) {
 				currentConj = (currentConj + 1) % conjugations.length;
 				k--;
@@ -75,9 +77,9 @@ public final class VerbQuizerService {
 
 	}
 
-	private LatinVerb getVerb(int conj) {
+	private LatinVerb getVerb(int conj, VerbType type) {
 		LatinVerb l = null;
-		List<LatinVerb> conjVs = database.findAllByConjugation(conj);
+		List<LatinVerb> conjVs = database.findAllByConjugationAndType(conj, type);
 		if (conjVs.isEmpty()) {
 			return null;
 		}

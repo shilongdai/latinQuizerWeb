@@ -7,5 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface LatinVerbDatabase extends CrudRepository<LatinVerb, Long> {
-	public List<LatinVerb> findAllByConjugation(int conj);
+	public List<LatinVerb> findAllByConjugationAndType(int conj, VerbType type);
 }

@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Range;
 
 import net.viperfish.latinQuiz.core.Mood;
 import net.viperfish.latinQuiz.core.Tense;
+import net.viperfish.latinQuiz.core.VerbType;
 import net.viperfish.latinQuiz.core.Voice;
 
 public class VerbStartPracticeForm {
@@ -22,6 +23,8 @@ public class VerbStartPracticeForm {
 	private List<Mood> moods;
 	@NotEmpty(message = "{verbForm.emptyVoice}")
 	private List<Voice> voices;
+	@NotEmpty(message = "{verbForm.emptyTypes}")
+	private List<VerbType> types;
 
 	public VerbStartPracticeForm() {
 		amount = 10;
@@ -29,6 +32,7 @@ public class VerbStartPracticeForm {
 		tenses = new LinkedList<>();
 		moods = new LinkedList<>();
 		voices = new LinkedList<>();
+		types = new LinkedList<>();
 	}
 
 	public int getAmount() {
@@ -71,6 +75,14 @@ public class VerbStartPracticeForm {
 		this.voices = voices;
 	}
 
+	public List<VerbType> getTypes() {
+		return types;
+	}
+
+	public void setTypes(List<VerbType> types) {
+		this.types = types;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -79,6 +91,7 @@ public class VerbStartPracticeForm {
 		result = prime * result + ((conjugations == null) ? 0 : conjugations.hashCode());
 		result = prime * result + ((moods == null) ? 0 : moods.hashCode());
 		result = prime * result + ((tenses == null) ? 0 : tenses.hashCode());
+		result = prime * result + ((types == null) ? 0 : types.hashCode());
 		result = prime * result + ((voices == null) ? 0 : voices.hashCode());
 		return result;
 	}
@@ -108,6 +121,11 @@ public class VerbStartPracticeForm {
 			if (other.tenses != null)
 				return false;
 		} else if (!tenses.equals(other.tenses))
+			return false;
+		if (types == null) {
+			if (other.types != null)
+				return false;
+		} else if (!types.equals(other.types))
 			return false;
 		if (voices == null) {
 			if (other.voices != null)
