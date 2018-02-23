@@ -113,6 +113,60 @@ public class TestFirstConjugations {
 		test(verb, expected, actual);
 	}
 
+	@Test
+	public void testFirstConjugationDeponentPresent() {
+		LatinVerb verb = new LatinVerb(1, "conspicior", "conspicari", "conspicatum", "", VerbType.DEPONENT);
+		String[][] expected = { { "conspicior", "conspicamur" }, { "conspicaris", "conspicamini" },
+				{ "conspicatur", "conspicantur" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationDeponentImperfect() {
+		LatinVerb verb = new LatinVerb(1, "conspicior", "conspicari", "conspicatum", "", VerbType.DEPONENT);
+		String[][] expected = { { "conspicabar", "conspicabamur" }, { "conspicabaris", "conspicabamini" },
+				{ "conspicabatur", "conspicabantur" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationDeponentFuture() {
+		LatinVerb verb = new LatinVerb(1, "conspicior", "conspicari", "conspicatum", "", VerbType.DEPONENT);
+		String[][] expected = { { "conspicabor", "conspicabimur" }, { "conspicaberis", "conspicabimini" },
+				{ "conspicabitur", "conspicabuntur" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationDeponentPerfect() {
+		LatinVerb verb = new LatinVerb(1, "conspicior", "conspicari", "conspicatum", "", VerbType.DEPONENT);
+		String[][] expected = { { "conspicatum sum", "conspicati sumus" }, { "conspicatum es", "conspicati estis" },
+				{ "conspicatum est", "conspicati sunt" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationDeponentPluperfect() {
+		LatinVerb verb = new LatinVerb(1, "conspicior", "conspicari", "conspicatum", "", VerbType.DEPONENT);
+		String[][] expected = { { "conspicatum eram", "conspicati eramus" },
+				{ "conspicatum eras", "conspicati eratis" }, { "conspicatum erat", "conspicati erant" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationDeponentFutPerf() {
+		LatinVerb verb = new LatinVerb(1, "conspicior", "conspicari", "conspicatum", "", VerbType.DEPONENT);
+		String[][] expected = { { "conspicatum ero", "conspicati erimus" }, { "conspicatum eris", "conspicati eritis" },
+				{ "conspicatum erit", "conspicati erunt" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT);
+		test(verb, expected, actual);
+	}
+
 	private void test(LatinVerb verb, String[][] expected, String[][] actual) {
 		for (int i = 0; i < 3; ++i) {
 			Assert.assertArrayEquals(expected[i], actual[i]);

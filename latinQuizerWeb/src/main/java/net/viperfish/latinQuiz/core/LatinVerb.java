@@ -14,10 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import net.viperfish.latinQuiz.conjugators.FirstDeponentConjugator;
 import net.viperfish.latinQuiz.conjugators.FirstSecondIndicActiveConjugator;
 import net.viperfish.latinQuiz.conjugators.FirstSecondIndicPassiveConjugator;
+import net.viperfish.latinQuiz.conjugators.FourthDeponentConjugator;
 import net.viperfish.latinQuiz.conjugators.FourthIndicActiveConjugator;
 import net.viperfish.latinQuiz.conjugators.FourthIndicPassiveConjugator;
+import net.viperfish.latinQuiz.conjugators.ThirdDeponentConjugator;
+import net.viperfish.latinQuiz.conjugators.ThirdIODeponentConjugator;
 import net.viperfish.latinQuiz.conjugators.ThirdIOIndicActiveConjugator;
 import net.viperfish.latinQuiz.conjugators.ThirdIOIndicPassiveConjugator;
 import net.viperfish.latinQuiz.conjugators.ThirdOIndicActiveConjugator;
@@ -220,6 +224,8 @@ public class LatinVerb implements Serializable {
 	}
 
 	private static void initFirstSecondDec() {
+
+		// regular verbs
 		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.FIRST_CONJ).get(Mood.INDICATIVE).put(Voice.ACTIVE,
 				new FirstSecondIndicActiveConjugator());
 		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.FIRST_CONJ).get(Mood.INDICATIVE).put(Voice.PASSIVE,
@@ -228,27 +234,51 @@ public class LatinVerb implements Serializable {
 				new FirstSecondIndicActiveConjugator());
 		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.SECOND_CONJ).get(Mood.INDICATIVE).put(Voice.PASSIVE,
 				new FirstSecondIndicPassiveConjugator());
+
+		// deponent verbs
+		conjugators.get(VerbType.DEPONENT).get(ConjugationMapper.FIRST_CONJ).get(Mood.INDICATIVE).put(Voice.ACTIVE,
+				new FirstDeponentConjugator());
+		conjugators.get(VerbType.DEPONENT).get(ConjugationMapper.SECOND_CONJ).get(Mood.INDICATIVE).put(Voice.ACTIVE,
+				new FirstDeponentConjugator());
+
 	}
 
 	private static void initThirdODec() {
+
+		// regular verbs
 		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.THIRD_CONJ_O).get(Mood.INDICATIVE).put(Voice.ACTIVE,
 				new ThirdOIndicActiveConjugator());
 		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.THIRD_CONJ_O).get(Mood.INDICATIVE).put(Voice.PASSIVE,
 				new ThirdOIndicPassiveConjugator());
+
+		// deponent verbs
+		conjugators.get(VerbType.DEPONENT).get(ConjugationMapper.THIRD_CONJ_O).get(Mood.INDICATIVE).put(Voice.ACTIVE,
+				new ThirdDeponentConjugator());
 	}
 
 	private static void initThirdIODec() {
+		// regular verbs
 		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.THIRD_CONJ_IO).get(Mood.INDICATIVE).put(Voice.ACTIVE,
 				new ThirdIOIndicActiveConjugator());
 		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.THIRD_CONJ_IO).get(Mood.INDICATIVE).put(Voice.PASSIVE,
 				new ThirdIOIndicPassiveConjugator());
+
+		// deponent verbs
+		conjugators.get(VerbType.DEPONENT).get(ConjugationMapper.THIRD_CONJ_IO).get(Mood.INDICATIVE).put(Voice.ACTIVE,
+				new ThirdIODeponentConjugator());
 	}
 
 	private static void initFourthDec() {
+
+		// regular verbs
 		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.FOURTH_CONJ).get(Mood.INDICATIVE).put(Voice.ACTIVE,
 				new FourthIndicActiveConjugator());
 		conjugators.get(VerbType.REGULAR).get(ConjugationMapper.FOURTH_CONJ).get(Mood.INDICATIVE).put(Voice.PASSIVE,
 				new FourthIndicPassiveConjugator());
+
+		// deponent verbs
+		conjugators.get(VerbType.DEPONENT).get(ConjugationMapper.FOURTH_CONJ).get(Mood.INDICATIVE).put(Voice.ACTIVE,
+				new FourthDeponentConjugator());
 	}
 
 }
