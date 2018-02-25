@@ -81,6 +81,60 @@ public class TestFourthConjugation {
 		test(verb, expected, actual);
 	}
 
+	@Test
+	public void testFourthConjugationDeponentPresent() {
+		LatinVerb verb = new LatinVerb(4, "experior", "experiri", "expertum", "", VerbType.DEPONENT);
+		String[][] expected = { { "experior", "experimur" }, { "experiris", "experimini" },
+				{ "experitur", "experiuntur" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFourthConjugationDeponentImperfect() {
+		LatinVerb verb = new LatinVerb(4, "experior", "experiri", "expertum", "", VerbType.DEPONENT);
+		String[][] expected = { { "experiebar", "experiebamur" }, { "experiebaris", "experiebamini" },
+				{ "experiebatur", "experiebantur" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFourthConjugationDeponentFuture() {
+		LatinVerb verb = new LatinVerb(4, "experior", "experiri", "expertum", "", VerbType.DEPONENT);
+		String[][] expected = { { "experiar", "experiemur" }, { "experieris", "experiemini" },
+				{ "experietur", "experientur" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFourthConjugationDeponentPerfect() {
+		LatinVerb verb = new LatinVerb(4, "experior", "experiri", "expertum", "", VerbType.DEPONENT);
+		String[][] expected = { { "expertum sum", "experti sumus" }, { "expertum es", "experti estis" },
+				{ "expertum est", "experti sunt" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFourthConjugationDeponentPluperfect() {
+		LatinVerb verb = new LatinVerb(4, "experior", "experiri", "expertum", "", VerbType.DEPONENT);
+		String[][] expected = { { "expertum eram", "experti eramus" }, { "expertum eras", "experti eratis" },
+				{ "expertum erat", "experti erant" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFourthConjugationDeponentFutPerf() {
+		LatinVerb verb = new LatinVerb(4, "experior", "experiri", "expertum", "", VerbType.DEPONENT);
+		String[][] expected = { { "expertum ero", "experti erimus" }, { "expertum eris", "experti eritis" },
+				{ "expertum erit", "experti erunt" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT);
+		test(verb, expected, actual);
+	}
+
 	private void test(LatinVerb verb, String[][] expected, String[][] actual) {
 		for (int i = 0; i < 3; ++i) {
 			Assert.assertArrayEquals(expected[i], actual[i]);

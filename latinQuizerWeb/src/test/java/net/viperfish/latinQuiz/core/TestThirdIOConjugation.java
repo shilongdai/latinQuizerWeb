@@ -88,6 +88,58 @@ public class TestThirdIOConjugation {
 		test(verb, expected, actual);
 	}
 
+	@Test
+	public void testThirdIOConjugationDeponentPresent() {
+		LatinVerb verb = new LatinVerb(5, "patior", "pati", "passum", "", VerbType.DEPONENT);
+		String[][] expected = { { "patior", "patimur" }, { "pateris", "patimini" }, { "patitur", "patiuntur" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testThirdIOConjugationDeponentImperfect() {
+		LatinVerb verb = new LatinVerb(5, "patior", "pati", "passum", "", VerbType.DEPONENT);
+		String[][] expected = { { "patiebar", "patiebamur" }, { "patiebaris", "patiebamini" },
+				{ "patiebatur", "patiebantur" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testThirdIOConjugationDeponentFuture() {
+		LatinVerb verb = new LatinVerb(5, "patior", "pati", "passum", "", VerbType.DEPONENT);
+		String[][] expected = { { "patiar", "patiemur" }, { "patiēris", "patiemini" }, { "patietur", "patientur" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testThirdIOConjugationDeponentPerfect() {
+		LatinVerb verb = new LatinVerb(5, "patior", "pati", "passum", "", VerbType.DEPONENT);
+		String[][] expected = { { "passum sum", "passi sumus" }, { "passum es", "passi estis" },
+				{ "passum est", "passi sunt" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testThirdIOConjugationDeponentPluperfect() {
+		LatinVerb verb = new LatinVerb(5, "patior", "pati", "passum", "", VerbType.DEPONENT);
+		String[][] expected = { { "passum eram", "passi eramus" }, { "passum eras", "passi eratis" },
+				{ "passum erat", "passi erant" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testThirdIOConjugationDeponentFutPerf() {
+		LatinVerb verb = new LatinVerb(5, "patior", "pati", "passum", "", VerbType.DEPONENT);
+		String[][] expected = { { "passum ero", "passi erimus" }, { "passum eris", "passi eritis" },
+				{ "passum erit", "passi erunt" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT);
+		test(verb, expected, actual);
+	}
+
 	private void test(LatinVerb verb, String[][] expected, String[][] actual) {
 		for (int i = 0; i < 3; ++i) {
 			Assert.assertArrayEquals(expected[i], actual[i]);

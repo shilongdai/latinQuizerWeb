@@ -87,6 +87,58 @@ public class TestThirdOConjugation {
 		test(verb, expected, actual);
 	}
 
+	@Test
+	public void testThirdOConjugationDeponentPresent() {
+		LatinVerb verb = new LatinVerb(3, "sequor", "sequi", "secutum", "", VerbType.DEPONENT);
+		String[][] expected = { { "sequor", "sequimur" }, { "sequeris", "sequimini" }, { "sequitur", "sequuntur" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testThirdOConjugationDeponentImperfect() {
+		LatinVerb verb = new LatinVerb(3, "sequor", "sequi", "secutum", "", VerbType.DEPONENT);
+		String[][] expected = { { "sequebar", "sequebamur" }, { "sequebaris", "sequebamini" },
+				{ "sequebatur", "sequebantur" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testThirdOConjugationDeponentFuture() {
+		LatinVerb verb = new LatinVerb(3, "sequor", "sequi", "secutum", "", VerbType.DEPONENT);
+		String[][] expected = { { "sequar", "sequemur" }, { "sequēris", "sequemini" }, { "sequetur", "sequentur" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testThirdOConjugationDeponentPerfect() {
+		LatinVerb verb = new LatinVerb(3, "sequor", "sequi", "secutum", "", VerbType.DEPONENT);
+		String[][] expected = { { "secutum sum", "secuti sumus" }, { "secutum es", "secuti estis" },
+				{ "secutum est", "secuti sunt" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testThirdOConjugationDeponentPluperfect() {
+		LatinVerb verb = new LatinVerb(3, "sequor", "sequi", "secutum", "", VerbType.DEPONENT);
+		String[][] expected = { { "secutum eram", "secuti eramus" }, { "secutum eras", "secuti eratis" },
+				{ "secutum erat", "secuti erant" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testThirdOConjugationDeponentFutPerf() {
+		LatinVerb verb = new LatinVerb(3, "sequor", "sequi", "secutum", "", VerbType.DEPONENT);
+		String[][] expected = { { "secutum ero", "secuti erimus" }, { "secutum eris", "secuti eritis" },
+				{ "secutum erit", "secuti erunt" } };
+		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT);
+		test(verb, expected, actual);
+	}
+
 	private void test(LatinVerb verb, String[][] expected, String[][] actual) {
 		for (int i = 0; i < 3; ++i) {
 			Assert.assertArrayEquals(expected[i], actual[i]);
