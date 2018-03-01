@@ -37,6 +37,8 @@ public class MultipleChoiceQuestionGenerator implements QuestionGenerator {
 		String[][] conjugated = v.conjugate(randMood, randVoice, t);
 		while (conjugated == null || conjugated.length == 0) {
 			t = Tense.values()[rand.nextInt(Tense.values().length)];
+			randVoice = voices.get(rand.nextInt(voices.size()));
+			randMood = moods.get(rand.nextInt(moods.size()));
 			conjugated = v.conjugate(randMood, randVoice, t);
 		}
 		// select the right answer

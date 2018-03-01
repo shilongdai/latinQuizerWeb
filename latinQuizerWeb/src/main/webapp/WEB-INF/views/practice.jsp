@@ -192,7 +192,12 @@
 									<div class="form-group">
 										<div class="checkbox col-sm-offset-2">
 											<label> <form:checkbox path="types" value="REGULAR" />
-												<spring:message code="ACTIVE"></spring:message>
+												<spring:message code="REGULAR"></spring:message>
+											</label>
+										</div>
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="types" value="DEPONENT" />
+												<spring:message code="DEPONENT"></spring:message>
 											</label>
 										</div>
 									</div>
