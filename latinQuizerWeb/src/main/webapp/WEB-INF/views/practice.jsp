@@ -16,8 +16,6 @@
 						code="practice.verb"></spring:message></a></li>
 			<li><a href="#2" data-toggle="tab"><spring:message
 						code="practice.noun"></spring:message></a></li>
-			<li><a href="#3" data-toggle="tab"><spring:message
-						code="practice.adjective"></spring:message></a></li>
 		</ul>
 
 		<c:set var="postUrl">
@@ -148,12 +146,12 @@
 									<div class="form-group">
 										<div class="checkbox col-sm-offset-2">
 											<label> <form:checkbox path="moods"
-													value="INDICATIVE" /> <spring:message code="INDICATIVE"></spring:message>
+													value="INDICATIVE" onchange="disableNonSub()" /> <spring:message code="INDICATIVE"></spring:message>
 											</label>
 										</div>
 										<div class="checkbox col-sm-offset-2">
 											<label> <form:checkbox path="moods"
-													value="SUBJUNCTIVE" /> <spring:message code="SUBJUNCTIVE"></spring:message>
+													value="SUBJUNCTIVE" onchange="disableNonSub()" /> <spring:message code="SUBJUNCTIVE"></spring:message>
 											</label>
 										</div>
 									</div>
@@ -196,12 +194,12 @@
 								<div class="panel-body">
 									<div class="form-group">
 										<div class="checkbox col-sm-offset-2">
-											<label> <form:checkbox path="types" value="REGULAR" />
+											<label> <form:checkbox path="types" value="REGULAR" onchange="disablePassive()" />
 												<spring:message code="REGULAR"></spring:message>
 											</label>
 										</div>
 										<div class="checkbox col-sm-offset-2">
-											<label> <form:checkbox path="types" value="DEPONENT" />
+											<label> <form:checkbox path="types" value="DEPONENT" onchange="disablePassive()" />
 												<spring:message code="DEPONENT"></spring:message>
 											</label>
 										</div>
@@ -243,10 +241,7 @@
 				</form:form>
 			</div>
 			<div class="tab-pane" id="2">
-				<p>UnderConstruction</p>
-			</div>
-			<div class="tab-pane" id="3">
-				<p>under construction</p>
+				<p><spring:message code="practice.comingSoon"></spring:message></p>
 			</div>
 		</div>
 	</div>

@@ -15,7 +15,7 @@ public class DeponentSubjunctiveConjugator extends SubjunctivePassiveConjugator 
 	@Override
 	public String[][] conjugate(Tense t, String first, String second, String third, String fourth) {
 		second = convertToActInfinitive(second);
-		return super.conjugate(t, first, second, third, fourth);
+		return super.conjugate(t, first, second, fourth, third);
 	}
 
 	private String convertToActInfinitive(String deponentInf) {

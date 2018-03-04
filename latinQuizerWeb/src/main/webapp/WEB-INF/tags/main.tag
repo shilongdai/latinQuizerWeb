@@ -42,6 +42,9 @@
 
 <script type="text/javascript"
 	src='<c:url value="/resources/js/Chart.bundle.min.js"></c:url>'></script>
+
+<script type="text/javascript"
+	src='<c:url value="/resources/js/custom.js"></c:url>'></script>
 </head>
 <body>
 
@@ -70,8 +73,8 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><span
-							class="glyphicon glyphicon-menu-hamburger"></span> Menu</a>
+						<!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><span
+							class="glyphicon glyphicon-menu-hamburger"></span> Menu</a>-->
 						<jsp:doBody></jsp:doBody>
 					</div>
 				</div>

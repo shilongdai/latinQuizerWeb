@@ -46,6 +46,7 @@ public class PracticeController {
 		DEFAULT.getVoices().add(Voice.PASSIVE);
 		DEFAULT.getTypes().add(VerbType.REGULAR);
 		DEFAULT.getTypes().add(VerbType.DEPONENT);
+		DEFAULT.getMoods().add(Mood.SUBJUNCTIVE);
 	}
 
 	public PracticeController() {
