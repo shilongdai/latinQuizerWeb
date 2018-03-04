@@ -2,7 +2,7 @@ package net.viperfish.latinQuiz.conjugators;
 
 import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.inflector.AO2AmFixer;
-import net.viperfish.latinQuiz.inflector.BaRule;
+import net.viperfish.latinQuiz.inflector.AppendRule;
 import net.viperfish.latinQuiz.inflector.CombiningRules;
 import net.viperfish.latinQuiz.inflector.ConvertToIRule;
 import net.viperfish.latinQuiz.inflector.EO2AMFixer;
@@ -22,7 +22,7 @@ public final class ThirdOIndicActiveConjugator extends RegularActiveConjugator {
 		addRule(Tense.PRESENT,
 				new PresentStrapStemRule(new Int2UntFixer(new ConvertToIRule(new StemPlusPresentActiveEndingsRule()))));
 		addRule(Tense.IMPERFECT,
-				new PresentStrapStemRule(new AO2AmFixer(new BaRule(new StemPlusPresentActiveEndingsRule()))));
+				new PresentStrapStemRule(new AO2AmFixer(new AppendRule("ba", new StemPlusPresentActiveEndingsRule()))));
 		addRule(Tense.FUTURE, new PresentStrapStemRule(new EO2AMFixer(new StemPlusPresentActiveEndingsRule())));
 		addRule(Tense.PERFECT, new PerfectActiveStrapStemRule(new StemPlusPerfectActiveEndingsRule()));
 		addRule(Tense.PLUPERFECT,

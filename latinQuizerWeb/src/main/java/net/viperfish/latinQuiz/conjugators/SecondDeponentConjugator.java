@@ -1,8 +1,7 @@
 package net.viperfish.latinQuiz.conjugators;
 
 import net.viperfish.latinQuiz.core.Tense;
-import net.viperfish.latinQuiz.inflector.BaRule;
-import net.viperfish.latinQuiz.inflector.BiRule;
+import net.viperfish.latinQuiz.inflector.AppendRule;
 import net.viperfish.latinQuiz.inflector.CombiningRules;
 import net.viperfish.latinQuiz.inflector.EraConjugator;
 import net.viperfish.latinQuiz.inflector.EriConjugator;
@@ -25,9 +24,9 @@ public final class SecondDeponentConjugator extends RegularDeponentConjugator {
 	@Override
 	protected void init() {
 		addRule(Tense.PRESENT, new PresentStrapStemRule(new PassivePresentFixer(new StemPlusPassiveRule())));
-		addRule(Tense.IMPERFECT, new PresentStrapStemRule(new BaRule(new StemPlusPassiveRule())));
-		addRule(Tense.FUTURE, new PresentStrapStemRule(
-				new Int2UntFixer(new PassiveBerisFixer(new IR2ORFixer(new BiRule(new StemPlusPassiveRule()))))));
+		addRule(Tense.IMPERFECT, new PresentStrapStemRule(new AppendRule("ba", new StemPlusPassiveRule())));
+		addRule(Tense.FUTURE, new PresentStrapStemRule(new Int2UntFixer(
+				new PassiveBerisFixer(new IR2ORFixer(new AppendRule("bi", new StemPlusPassiveRule()))))));
 		addRule(Tense.PERFECT, new CombiningRules(new UM2IFixer(new NullRule(3, 2)), " ", new SumRule()));
 		addRule(Tense.PLUPERFECT, new CombiningRules(new UM2IFixer(new NullRule(3, 2)), " ", new EraConjugator()));
 		addRule(Tense.FUTURE_PERFECT,

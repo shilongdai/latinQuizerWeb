@@ -1,7 +1,7 @@
 package net.viperfish.latinQuiz.conjugators;
 
 import net.viperfish.latinQuiz.core.Tense;
-import net.viperfish.latinQuiz.inflector.BaRule;
+import net.viperfish.latinQuiz.inflector.AppendRule;
 import net.viperfish.latinQuiz.inflector.CombiningRules;
 import net.viperfish.latinQuiz.inflector.ConvertToIRule;
 import net.viperfish.latinQuiz.inflector.E2EMacronFixer;
@@ -23,7 +23,7 @@ public final class ThirdOIndicPassiveConjugator extends RegularPassiveConjugator
 	protected void init() {
 		addRule(Tense.PRESENT, new PresentStrapStemRule(new PassivePresentFixer(
 				new IR2ERFixer(new Int2UntFixer(new ConvertToIRule(new StemPlusPassiveRule()))))));
-		addRule(Tense.IMPERFECT, new PresentStrapStemRule(new BaRule(new StemPlusPassiveRule())));
+		addRule(Tense.IMPERFECT, new PresentStrapStemRule(new AppendRule("ba", new StemPlusPassiveRule())));
 		addRule(Tense.FUTURE, new PresentStrapStemRule(new E2EMacronFixer(new ER2ARFixer(new StemPlusPassiveRule()))));
 		addRule(Tense.PERFECT, new CombiningRules(new UM2IFixer(new NullRule(3, 2)), " ", new SumRule()));
 		addRule(Tense.PLUPERFECT, new CombiningRules(new UM2IFixer(new NullRule(3, 2)), " ", new EraConjugator()));

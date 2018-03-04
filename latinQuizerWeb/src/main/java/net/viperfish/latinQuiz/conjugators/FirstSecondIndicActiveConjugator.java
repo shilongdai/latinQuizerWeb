@@ -2,8 +2,7 @@ package net.viperfish.latinQuiz.conjugators;
 
 import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.inflector.AO2AmFixer;
-import net.viperfish.latinQuiz.inflector.BaRule;
-import net.viperfish.latinQuiz.inflector.BiRule;
+import net.viperfish.latinQuiz.inflector.AppendRule;
 import net.viperfish.latinQuiz.inflector.CombiningRules;
 import net.viperfish.latinQuiz.inflector.EraConjugator;
 import net.viperfish.latinQuiz.inflector.EriConjugator;
@@ -21,9 +20,9 @@ public final class FirstSecondIndicActiveConjugator extends RegularActiveConjuga
 	protected void init() {
 		addRule(Tense.PRESENT, new PresentStrapStemRule(new StemPlusPresentActiveEndingsRule()));
 		addRule(Tense.IMPERFECT,
-				new PresentStrapStemRule(new AO2AmFixer(new BaRule(new StemPlusPresentActiveEndingsRule()))));
+				new PresentStrapStemRule(new AO2AmFixer(new AppendRule("ba", new StemPlusPresentActiveEndingsRule()))));
 		addRule(Tense.FUTURE, new Int2UntFixer(
-				new PresentStrapStemRule(new IO2OFixer(new BiRule(new StemPlusPresentActiveEndingsRule())))));
+				new PresentStrapStemRule(new IO2OFixer(new AppendRule("bi", new StemPlusPresentActiveEndingsRule())))));
 		addRule(Tense.PERFECT, new PerfectActiveStrapStemRule(new StemPlusPerfectActiveEndingsRule()));
 		addRule(Tense.PLUPERFECT,
 				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "", new EraConjugator()));
