@@ -151,6 +151,11 @@
 													value="INDICATIVE" /> <spring:message code="INDICATIVE"></spring:message>
 											</label>
 										</div>
+										<div class="checkbox col-sm-offset-2">
+											<label> <form:checkbox path="moods"
+													value="SUBJUNCTIVE" /> <spring:message code="SUBJUNCTIVE"></spring:message>
+											</label>
+										</div>
 									</div>
 								</div>
 							</div>

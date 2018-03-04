@@ -167,6 +167,77 @@ public class TestFirstConjugations {
 		test(verb, expected, actual);
 	}
 
+	@Test
+	public void testFirstConjugationImperfectSubjunctive() {
+		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
+		String[][] expected = { { "cogitarem", "cogitaremus" }, { "cogitares", "cogitaretis" },
+				{ "cogitaret", "cogitarent" } };
+		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationPresentSubjunctive() {
+		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
+		String[][] expected = { { "cogitem", "cogitemus" }, { "cogites", "cogitetis" }, { "cogitet", "cogitent" } };
+		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.ACTIVE, Tense.PRESENT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationPerfectSubjunctive() {
+		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
+		String[][] expected = { { "cogitaverim", "cogitaverimus" }, { "cogitaveris", "cogitaveritis" },
+				{ "cogitaverit", "cogitaverint" } };
+		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.ACTIVE, Tense.PERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationPluPerfectSubjunctive() {
+		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
+		String[][] expected = { { "cogitavissem", "cogitavissemus" }, { "cogitavisses", "cogitavissetis" },
+				{ "cogitavisset", "cogitavissent" } };
+		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationImperfectSubjunctivePassive() {
+		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
+		String[][] expected = { { "cogitarer", "cogitaremur" }, { "cogitareris", "cogitaremini" },
+				{ "cogitaretur", "cogitarentur" } };
+		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.PASSIVE, Tense.IMPERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationPresentSubjunctivePassive() {
+		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
+		String[][] expected = { { "cogiter", "cogitemur" }, { "cogiteris", "cogitemini" },
+				{ "cogitetur", "cogitentur" } };
+		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.PASSIVE, Tense.PRESENT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationPerfectSubjunctivePassive() {
+		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatum", VerbType.REGULAR);
+		String[][] expected = { { "cogitatum sim", "cogitati simus" }, { "cogitatum sis", "cogitati sitis" },
+				{ "cogitatum sit", "cogitati sint" } };
+		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.PASSIVE, Tense.PERFECT);
+		test(verb, expected, actual);
+	}
+
+	@Test
+	public void testFirstConjugationPluPerfectSubjunctivePassive() {
+		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatum", VerbType.REGULAR);
+		String[][] expected = { { "cogitatum essem", "cogitati essemus" }, { "cogitatum esses", "cogitati essetis" },
+				{ "cogitatum esset", "cogitati essent" } };
+		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.PASSIVE, Tense.PLUPERFECT);
+		test(verb, expected, actual);
+	}
+
 	private void test(LatinVerb verb, String[][] expected, String[][] actual) {
 		for (int i = 0; i < 3; ++i) {
 			Assert.assertArrayEquals(expected[i], actual[i]);

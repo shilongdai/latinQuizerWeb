@@ -1,6 +1,5 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.VerbRule;
 
 public class AppendRule implements VerbRule {
@@ -14,9 +13,9 @@ public class AppendRule implements VerbRule {
 	}
 
 	@Override
-	public String[][] inflect(String first, String stem, Tense t) {
+	public String[][] inflect(String first, String stem) {
 		stem += app;
-		return rule.inflect(first, stem, t);
+		return rule.inflect(first, stem);
 	}
 
 }

@@ -2,14 +2,11 @@ package net.viperfish.latinQuiz.inflector;
 
 import net.viperfish.latinQuiz.core.VerbRule;
 
-public class StemPlusPerfectActiveEndingsRule implements VerbRule {
-
-	public StemPlusPerfectActiveEndingsRule() {
-	}
+public final class StemPlusPresentActiveMEnding implements VerbRule {
 
 	@Override
 	public String[][] inflect(String first, String stem) {
-		String[][] endings = { { "i", "imus" }, { "isti", "istis" }, { "it", "erunt" } };
+		String[][] endings = { { "m", "mus" }, { "s", "tis" }, { "t", "nt" } };
 		String[][] result = new String[endings.length][];
 		for (int i = 0; i < result.length; ++i) {
 			result[i] = new String[endings[i].length];

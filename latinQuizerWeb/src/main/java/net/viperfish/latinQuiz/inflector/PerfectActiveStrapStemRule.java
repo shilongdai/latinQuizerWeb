@@ -1,7 +1,6 @@
 package net.viperfish.latinQuiz.inflector;
 
 import net.viperfish.latinQuiz.core.VerbRule;
-import net.viperfish.latinQuiz.core.Tense;
 
 public final class PerfectActiveStrapStemRule implements VerbRule {
 
@@ -12,12 +11,12 @@ public final class PerfectActiveStrapStemRule implements VerbRule {
 	}
 
 	@Override
-	public String[][] inflect(String first, String stem, Tense t) {
+	public String[][] inflect(String first, String stem) {
 		String toConjugate = stem;
 		if (stem.charAt(stem.length() - 1) == 'i') {
 			toConjugate = stem.substring(0, stem.length() - 1);
 		}
-		return src.inflect(first, toConjugate, t);
+		return src.inflect(first, toConjugate);
 	}
 
 }

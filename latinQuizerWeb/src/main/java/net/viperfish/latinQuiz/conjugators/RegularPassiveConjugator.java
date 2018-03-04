@@ -33,13 +33,13 @@ abstract class RegularPassiveConjugator implements Conjugator {
 		case PRESENT:
 		case IMPERFECT:
 		case FUTURE: {
-			result = r.inflect(first, second, t);
+			result = r.inflect(first, second);
 			break;
 		}
 		case PERFECT:
 		case PLUPERFECT:
 		case FUTURE_PERFECT: {
-			result = r.inflect(first, fourth, t);
+			result = r.inflect(first, fourth);
 			break;
 		}
 		}

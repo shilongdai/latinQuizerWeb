@@ -1,7 +1,6 @@
 package net.viperfish.latinQuiz.inflector;
 
 import net.viperfish.latinQuiz.core.VerbRule;
-import net.viperfish.latinQuiz.core.Tense;
 
 public class UM2IFixer implements VerbRule {
 
@@ -13,8 +12,8 @@ public class UM2IFixer implements VerbRule {
 	}
 
 	@Override
-	public String[][] inflect(String first, String stem, Tense t) {
-		String[][] result = conj.inflect(first, stem, t);
+	public String[][] inflect(String first, String stem) {
+		String[][] result = conj.inflect(first, stem);
 		for (int i = 0; i < 3; ++i) {
 			StringBuilder sb = new StringBuilder(result[i][1]);
 			int begin = sb.lastIndexOf("um");

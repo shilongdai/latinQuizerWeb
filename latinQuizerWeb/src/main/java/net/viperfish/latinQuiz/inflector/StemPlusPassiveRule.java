@@ -1,7 +1,6 @@
 package net.viperfish.latinQuiz.inflector;
 
 import net.viperfish.latinQuiz.core.VerbRule;
-import net.viperfish.latinQuiz.core.Tense;
 
 public class StemPlusPassiveRule implements VerbRule {
 
@@ -10,7 +9,7 @@ public class StemPlusPassiveRule implements VerbRule {
 	}
 
 	@Override
-	public String[][] inflect(String first, String stem, Tense t) {
+	public String[][] inflect(String first, String stem) {
 		String[][] endings = { { "r", "mur" }, { "ris", "mini" }, { "tur", "ntur" } };
 		String[][] result = new String[endings.length][];
 		for (int i = 0; i < result.length; ++i) {

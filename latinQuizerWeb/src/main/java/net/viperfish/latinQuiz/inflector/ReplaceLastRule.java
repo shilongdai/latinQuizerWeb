@@ -1,6 +1,5 @@
 package net.viperfish.latinQuiz.inflector;
 
-import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.VerbRule;
 
 abstract class ReplaceLastRule implements VerbRule {
@@ -20,8 +19,8 @@ abstract class ReplaceLastRule implements VerbRule {
 	}
 
 	@Override
-	public String[][] inflect(String first, String stem, Tense t) {
-		String[][] result = conj.inflect(first, stem, t);
+	public String[][] inflect(String first, String stem) {
+		String[][] result = conj.inflect(first, stem);
 		StringBuilder sb = new StringBuilder(result[row][column]);
 
 		int begin = sb.lastIndexOf(toReplace);

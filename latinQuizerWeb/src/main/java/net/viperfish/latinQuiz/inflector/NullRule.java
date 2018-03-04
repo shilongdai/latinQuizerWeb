@@ -1,7 +1,6 @@
 package net.viperfish.latinQuiz.inflector;
 
 import net.viperfish.latinQuiz.core.VerbRule;
-import net.viperfish.latinQuiz.core.Tense;
 
 public class NullRule implements VerbRule {
 
@@ -15,7 +14,7 @@ public class NullRule implements VerbRule {
 	}
 
 	@Override
-	public String[][] inflect(String first, String stem, Tense t) {
+	public String[][] inflect(String first, String stem) {
 		String[][] result = new String[row][column];
 		for (int i = 0; i < row; ++i) {
 			for (int j = 0; j < column; ++j) {

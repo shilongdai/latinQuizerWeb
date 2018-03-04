@@ -1,7 +1,6 @@
 package net.viperfish.latinQuiz.inflector;
 
 import net.viperfish.latinQuiz.core.VerbRule;
-import net.viperfish.latinQuiz.core.Tense;
 
 public class EraConjugator implements VerbRule {
 
@@ -9,7 +8,7 @@ public class EraConjugator implements VerbRule {
 	}
 
 	@Override
-	public String[][] inflect(String first, String stem, Tense t) {
+	public String[][] inflect(String first, String stem) {
 		String[][] result = { { "eram", "eramus" }, { "eras", "eratis" }, { "erat", "erant" } };
 		return result;
 	}

@@ -1,7 +1,6 @@
 package net.viperfish.latinQuiz.inflector;
 
 import net.viperfish.latinQuiz.core.VerbRule;
-import net.viperfish.latinQuiz.core.Tense;
 
 public class StemPlusPresentActiveEndingsRule implements VerbRule {
 
@@ -9,7 +8,7 @@ public class StemPlusPresentActiveEndingsRule implements VerbRule {
 	}
 
 	@Override
-	public String[][] inflect(String first, String stem, Tense t) {
+	public String[][] inflect(String first, String stem) {
 		String[][] endings = { { "o", "mus" }, { "s", "tis" }, { "t", "nt" } };
 		String[][] result = new String[endings.length][];
 		for (int i = 0; i < result.length; ++i) {

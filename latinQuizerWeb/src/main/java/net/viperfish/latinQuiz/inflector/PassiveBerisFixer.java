@@ -1,7 +1,6 @@
 package net.viperfish.latinQuiz.inflector;
 
 import net.viperfish.latinQuiz.core.VerbRule;
-import net.viperfish.latinQuiz.core.Tense;
 
 public class PassiveBerisFixer implements VerbRule {
 
@@ -12,8 +11,8 @@ public class PassiveBerisFixer implements VerbRule {
 	}
 
 	@Override
-	public String[][] inflect(String first, String stem, Tense t) {
-		String[][] result = conj.inflect(first, stem, t);
+	public String[][] inflect(String first, String stem) {
+		String[][] result = conj.inflect(first, stem);
 		StringBuilder sb = new StringBuilder(result[1][0]);
 		int begin = sb.lastIndexOf("biris");
 		if (begin != -1) {

@@ -3,11 +3,12 @@ package net.viperfish.latinQuiz.conjugators;
 import net.viperfish.latinQuiz.core.ConjugationMapper;
 import net.viperfish.latinQuiz.core.Tense;
 
-abstract class RegularDeponentConjugator extends RegularActiveConjugator {
+public class DeponentSubjunctiveConjugator extends SubjunctivePassiveConjugator {
 
 	private int conj;
 
-	public RegularDeponentConjugator(int conj) {
+	public DeponentSubjunctiveConjugator(int conj) {
+		super(conj);
 		this.conj = conj;
 	}
 
