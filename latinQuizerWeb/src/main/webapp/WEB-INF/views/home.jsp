@@ -7,7 +7,7 @@
 	<h1>
 		<spring:message code="menu.home"></spring:message>
 	</h1>
-
+	
 	<p>
 		<spring:message code="home.intro"></spring:message>
 	</p>

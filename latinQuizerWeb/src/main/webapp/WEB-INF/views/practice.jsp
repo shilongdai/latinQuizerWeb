@@ -49,31 +49,31 @@
 							<div id="collapse1" class="panel-collapse collapse in">
 								<div class="panel-body">
 									<div class="form-group">
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="conjugations" value="1" />
 												<spring:message code="practice.firstConj"></spring:message>
 											</label>
 										</div>
 
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="conjugations" value="2" />
 												<spring:message code="practice.secondConj"></spring:message>
 											</label>
 										</div>
 
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="conjugations" value="3" />
 												<spring:message code="practice.thirdOConj"></spring:message>
 											</label>
 										</div>
 
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="conjugations" value="5" />
 												<spring:message code="practice.thirdIOConj"></spring:message>
 											</label>
 										</div>
 
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="conjugations" value="4" />
 												<spring:message code="practice.fourthConj"></spring:message>
 											</label>
@@ -93,38 +93,38 @@
 								<div class="panel-body">
 
 									<div class="form-group">
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="tenses" value="PRESENT" />
 												<spring:message code="PRESENT"></spring:message>
 											</label>
 										</div>
 
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="tenses"
 													value="IMPERFECT" /> <spring:message code="IMPERFECT"></spring:message>
 											</label>
 										</div>
 
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="tenses" value="FUTURE" />
 												<spring:message code="FUTURE"></spring:message>
 											</label>
 										</div>
 
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="tenses" value="PERFECT" />
 												<spring:message code="PERFECT"></spring:message>
 											</label>
 										</div>
 
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="tenses"
 													value="FUTURE_PERFECT" /> <spring:message
 													code="FUTURE_PERFECT"></spring:message>
 											</label>
 										</div>
 
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="tenses"
 													value="PLUPERFECT" /> <spring:message code="PLUPERFECT"></spring:message>
 											</label>
@@ -144,12 +144,12 @@
 							<div id="collapse3" class="panel-collapse collapse">
 								<div class="panel-body">
 									<div class="form-group">
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="moods"
 													value="INDICATIVE" onchange="disableNonSub()" /> <spring:message code="INDICATIVE"></spring:message>
 											</label>
 										</div>
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="moods"
 													value="SUBJUNCTIVE" onchange="disableNonSub()" /> <spring:message code="SUBJUNCTIVE"></spring:message>
 											</label>
@@ -168,12 +168,12 @@
 							<div id="collapse4" class="panel-collapse collapse">
 								<div class="panel-body">
 									<div class="form-group">
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="voices" value="ACTIVE" />
 												<spring:message code="ACTIVE"></spring:message>
 											</label>
 										</div>
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="voices" value="PASSIVE" />
 												<spring:message code="PASSIVE"></spring:message>
 											</label>
@@ -193,12 +193,12 @@
 							<div id="collapse5" class="panel-collapse collapse">
 								<div class="panel-body">
 									<div class="form-group">
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="types" value="REGULAR" onchange="disablePassive()" />
 												<spring:message code="REGULAR"></spring:message>
 											</label>
 										</div>
-										<div class="checkbox col-sm-offset-2">
+										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="types" value="DEPONENT" onchange="disablePassive()" />
 												<spring:message code="DEPONENT"></spring:message>
 											</label>
