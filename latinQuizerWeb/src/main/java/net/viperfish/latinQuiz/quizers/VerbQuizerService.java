@@ -3,9 +3,11 @@ package net.viperfish.latinQuiz.quizers;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -14,8 +16,8 @@ import org.springframework.stereotype.Service;
 import net.viperfish.latinQuiz.core.LatinVerb;
 import net.viperfish.latinQuiz.core.LatinVerbDatabase;
 import net.viperfish.latinQuiz.core.Mood;
-import net.viperfish.latinQuiz.core.MultipleChoiceQuestion;
 import net.viperfish.latinQuiz.core.Question;
+import net.viperfish.latinQuiz.core.QuestionType;
 import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.VerbType;
 import net.viperfish.latinQuiz.core.Voice;
@@ -26,11 +28,16 @@ public final class VerbQuizerService {
 
 	private SecureRandom rand;
 	private LatinVerbDatabase database;
-	private MessageSource i18n;
-	private MultipleChoiceQuestionGenerator gen;
+	private Map<QuestionType, QuestionGenerator> generators;
 
 	public VerbQuizerService() {
 		rand = new SecureRandom();
+		generators = new HashMap<>();
+	}
+
+	private void init(MessageSource i18n) {
+		generators.put(QuestionType.MULTIPLE_CHOICE, new MultipleChoiceQuestionGenerator(i18n));
+		generators.put(QuestionType.SYNOPSIS, new SynopsisQuestionGenerator(i18n));
 	}
 
 	@Autowired
@@ -40,12 +47,12 @@ public final class VerbQuizerService {
 
 	@Autowired
 	public void setI18n(MessageSource i18n) {
-		this.i18n = i18n;
-		gen = new MultipleChoiceQuestionGenerator(i18n);
+		init(i18n);
 	}
 
 	public Question[] generateQuestions(int length, Integer[] conjugations, List<Tense> tenses, List<Voice> voices,
-			List<Mood> moods, List<VerbType> types) throws InsufficientWordBankException {
+			List<Mood> moods, List<VerbType> types, List<QuestionType> questionTypes)
+			throws InsufficientWordBankException {
 		// make sure that there are words in the word bank and that there are the
 		// established conjugations
 		checkParameters(length, conjugations);
@@ -54,6 +61,7 @@ public final class VerbQuizerService {
 		List<Question> result = new LinkedList<>();
 		for (int k = 0; k < length; ++k) {
 			VerbType type = types.get(rand.nextInt(types.size()));
+			QuestionType questionType = questionTypes.get(rand.nextInt(questionTypes.size()));
 			// get a random verb from the current selecting conjugation
 			LatinVerb l = getVerb(conjugations[currentConj], type);
 			if (l == null) {
@@ -61,6 +69,7 @@ public final class VerbQuizerService {
 				k--;
 				continue;
 			}
+			QuestionGenerator gen = generators.get(questionType);
 			Question q = gen.generate(l, conjugations, tenses, voices, moods);
 
 			// if this question exists, generate another one
@@ -73,7 +82,7 @@ public final class VerbQuizerService {
 			currentConj = (currentConj + 1) % conjugations.length;
 		}
 		Collections.shuffle(result);
-		return result.toArray(new MultipleChoiceQuestion[result.size()]);
+		return result.toArray(new Question[result.size()]);
 
 	}
 

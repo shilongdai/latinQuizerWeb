@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
 import net.viperfish.latinQuiz.core.Mood;
+import net.viperfish.latinQuiz.core.QuestionType;
 import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.VerbType;
 import net.viperfish.latinQuiz.core.Voice;
@@ -26,6 +27,8 @@ public class VerbStartPracticeForm {
 	@NotEmpty(message = "{verbForm.emptyTypes}")
 	private List<VerbType> types;
 
+	private List<QuestionType> questionTypes;
+
 	public VerbStartPracticeForm() {
 		amount = 10;
 		conjugations = new LinkedList<>();
@@ -33,6 +36,7 @@ public class VerbStartPracticeForm {
 		moods = new LinkedList<>();
 		voices = new LinkedList<>();
 		types = new LinkedList<>();
+		questionTypes = new LinkedList<>();
 	}
 
 	public int getAmount() {
@@ -83,6 +87,14 @@ public class VerbStartPracticeForm {
 		this.types = types;
 	}
 
+	public List<QuestionType> getQuestionTypes() {
+		return questionTypes;
+	}
+
+	public void setQuestionTypes(List<QuestionType> questionTypes) {
+		this.questionTypes = questionTypes;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,6 +102,7 @@ public class VerbStartPracticeForm {
 		result = prime * result + amount;
 		result = prime * result + ((conjugations == null) ? 0 : conjugations.hashCode());
 		result = prime * result + ((moods == null) ? 0 : moods.hashCode());
+		result = prime * result + ((questionTypes == null) ? 0 : questionTypes.hashCode());
 		result = prime * result + ((tenses == null) ? 0 : tenses.hashCode());
 		result = prime * result + ((types == null) ? 0 : types.hashCode());
 		result = prime * result + ((voices == null) ? 0 : voices.hashCode());
@@ -116,6 +129,11 @@ public class VerbStartPracticeForm {
 			if (other.moods != null)
 				return false;
 		} else if (!moods.equals(other.moods))
+			return false;
+		if (questionTypes == null) {
+			if (other.questionTypes != null)
+				return false;
+		} else if (!questionTypes.equals(other.questionTypes))
 			return false;
 		if (tenses == null) {
 			if (other.tenses != null)

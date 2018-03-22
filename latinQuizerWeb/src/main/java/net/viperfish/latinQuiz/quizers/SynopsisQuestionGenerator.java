@@ -1,0 +1,59 @@
+package net.viperfish.latinQuiz.quizers;
+
+import java.security.SecureRandom;
+import java.util.List;
+
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+
+import net.viperfish.latinQuiz.core.LatinVerb;
+import net.viperfish.latinQuiz.core.Mood;
+import net.viperfish.latinQuiz.core.Question;
+import net.viperfish.latinQuiz.core.SynopsisAnswer;
+import net.viperfish.latinQuiz.core.SynopsisQuestion;
+import net.viperfish.latinQuiz.core.Tense;
+import net.viperfish.latinQuiz.core.Voice;
+
+public class SynopsisQuestionGenerator implements QuestionGenerator {
+
+	private SecureRandom rand;
+	private MessageSource i18n;
+
+	public SynopsisQuestionGenerator(MessageSource source) {
+		rand = new SecureRandom();
+		this.i18n = source;
+	}
+
+	@Override
+	public Question generate(LatinVerb v, Integer[] conjugations, List<Tense> tenses, List<Voice> voices,
+			List<Mood> moods) {
+		Voice randVoice = voices.get(rand.nextInt(voices.size()));
+		Mood randMood = moods.get(rand.nextInt(moods.size()));
+		SynopsisQuestion questionResult = new SynopsisQuestion();
+		int person = rand.nextInt(3);
+		int sgPl = rand.nextInt(2);
+		SynopsisAnswer answer = new SynopsisAnswer();
+		for (Tense t : tenses) {
+			String[][] conjugated = v.conjugate(randMood, randVoice, t);
+			if (conjugated.length != 0) {
+				questionResult.getTenses().add(t);
+				answer.getRows().put(t, conjugated[person][sgPl]);
+			}
+		}
+
+		// generate the question
+		String localizedMood = i18n.getMessage(randMood.name(), null, LocaleContextHolder.getLocale());
+		String localizedVoice = i18n.getMessage(randVoice.name(), null, LocaleContextHolder.getLocale());
+		String localizedPerson = i18n.getMessage(QuestionHelper.personToKey(person), null,
+				LocaleContextHolder.getLocale());
+		String localizedNumber = i18n.getMessage(QuestionHelper.numberToKey(sgPl), null,
+				LocaleContextHolder.getLocale());
+		String question = i18n.getMessage("practice.verb.synopsis", new Object[] { v.getDictionaryEntry(),
+				localizedMood, localizedVoice, localizedPerson, localizedNumber }, LocaleContextHolder.getLocale());
+
+		questionResult.setQuestion(question);
+		questionResult.setAnswer(answer);
+		return questionResult;
+	}
+
+}

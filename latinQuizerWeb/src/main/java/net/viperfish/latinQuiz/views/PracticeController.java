@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import net.viperfish.latinQuiz.core.Answer;
 import net.viperfish.latinQuiz.core.Mood;
 import net.viperfish.latinQuiz.core.Question;
+import net.viperfish.latinQuiz.core.QuestionType;
 import net.viperfish.latinQuiz.core.SingleTextualAnswer;
+import net.viperfish.latinQuiz.core.SynopsisAnswer;
 import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.VerbType;
 import net.viperfish.latinQuiz.core.Voice;
@@ -47,6 +49,8 @@ public class PracticeController {
 		DEFAULT.getTypes().add(VerbType.REGULAR);
 		DEFAULT.getTypes().add(VerbType.DEPONENT);
 		DEFAULT.getMoods().add(Mood.SUBJUNCTIVE);
+		DEFAULT.getQuestionTypes().add(QuestionType.MULTIPLE_CHOICE);
+		DEFAULT.getQuestionTypes().add(QuestionType.SYNOPSIS);
 	}
 
 	public PracticeController() {
@@ -70,10 +74,20 @@ public class PracticeController {
 			Integer[] selectedConjugations = verbForm.getConjugations()
 					.toArray(new Integer[verbForm.getConjugations().size()]);
 			Question[] generated = verbService.generateQuestions(verbForm.getAmount(), selectedConjugations,
-					verbForm.getTenses(), verbForm.getVoices(), verbForm.getMoods(), verbForm.getTypes());
+					verbForm.getTenses(), verbForm.getVoices(), verbForm.getMoods(), verbForm.getTypes(),
+					verbForm.getQuestionTypes());
 			Answer[] answers = new Answer[generated.length];
 			for (int i = 0; i < answers.length; ++i) {
-				answers[i] = new SingleTextualAnswer();
+				switch (generated[i].getType()) {
+				case MULTIPLE_CHOICE: {
+					answers[i] = new SingleTextualAnswer();
+					break;
+				}
+				case SYNOPSIS: {
+					answers[i] = new SynopsisAnswer();
+					break;
+				}
+				}
 			}
 			session.setAttribute("questions", generated);
 			session.setAttribute("userAnswers", answers);
@@ -86,21 +100,16 @@ public class PracticeController {
 		}
 	}
 
-	@RequestMapping(value = "verb/{count}/singleTextAnswer", method = RequestMethod.POST)
+	@RequestMapping(value = "verb/{count}/singleTextualAnswer", method = RequestMethod.POST)
 	public String answerVerbPractice(SingleTextualAnswer singleTextualAnswer, HttpSession session,
 			@PathVariable("count") int count) {
-		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
-		if (answers == null) {
-			return "redirect:/practice";
-		}
-		answers[count] = singleTextualAnswer;
-		if (count == answers.length - 1) {
-			if (!(boolean) session.getAttribute("review")) {
-				session.setAttribute("end", new Date().getTime());
-			}
-			return "redirect:/practice/verb/report";
-		}
-		return "redirect:/practice/verb/" + (count + 1);
+		return handleAnswerPOST(singleTextualAnswer, session, count);
+	}
+
+	@RequestMapping(value = "verb/{count}/synopsisAnswer", method = RequestMethod.POST)
+	public String synopsisAnswerVerbPractice(SynopsisAnswer answer, HttpSession session,
+			@PathVariable("count") int count) {
+		return handleAnswerPOST(answer, session, count);
 	}
 
 	@RequestMapping(value = "verb/{count}", method = RequestMethod.GET)
@@ -117,7 +126,17 @@ public class PracticeController {
 		if ((boolean) session.getAttribute("review")) {
 			model.put("reviewing", true);
 		}
-		return "multipleChoice";
+		switch (questions[count].getType()) {
+		case MULTIPLE_CHOICE: {
+			return "multipleChoice";
+		}
+		case SYNOPSIS: {
+			return "synopsis";
+		}
+		default: {
+			return "404";
+		}
+		}
 	}
 
 	@RequestMapping(value = "verb/report", method = RequestMethod.GET)
@@ -143,6 +162,21 @@ public class PracticeController {
 		model.put("report", new VerbReport(total, correct, incorrect, (int) score, time));
 		session.setAttribute("review", true);
 		return "verbReport";
+	}
+
+	private String handleAnswerPOST(Answer singleTextualAnswer, HttpSession session, int count) {
+		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
+		if (answers == null) {
+			return "redirect:/practice";
+		}
+		answers[count] = singleTextualAnswer;
+		if (count == answers.length - 1) {
+			if (!(boolean) session.getAttribute("review")) {
+				session.setAttribute("end", new Date().getTime());
+			}
+			return "redirect:/practice/verb/report";
+		}
+		return "redirect:/practice/verb/" + (count + 1);
 	}
 
 }

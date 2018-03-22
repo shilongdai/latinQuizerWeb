@@ -8,7 +8,7 @@ public final class MultipleChoiceQuestion extends Question {
 	private Set<String> choices;
 
 	public MultipleChoiceQuestion(String question) {
-		super(null, question);
+		super(null, question, QuestionType.MULTIPLE_CHOICE);
 		choices = new HashSet<>();
 	}
 
