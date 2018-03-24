@@ -6,13 +6,24 @@
 	prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@ taglib
 	prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><%@ taglib
 	prefix="spring" uri="http://www.springframework.org/tags"%>
-<h3>
-	<spring:message code="question.status"
-		arguments="${current + 1}, ${count}"></spring:message>
-</h3>
-<p>
-	<c:out value="${question.question}"></c:out>
-</p>
+
+<div class="btn-group btn-breadcrumb">
+	<a href='<c:url value="/practice"></c:url>' class="btn btn-default"><i
+		class="glyphicon glyphicon-home"></i> <spring:message
+			code="menu.practice"></spring:message></a> <a href="#"
+		class="btn btn-default"><spring:message code="question.status"
+			arguments="${current + 1 },${count }"></spring:message></a>
+</div>
+
+<div>
+
+	<br>
+
+	<p>
+		<c:out value="${question.question}"></c:out>
+	</p>
+
+</div>
 <c:url value="/practice/verb/${current}/${type}" var="postUrl"></c:url>
 <form:form action="${postUrl }" method="post" modelAttribute="answer">
 	<jsp:doBody></jsp:doBody>
