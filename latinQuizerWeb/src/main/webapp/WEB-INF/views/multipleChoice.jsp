@@ -5,7 +5,7 @@
 	prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <v:main>
-	<v:verbPractice type="singleTextAnswer">
+	<v:verbPractice type="singleTextualAnswer">
 		<div class="funkyradio">
 			<c:forEach items="${question.choices }" var="i" varStatus="theCount">
 				<c:choose>

@@ -25,7 +25,7 @@
 
 </div>
 <c:url value="/practice/verb/${current}/${type}" var="postUrl"></c:url>
-<form:form action="${postUrl }" method="post" modelAttribute="answer">
+<form:form action="${postUrl }" method="post" modelAttribute="answer" cssClass="form-horizontal">
 	<jsp:doBody></jsp:doBody>
 	<br>
 	<div class="btn-group">

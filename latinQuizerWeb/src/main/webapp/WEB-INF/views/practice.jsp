@@ -146,12 +146,14 @@
 									<div class="form-group">
 										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="moods"
-													value="INDICATIVE" onchange="disableNonSub()" /> <spring:message code="INDICATIVE"></spring:message>
+													value="INDICATIVE" onchange="disableNonSub()" /> <spring:message
+													code="INDICATIVE"></spring:message>
 											</label>
 										</div>
 										<div class="checkbox checkbox_left_margin">
 											<label> <form:checkbox path="moods"
-													value="SUBJUNCTIVE" onchange="disableNonSub()" /> <spring:message code="SUBJUNCTIVE"></spring:message>
+													value="SUBJUNCTIVE" onchange="disableNonSub()" /> <spring:message
+													code="SUBJUNCTIVE"></spring:message>
 											</label>
 										</div>
 									</div>
@@ -194,13 +196,42 @@
 								<div class="panel-body">
 									<div class="form-group">
 										<div class="checkbox checkbox_left_margin">
-											<label> <form:checkbox path="types" value="REGULAR" onchange="disablePassive()" />
-												<spring:message code="REGULAR"></spring:message>
+											<label> <form:checkbox path="types" value="REGULAR"
+													onchange="disablePassive()" /> <spring:message
+													code="REGULAR"></spring:message>
 											</label>
 										</div>
 										<div class="checkbox checkbox_left_margin">
-											<label> <form:checkbox path="types" value="DEPONENT" onchange="disablePassive()" />
-												<spring:message code="DEPONENT"></spring:message>
+											<label> <form:checkbox path="types" value="DEPONENT"
+													onchange="disablePassive()" /> <spring:message
+													code="DEPONENT"></spring:message>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="#collapse6"> <spring:message
+											code="practice.questionType"></spring:message></a>
+								</h4>
+							</div>
+							<div id="collapse6" class="panel-collapse collapse">
+								<div class="panel-body">
+									<div class="form-group">
+										<div class="checkbox checkbox_left_margin">
+											<label> <form:checkbox path="questionTypes"
+													value="MULTIPLE_CHOICE" /> <spring:message
+													code="MULTIPLE_CHOICE"></spring:message>
+											</label>
+										</div>
+										<div class="checkbox checkbox_left_margin">
+											<label> <form:checkbox path="questionTypes"
+													value="SYNOPSIS" onchange="disablePassive()" /> <spring:message
+													code="SYNOPSIS"></spring:message>
 											</label>
 										</div>
 									</div>
@@ -227,21 +258,17 @@
 					<form:errors path="types" element="div"
 						cssClass="alert alert-danger alert-dismissible"></form:errors>
 
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-2">
-							<div class="btn-group">
-								<a href='<c:url value="/"></c:url>' class="btn btn-default"><spring:message
-										code="label.cancel"></spring:message></a>
-								<button type="submit" class="btn btn-primary">
-									<spring:message code="practice.start"></spring:message>
-								</button>
-							</div>
-						</div>
-					</div>
+
+					<button type="submit" class="btn btn-primary">
+						<spring:message code="practice.start"></spring:message>
+					</button>
+
 				</form:form>
 			</div>
 			<div class="tab-pane" id="2">
-				<p><spring:message code="practice.comingSoon"></spring:message></p>
+				<p>
+					<spring:message code="practice.comingSoon"></spring:message>
+				</p>
 			</div>
 		</div>
 	</div>
