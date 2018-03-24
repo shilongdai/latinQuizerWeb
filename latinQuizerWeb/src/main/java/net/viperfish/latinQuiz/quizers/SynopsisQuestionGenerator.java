@@ -27,17 +27,23 @@ public class SynopsisQuestionGenerator implements QuestionGenerator {
 	@Override
 	public Question generate(LatinVerb v, Integer[] conjugations, List<Tense> tenses, List<Voice> voices,
 			List<Mood> moods) {
-		Voice randVoice = voices.get(rand.nextInt(voices.size()));
-		Mood randMood = moods.get(rand.nextInt(moods.size()));
 		SynopsisQuestion questionResult = new SynopsisQuestion();
-		int person = rand.nextInt(3);
-		int sgPl = rand.nextInt(2);
 		SynopsisAnswer answer = new SynopsisAnswer();
-		for (Tense t : tenses) {
-			String[][] conjugated = v.conjugate(randMood, randVoice, t);
-			if (conjugated.length != 0) {
-				questionResult.getTenses().add(t);
-				answer.getRows().put(t, conjugated[person][sgPl]);
+		Voice randVoice = null;
+		Mood randMood = null;
+		int person = 0;
+		int sgPl = 0;
+		while (questionResult.getTenses().size() == 0) {
+			randVoice = voices.get(rand.nextInt(voices.size()));
+			randMood = moods.get(rand.nextInt(moods.size()));
+			person = rand.nextInt(3);
+			sgPl = rand.nextInt(2);
+			for (Tense t : tenses) {
+				String[][] conjugated = v.conjugate(randMood, randVoice, t);
+				if (conjugated.length != 0) {
+					questionResult.getTenses().add(t);
+					answer.getRows().put(t, conjugated[person][sgPl]);
+				}
 			}
 		}
 
