@@ -1,7 +1,10 @@
 package net.viperfish.latinQuiz.core;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import org.apache.commons.lang3.tuple.Triple;
 
 public final class MultipleChoiceQuestion extends Question {
 
@@ -12,10 +15,11 @@ public final class MultipleChoiceQuestion extends Question {
 		choices = new HashSet<>();
 	}
 
-	public void addChoice(String possibleAnswer, boolean isCorrect) {
+	public void addChoice(String possibleAnswer, boolean isCorrect,
+			List<? extends Triple<String, ? extends List<String>, String>> steps) {
 		choices.add(possibleAnswer);
 		if (isCorrect) {
-			this.setAnswer(new SingleTextualAnswer(possibleAnswer));
+			this.setAnswer(new SingleTextualAnswer(possibleAnswer, steps));
 		}
 	}
 

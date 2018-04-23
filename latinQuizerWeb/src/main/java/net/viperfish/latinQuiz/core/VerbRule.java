@@ -1,5 +1,5 @@
 package net.viperfish.latinQuiz.core;
 
 public interface VerbRule {
-	public String[][] inflect(String first, String stem);
+	public ConjugatedVerb[][] inflect(String first, ConjugatedVerb inProgress);
 }

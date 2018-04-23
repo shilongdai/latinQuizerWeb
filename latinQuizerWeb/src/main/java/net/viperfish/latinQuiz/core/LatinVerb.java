@@ -79,10 +79,10 @@ public class LatinVerb implements Serializable {
 		type = VerbType.REGULAR;
 	}
 
-	public String[][] conjugate(Mood mood, Voice voice, Tense tense) {
+	public ConjugatedVerb[][] conjugate(Mood mood, Voice voice, Tense tense) {
 		Conjugator c = conjugators.get(this.type).get(conjugation).get(mood).get(voice);
 		if (c == null) {
-			return new String[0][0];
+			return new ConjugatedVerb[0][0];
 		}
 		return c.conjugate(tense, stripDiacritics(presentFirst), stripDiacritics(genitive),
 				stripDiacritics(perfectFirst), stripDiacritics(passiveFirst));

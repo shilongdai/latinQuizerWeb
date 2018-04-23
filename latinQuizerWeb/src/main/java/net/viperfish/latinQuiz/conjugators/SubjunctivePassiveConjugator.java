@@ -1,5 +1,6 @@
 package net.viperfish.latinQuiz.conjugators;
 
+import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.ConjugationMapper;
 import net.viperfish.latinQuiz.core.Conjugator;
 import net.viperfish.latinQuiz.core.Tense;
@@ -28,20 +29,20 @@ public class SubjunctivePassiveConjugator implements Conjugator {
 	}
 
 	@Override
-	public String[][] conjugate(Tense t, String first, String second, String third, String fourth) {
-		String[][] result = new String[0][0];
+	public ConjugatedVerb[][] conjugate(Tense t, String first, String second, String third, String fourth) {
+		ConjugatedVerb[][] result = new ConjugatedVerb[0][0];
 		switch (t) {
 		case PRESENT: {
-			return present.inflect(first, second);
+			return present.inflect(first, new ConjugatedVerb(second));
 		}
 		case IMPERFECT: {
-			return imperfect.inflect(first, second);
+			return imperfect.inflect(first, new ConjugatedVerb(second));
 		}
 		case PERFECT: {
-			return perfect.inflect(first, fourth);
+			return perfect.inflect(first, new ConjugatedVerb(fourth));
 		}
 		case PLUPERFECT:
-			return pluperfect.inflect(first, fourth);
+			return pluperfect.inflect(first, new ConjugatedVerb(fourth));
 		default:
 			break;
 		}

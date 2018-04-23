@@ -8,7 +8,8 @@ public class TestFirstConjugations {
 	public void testFirstConjugationPresent() {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogito", "cogitamus" }, { "cogitas", "cogitatis" }, { "cogitat", "cogitant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT));
 		for (int i = 0; i < 3; ++i) {
 			Assert.assertArrayEquals(expected[i], actual[i]);
 		}
@@ -19,7 +20,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitabam", "cogitabamus" }, { "cogitabas", "cogitabatis" },
 				{ "cogitabat", "cogitabant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -28,7 +30,7 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitabo", "cogitabimus" }, { "cogitabis", "cogitabitis" },
 				{ "cogitabit", "cogitabunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE);
+		String[][] actual = TestUtils.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE));
 		test(verb, expected, actual);
 	}
 
@@ -37,7 +39,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitavi", "cogitavimus" }, { "cogitavisti", "cogitavistis" },
 				{ "cogitavit", "cogitaverunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -46,7 +49,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitaveram", "cogitaveramus" }, { "cogitaveras", "cogitaveratis" },
 				{ "cogitaverat", "cogitaverant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -55,7 +59,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitavero", "cogitaverimus" }, { "cogitaveris", "cogitaveritis" },
 				{ "cogitaverit", "cogitaverint" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -64,7 +69,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitor", "cogitamur" }, { "cogitaris", "cogitamini" },
 				{ "cogitatur", "cogitantur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -73,7 +79,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitabar", "cogitabamur" }, { "cogitabaris", "cogitabamini" },
 				{ "cogitabatur", "cogitabantur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -82,7 +89,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitabor", "cogitabimur" }, { "cogitaberis", "cogitabimini" },
 				{ "cogitabitur", "cogitabuntur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.FUTURE);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.FUTURE));
 		test(verb, expected, actual);
 	}
 
@@ -91,7 +99,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatum", VerbType.REGULAR);
 		String[][] expected = { { "cogitatum sum", "cogitati sumus" }, { "cogitatum es", "cogitati estis" },
 				{ "cogitatum est", "cogitati sunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -100,7 +109,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatum", VerbType.REGULAR);
 		String[][] expected = { { "cogitatum eram", "cogitati eramus" }, { "cogitatum eras", "cogitati eratis" },
 				{ "cogitatum erat", "cogitati erant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.PLUPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.PLUPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -109,7 +119,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatum", VerbType.REGULAR);
 		String[][] expected = { { "cogitatum ero", "cogitati erimus" }, { "cogitatum eris", "cogitati eritis" },
 				{ "cogitatum erit", "cogitati erunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.FUTURE_PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.FUTURE_PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -118,7 +129,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "conspicior", "conspicari", "conspicatum", "", VerbType.DEPONENT);
 		String[][] expected = { { "conspicior", "conspicamur" }, { "conspicaris", "conspicamini" },
 				{ "conspicatur", "conspicantur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -127,7 +139,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "conspicior", "conspicari", "conspicatum", "", VerbType.DEPONENT);
 		String[][] expected = { { "conspicabar", "conspicabamur" }, { "conspicabaris", "conspicabamini" },
 				{ "conspicabatur", "conspicabantur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -136,7 +149,7 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "conspicior", "conspicari", "conspicatum", "", VerbType.DEPONENT);
 		String[][] expected = { { "conspicabor", "conspicabimur" }, { "conspicaberis", "conspicabimini" },
 				{ "conspicabitur", "conspicabuntur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE);
+		String[][] actual = TestUtils.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE));
 		test(verb, expected, actual);
 	}
 
@@ -145,7 +158,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "conspicior", "conspicari", "conspicatum", "", VerbType.DEPONENT);
 		String[][] expected = { { "conspicatum sum", "conspicati sumus" }, { "conspicatum es", "conspicati estis" },
 				{ "conspicatum est", "conspicati sunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -154,7 +168,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "conspicior", "conspicari", "conspicatum", "", VerbType.DEPONENT);
 		String[][] expected = { { "conspicatum eram", "conspicati eramus" },
 				{ "conspicatum eras", "conspicati eratis" }, { "conspicatum erat", "conspicati erant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -163,7 +178,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "conspicior", "conspicari", "conspicatum", "", VerbType.DEPONENT);
 		String[][] expected = { { "conspicatum ero", "conspicati erimus" }, { "conspicatum eris", "conspicati eritis" },
 				{ "conspicatum erit", "conspicati erunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -172,7 +188,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitarem", "cogitaremus" }, { "cogitares", "cogitaretis" },
 				{ "cogitaret", "cogitarent" } };
-		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.SUBJUNCTIVE, Voice.ACTIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -180,7 +197,8 @@ public class TestFirstConjugations {
 	public void testFirstConjugationPresentSubjunctive() {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitem", "cogitemus" }, { "cogites", "cogitetis" }, { "cogitet", "cogitent" } };
-		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.ACTIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.SUBJUNCTIVE, Voice.ACTIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -189,7 +207,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitaverim", "cogitaverimus" }, { "cogitaveris", "cogitaveritis" },
 				{ "cogitaverit", "cogitaverint" } };
-		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.ACTIVE, Tense.PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.SUBJUNCTIVE, Voice.ACTIVE, Tense.PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -198,7 +217,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitavissem", "cogitavissemus" }, { "cogitavisses", "cogitavissetis" },
 				{ "cogitavisset", "cogitavissent" } };
-		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.SUBJUNCTIVE, Voice.ACTIVE, Tense.PLUPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -207,7 +227,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogitarer", "cogitaremur" }, { "cogitareris", "cogitaremini" },
 				{ "cogitaretur", "cogitarentur" } };
-		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.PASSIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.SUBJUNCTIVE, Voice.PASSIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -216,7 +237,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatus", VerbType.REGULAR);
 		String[][] expected = { { "cogiter", "cogitemur" }, { "cogiteris", "cogitemini" },
 				{ "cogitetur", "cogitentur" } };
-		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.PASSIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.SUBJUNCTIVE, Voice.PASSIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -225,7 +247,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatum", VerbType.REGULAR);
 		String[][] expected = { { "cogitatum sim", "cogitati simus" }, { "cogitatum sis", "cogitati sitis" },
 				{ "cogitatum sit", "cogitati sint" } };
-		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.PASSIVE, Tense.PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.SUBJUNCTIVE, Voice.PASSIVE, Tense.PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -234,7 +257,8 @@ public class TestFirstConjugations {
 		LatinVerb verb = new LatinVerb(1, "cogito", "cogitare", "cogitavi", "cogitatum", VerbType.REGULAR);
 		String[][] expected = { { "cogitatum essem", "cogitati essemus" }, { "cogitatum esses", "cogitati essetis" },
 				{ "cogitatum esset", "cogitati essent" } };
-		String[][] actual = verb.conjugate(Mood.SUBJUNCTIVE, Voice.PASSIVE, Tense.PLUPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.SUBJUNCTIVE, Voice.PASSIVE, Tense.PLUPERFECT));
 		test(verb, expected, actual);
 	}
 

@@ -10,7 +10,8 @@ public class TestThirdOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_O, "duco", "ducere", "duxi", "ductus",
 				VerbType.REGULAR);
 		String[][] expected = { { "duco", "ducimus" }, { "ducis", "ducitis" }, { "ducit", "ducunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -19,7 +20,8 @@ public class TestThirdOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_O, "duco", "ducere", "duxi", "ductus",
 				VerbType.REGULAR);
 		String[][] expected = { { "ducebam", "ducebamus" }, { "ducebas", "ducebatis" }, { "ducebat", "ducebant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -28,7 +30,7 @@ public class TestThirdOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_O, "duco", "ducere", "duxi", "ductus",
 				VerbType.REGULAR);
 		String[][] expected = { { "ducam", "ducemus" }, { "duces", "ducetis" }, { "ducet", "ducent" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE);
+		String[][] actual = TestUtils.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE));
 		test(verb, expected, actual);
 	}
 
@@ -37,7 +39,8 @@ public class TestThirdOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_O, "duco", "ducere", "duxi", "ductus",
 				VerbType.REGULAR);
 		String[][] expected = { { "duxi", "duximus" }, { "duxisti", "duxistis" }, { "duxit", "duxerunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -46,7 +49,8 @@ public class TestThirdOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_O, "duco", "ducere", "duxi", "ductus",
 				VerbType.REGULAR);
 		String[][] expected = { { "duxeram", "duxeramus" }, { "duxeras", "duxeratis" }, { "duxerat", "duxerant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -55,7 +59,8 @@ public class TestThirdOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_O, "duco", "ducere", "duxi", "ductus",
 				VerbType.REGULAR);
 		String[][] expected = { { "duxero", "duxerimus" }, { "duxeris", "duxeritis" }, { "duxerit", "duxerint" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -64,7 +69,8 @@ public class TestThirdOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_O, "duco", "ducere", "duxi", "ductus",
 				VerbType.REGULAR);
 		String[][] expected = { { "ducor", "ducimur" }, { "duceris", "ducimini" }, { "ducitur", "ducuntur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -74,7 +80,8 @@ public class TestThirdOConjugation {
 				VerbType.REGULAR);
 		String[][] expected = { { "ducebar", "ducebamur" }, { "ducebaris", "ducebamini" },
 				{ "ducebatur", "ducebantur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -83,7 +90,8 @@ public class TestThirdOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_O, "duco", "ducere", "duxi", "ductus",
 				VerbType.REGULAR);
 		String[][] expected = { { "ducar", "ducemur" }, { "ducēris", "ducemini" }, { "ducetur", "ducentur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.FUTURE);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.FUTURE));
 		test(verb, expected, actual);
 	}
 
@@ -91,7 +99,8 @@ public class TestThirdOConjugation {
 	public void testThirdOConjugationDeponentPresent() {
 		LatinVerb verb = new LatinVerb(3, "sequor", "sequi", "secutum", "", VerbType.DEPONENT);
 		String[][] expected = { { "sequor", "sequimur" }, { "sequeris", "sequimini" }, { "sequitur", "sequuntur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -100,7 +109,8 @@ public class TestThirdOConjugation {
 		LatinVerb verb = new LatinVerb(3, "sequor", "sequi", "secutum", "", VerbType.DEPONENT);
 		String[][] expected = { { "sequebar", "sequebamur" }, { "sequebaris", "sequebamini" },
 				{ "sequebatur", "sequebantur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -108,7 +118,7 @@ public class TestThirdOConjugation {
 	public void testThirdOConjugationDeponentFuture() {
 		LatinVerb verb = new LatinVerb(3, "sequor", "sequi", "secutum", "", VerbType.DEPONENT);
 		String[][] expected = { { "sequar", "sequemur" }, { "sequēris", "sequemini" }, { "sequetur", "sequentur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE);
+		String[][] actual = TestUtils.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE));
 		test(verb, expected, actual);
 	}
 
@@ -117,7 +127,8 @@ public class TestThirdOConjugation {
 		LatinVerb verb = new LatinVerb(3, "sequor", "sequi", "secutum", "", VerbType.DEPONENT);
 		String[][] expected = { { "secutum sum", "secuti sumus" }, { "secutum es", "secuti estis" },
 				{ "secutum est", "secuti sunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -126,7 +137,8 @@ public class TestThirdOConjugation {
 		LatinVerb verb = new LatinVerb(3, "sequor", "sequi", "secutum", "", VerbType.DEPONENT);
 		String[][] expected = { { "secutum eram", "secuti eramus" }, { "secutum eras", "secuti eratis" },
 				{ "secutum erat", "secuti erant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -135,7 +147,8 @@ public class TestThirdOConjugation {
 		LatinVerb verb = new LatinVerb(3, "sequor", "sequi", "secutum", "", VerbType.DEPONENT);
 		String[][] expected = { { "secutum ero", "secuti erimus" }, { "secutum eris", "secuti eritis" },
 				{ "secutum erit", "secuti erunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT));
 		test(verb, expected, actual);
 	}
 

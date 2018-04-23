@@ -10,6 +10,7 @@ import java.util.Set;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
+import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.LatinVerb;
 import net.viperfish.latinQuiz.core.Mood;
 import net.viperfish.latinQuiz.core.MultipleChoiceQuestion;
@@ -34,7 +35,7 @@ public class MultipleChoiceQuestionGenerator implements QuestionGenerator {
 		Tense t = tenses.get(rand.nextInt(tenses.size()));
 		Voice randVoice = voices.get(rand.nextInt(voices.size()));
 		Mood randMood = moods.get(rand.nextInt(moods.size()));
-		String[][] conjugated = v.conjugate(randMood, randVoice, t);
+		ConjugatedVerb[][] conjugated = v.conjugate(randMood, randVoice, t);
 		while (conjugated == null || conjugated.length == 0) {
 			t = Tense.values()[rand.nextInt(Tense.values().length)];
 			randVoice = voices.get(rand.nextInt(voices.size()));
@@ -59,39 +60,39 @@ public class MultipleChoiceQuestionGenerator implements QuestionGenerator {
 								localizedVoice, localizedTense, localizedPerson, localizedNumber },
 						LocaleContextHolder.getLocale());
 
-		HashSet<String> choices = new HashSet<>();
-		String correctChoice = conjugated[personIndex][numberIndex];
+		HashSet<ConjugatedVerb> choices = new HashSet<>();
+		ConjugatedVerb correctChoice = conjugated[personIndex][numberIndex];
 		choices.add(correctChoice);
 		// create the choices
 		generateChoices(v, 4, choices);
-		List<String> choiceList = new LinkedList<>(choices);
+		List<ConjugatedVerb> choiceList = new LinkedList<>(choices);
 		Collections.shuffle(choiceList);
 		MultipleChoiceQuestion questionResult = createMultipleChoice(question, choiceList, correctChoice);
 		return questionResult;
 	}
 
-	private MultipleChoiceQuestion createMultipleChoice(String questionStr, List<String> choiceList,
-			String correctChoice) {
+	private MultipleChoiceQuestion createMultipleChoice(String questionStr, List<ConjugatedVerb> choiceList,
+			ConjugatedVerb correctChoice) {
 		MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionStr);
 		for (int i = 0; i < choiceList.size(); ++i) {
 			if (choiceList.get(i).equals(correctChoice)) {
-				question.addChoice(choiceList.get(i), true);
+				question.addChoice(choiceList.get(i).getConjugated(), true, choiceList.get(i).getInterProduct());
 			} else {
-				question.addChoice(choiceList.get(i), false);
+				question.addChoice(choiceList.get(i).getConjugated(), false, null);
 			}
 		}
 		return question;
 	}
 
-	private void generateChoices(LatinVerb v, int amount, Set<String> choices) {
-		List<String> mesh = createMesh(v);
+	private void generateChoices(LatinVerb v, int amount, Set<ConjugatedVerb> choices) {
+		List<ConjugatedVerb> mesh = createMesh(v);
 		while (choices.size() != amount) {
 			choices.add(mesh.get(rand.nextInt(mesh.size())));
 		}
 	}
 
-	private List<String> createMesh(LatinVerb v) {
-		List<String> result = new LinkedList<>();
+	private List<ConjugatedVerb> createMesh(LatinVerb v) {
+		List<ConjugatedVerb> result = new LinkedList<>();
 		for (Mood m : Mood.values()) {
 			for (Voice voc : Voice.values()) {
 				for (Tense t : Tense.values()) {

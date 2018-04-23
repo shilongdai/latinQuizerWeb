@@ -10,7 +10,8 @@ public class TestThirdIOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_IO, "capio", "capere", "cepi", "captus",
 				VerbType.REGULAR);
 		String[][] expected = { { "capio", "capimus" }, { "capis", "capitis" }, { "capit", "capiunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -20,7 +21,8 @@ public class TestThirdIOConjugation {
 				VerbType.REGULAR);
 		String[][] expected = { { "capiebam", "capiebamus" }, { "capiebas", "capiebatis" },
 				{ "capiebat", "capiebant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -29,7 +31,7 @@ public class TestThirdIOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_IO, "capio", "capere", "cepi", "captus",
 				VerbType.REGULAR);
 		String[][] expected = { { "capiam", "capiemus" }, { "capies", "capietis" }, { "capiet", "capient" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE);
+		String[][] actual = TestUtils.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE));
 		test(verb, expected, actual);
 	}
 
@@ -38,7 +40,8 @@ public class TestThirdIOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_IO, "capio", "capere", "cepi", "captus",
 				VerbType.REGULAR);
 		String[][] expected = { { "cepi", "cepimus" }, { "cepisti", "cepistis" }, { "cepit", "ceperunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -47,7 +50,8 @@ public class TestThirdIOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_IO, "capio", "capere", "cepi", "captus",
 				VerbType.REGULAR);
 		String[][] expected = { { "ceperam", "ceperamus" }, { "ceperas", "ceperatis" }, { "ceperat", "ceperant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -56,7 +60,8 @@ public class TestThirdIOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_IO, "capio", "capere", "cepi", "captus",
 				VerbType.REGULAR);
 		String[][] expected = { { "cepero", "ceperimus" }, { "ceperis", "ceperitis" }, { "ceperit", "ceperint" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -65,7 +70,8 @@ public class TestThirdIOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_IO, "capio", "capere", "cepi", "captus",
 				VerbType.REGULAR);
 		String[][] expected = { { "capior", "capimur" }, { "caperis", "capimini" }, { "capitur", "capiuntur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -75,7 +81,8 @@ public class TestThirdIOConjugation {
 				VerbType.REGULAR);
 		String[][] expected = { { "capiebar", "capiebamur" }, { "capiebaris", "capiebamini" },
 				{ "capiebatur", "capiebantur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -84,7 +91,8 @@ public class TestThirdIOConjugation {
 		LatinVerb verb = new LatinVerb(ConjugationMapper.THIRD_CONJ_IO, "capio", "capere", "cepi", "captus",
 				VerbType.REGULAR);
 		String[][] expected = { { "capiar", "capiemur" }, { "capiēris", "capiemini" }, { "capietur", "capientur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.FUTURE);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.FUTURE));
 		test(verb, expected, actual);
 	}
 
@@ -92,7 +100,8 @@ public class TestThirdIOConjugation {
 	public void testThirdIOConjugationDeponentPresent() {
 		LatinVerb verb = new LatinVerb(5, "patior", "pati", "passum", "", VerbType.DEPONENT);
 		String[][] expected = { { "patior", "patimur" }, { "pateris", "patimini" }, { "patitur", "patiuntur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -101,7 +110,8 @@ public class TestThirdIOConjugation {
 		LatinVerb verb = new LatinVerb(5, "patior", "pati", "passum", "", VerbType.DEPONENT);
 		String[][] expected = { { "patiebar", "patiebamur" }, { "patiebaris", "patiebamini" },
 				{ "patiebatur", "patiebantur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -109,7 +119,7 @@ public class TestThirdIOConjugation {
 	public void testThirdIOConjugationDeponentFuture() {
 		LatinVerb verb = new LatinVerb(5, "patior", "pati", "passum", "", VerbType.DEPONENT);
 		String[][] expected = { { "patiar", "patiemur" }, { "patiēris", "patiemini" }, { "patietur", "patientur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE);
+		String[][] actual = TestUtils.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE));
 		test(verb, expected, actual);
 	}
 
@@ -118,7 +128,8 @@ public class TestThirdIOConjugation {
 		LatinVerb verb = new LatinVerb(5, "patior", "pati", "passum", "", VerbType.DEPONENT);
 		String[][] expected = { { "passum sum", "passi sumus" }, { "passum es", "passi estis" },
 				{ "passum est", "passi sunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -127,7 +138,8 @@ public class TestThirdIOConjugation {
 		LatinVerb verb = new LatinVerb(5, "patior", "pati", "passum", "", VerbType.DEPONENT);
 		String[][] expected = { { "passum eram", "passi eramus" }, { "passum eras", "passi eratis" },
 				{ "passum erat", "passi erant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -136,7 +148,8 @@ public class TestThirdIOConjugation {
 		LatinVerb verb = new LatinVerb(5, "patior", "pati", "passum", "", VerbType.DEPONENT);
 		String[][] expected = { { "passum ero", "passi erimus" }, { "passum eris", "passi eritis" },
 				{ "passum erit", "passi erunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT));
 		test(verb, expected, actual);
 	}
 

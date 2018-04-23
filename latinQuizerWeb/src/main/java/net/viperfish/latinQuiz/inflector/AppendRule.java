@@ -1,8 +1,16 @@
 package net.viperfish.latinQuiz.inflector;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.lang3.tuple.MutableTriple;
+
+import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.VerbRule;
 
 public class AppendRule implements VerbRule {
+
+	private static final String VERB_APPENDRULE = "verb.appendRule";
 
 	private VerbRule rule;
 	private String app;
@@ -13,8 +21,10 @@ public class AppendRule implements VerbRule {
 	}
 
 	@Override
-	public String[][] inflect(String first, String stem) {
-		stem += app;
+	public ConjugatedVerb[][] inflect(String first, ConjugatedVerb stem) {
+		stem.setConjugated(stem.getConjugated() + app);
+		stem.getInterProduct().add(new MutableTriple<String, List<String>, String>(VERB_APPENDRULE, Arrays.asList(app),
+				stem.getConjugated()));
 		return rule.inflect(first, stem);
 	}
 

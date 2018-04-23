@@ -3,9 +3,12 @@ package net.viperfish.latinQuiz.quizers;
 import java.security.SecureRandom;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
+import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.LatinVerb;
 import net.viperfish.latinQuiz.core.Mood;
 import net.viperfish.latinQuiz.core.Question;
@@ -39,10 +42,13 @@ public class SynopsisQuestionGenerator implements QuestionGenerator {
 			person = rand.nextInt(3);
 			sgPl = rand.nextInt(2);
 			for (Tense t : tenses) {
-				String[][] conjugated = v.conjugate(randMood, randVoice, t);
+				ConjugatedVerb[][] conjugated = v.conjugate(randMood, randVoice, t);
 				if (conjugated.length != 0) {
 					questionResult.getTenses().add(t);
-					answer.getRows().put(t, conjugated[person][sgPl]);
+					answer.getRows().put(t,
+							new MutablePair<String, List<? extends Triple<String, ? extends List<String>, String>>>(
+									conjugated[person][sgPl].getConjugated(),
+									conjugated[person][sgPl].getInterProduct()));
 				}
 			}
 		}

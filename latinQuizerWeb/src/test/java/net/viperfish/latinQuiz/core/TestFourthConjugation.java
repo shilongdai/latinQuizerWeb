@@ -9,7 +9,8 @@ public class TestFourthConjugation {
 	public void testFourthConjugationPresent() {
 		LatinVerb verb = new LatinVerb(4, "audio", "audire", "audivi", "auditum", VerbType.REGULAR);
 		String[][] expected = { { "audio", "audimus" }, { "audis", "auditis" }, { "audit", "audiunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -18,7 +19,8 @@ public class TestFourthConjugation {
 		LatinVerb verb = new LatinVerb(4, "audio", "audire", "audivi", "auditum", VerbType.REGULAR);
 		String[][] expected = { { "audiebam", "audiebamus" }, { "audiebas", "audiebatis" },
 				{ "audiebat", "audiebant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -26,7 +28,7 @@ public class TestFourthConjugation {
 	public void testFourthConjugationFuture() {
 		LatinVerb verb = new LatinVerb(4, "audio", "audire", "audivi", "auditum", VerbType.REGULAR);
 		String[][] expected = { { "audiam", "audiemus" }, { "audies", "audietis" }, { "audiet", "audient" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE);
+		String[][] actual = TestUtils.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE));
 		test(verb, expected, actual);
 	}
 
@@ -34,7 +36,8 @@ public class TestFourthConjugation {
 	public void testFourthConjugationPerfect() {
 		LatinVerb verb = new LatinVerb(4, "audio", "audire", "audivi", "auditum", VerbType.REGULAR);
 		String[][] expected = { { "audivi", "audivimus" }, { "audivisti", "audivistis" }, { "audivit", "audiverunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -43,7 +46,8 @@ public class TestFourthConjugation {
 		LatinVerb verb = new LatinVerb(4, "audio", "audire", "audivi", "auditum", VerbType.REGULAR);
 		String[][] expected = { { "audiveram", "audiveramus" }, { "audiveras", "audiveratis" },
 				{ "audiverat", "audiverant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -52,7 +56,8 @@ public class TestFourthConjugation {
 		LatinVerb verb = new LatinVerb(4, "audio", "audire", "audivi", "auditum", VerbType.REGULAR);
 		String[][] expected = { { "audivero", "audiverimus" }, { "audiveris", "audiveritis" },
 				{ "audiverit", "audiverint" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -60,7 +65,8 @@ public class TestFourthConjugation {
 	public void testFourthConjugationPresentPassive() {
 		LatinVerb verb = new LatinVerb(4, "audio", "audire", "audivi", "auditum", VerbType.REGULAR);
 		String[][] expected = { { "audior", "audimur" }, { "audiris", "audimini" }, { "auditur", "audiuntur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -69,7 +75,8 @@ public class TestFourthConjugation {
 		LatinVerb verb = new LatinVerb(4, "audio", "audire", "audivi", "auditum", VerbType.REGULAR);
 		String[][] expected = { { "audiebar", "audiebamur" }, { "audiebaris", "audiebamini" },
 				{ "audiebatur", "audiebantur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -77,7 +84,8 @@ public class TestFourthConjugation {
 	public void testFourthConjugationFuturePassive() {
 		LatinVerb verb = new LatinVerb(4, "audio", "audire", "audivi", "auditum", VerbType.REGULAR);
 		String[][] expected = { { "audiar", "audiemur" }, { "audieris", "audiemini" }, { "audietur", "audientur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.FUTURE);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.PASSIVE, Tense.FUTURE));
 		test(verb, expected, actual);
 	}
 
@@ -86,7 +94,8 @@ public class TestFourthConjugation {
 		LatinVerb verb = new LatinVerb(4, "experior", "experiri", "expertum", "", VerbType.DEPONENT);
 		String[][] expected = { { "experior", "experimur" }, { "experiris", "experimini" },
 				{ "experitur", "experiuntur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PRESENT));
 		test(verb, expected, actual);
 	}
 
@@ -95,7 +104,8 @@ public class TestFourthConjugation {
 		LatinVerb verb = new LatinVerb(4, "experior", "experiri", "expertum", "", VerbType.DEPONENT);
 		String[][] expected = { { "experiebar", "experiebamur" }, { "experiebaris", "experiebamini" },
 				{ "experiebatur", "experiebantur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.IMPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -104,7 +114,7 @@ public class TestFourthConjugation {
 		LatinVerb verb = new LatinVerb(4, "experior", "experiri", "expertum", "", VerbType.DEPONENT);
 		String[][] expected = { { "experiar", "experiemur" }, { "experieris", "experiemini" },
 				{ "experietur", "experientur" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE);
+		String[][] actual = TestUtils.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE));
 		test(verb, expected, actual);
 	}
 
@@ -113,7 +123,8 @@ public class TestFourthConjugation {
 		LatinVerb verb = new LatinVerb(4, "experior", "experiri", "expertum", "", VerbType.DEPONENT);
 		String[][] expected = { { "expertum sum", "experti sumus" }, { "expertum es", "experti estis" },
 				{ "expertum est", "experti sunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -122,7 +133,8 @@ public class TestFourthConjugation {
 		LatinVerb verb = new LatinVerb(4, "experior", "experiri", "expertum", "", VerbType.DEPONENT);
 		String[][] expected = { { "expertum eram", "experti eramus" }, { "expertum eras", "experti eratis" },
 				{ "expertum erat", "experti erant" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.PLUPERFECT));
 		test(verb, expected, actual);
 	}
 
@@ -131,7 +143,8 @@ public class TestFourthConjugation {
 		LatinVerb verb = new LatinVerb(4, "experior", "experiri", "expertum", "", VerbType.DEPONENT);
 		String[][] expected = { { "expertum ero", "experti erimus" }, { "expertum eris", "experti eritis" },
 				{ "expertum erit", "experti erunt" } };
-		String[][] actual = verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT);
+		String[][] actual = TestUtils
+				.conjVerb2StringArray(verb.conjugate(Mood.INDICATIVE, Voice.ACTIVE, Tense.FUTURE_PERFECT));
 		test(verb, expected, actual);
 	}
 

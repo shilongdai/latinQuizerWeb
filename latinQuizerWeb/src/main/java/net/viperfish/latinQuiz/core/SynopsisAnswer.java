@@ -1,22 +1,37 @@
 package net.viperfish.latinQuiz.core;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public final class SynopsisAnswer implements Answer {
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Triple;
 
-	private Map<Tense, String> rows;
+public final class SynopsisAnswer implements Answer<Tense> {
+
+	private Map<Tense, MutablePair<String, List<? extends Triple<String, ? extends List<String>, String>>>> rows;
 
 	public SynopsisAnswer() {
 		rows = new HashMap<>();
 	}
 
-	public Map<Tense, String> getRows() {
+	public Map<Tense, MutablePair<String, List<? extends Triple<String, ? extends List<String>, String>>>> getRows() {
 		return rows;
 	}
 
-	public void setRows(Map<Tense, String> rows) {
+	public void setRows(
+			Map<Tense, MutablePair<String, List<? extends Triple<String, ? extends List<String>, String>>>> rows) {
 		this.rows = rows;
+	}
+
+	@Override
+	public List<? extends Triple<String, ? extends List<String>, String>> getSteps() {
+		return rows.get(Tense.PRESENT).getRight();
+	}
+
+	@Override
+	public List<? extends Triple<String, ? extends List<String>, String>> getSteps(Tense key) {
+		return rows.get(key).getRight();
 	}
 
 	@Override
