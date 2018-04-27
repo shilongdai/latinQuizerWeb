@@ -15,27 +15,32 @@
 								test="${question.answer.answer == i && answer.answer == i}">
 								<div class="funkyradio-success">
 									<form:radiobutton path="answer" value="${i}" />
-									<label for="answer${theCount.count}"> <c:out value="${i}"></c:out></label>
+									<label for="answer${theCount.count}"> <c:out
+											value="${i}"></c:out></label>
 								</div>
 							</c:when>
 							<c:when
 								test="${question.answer.answer == i && answer.answer != i}">
 								<div class="funkyradio-success">
 									<form:radiobutton path="answer" value="${i}" disabled="true" />
-									<label class="bg-success" for="answer${theCount.count}"> <c:out value="${i}"></c:out></label>
+									<label class="bg-success" for="answer${theCount.count}">
+										<c:out value="${i}"></c:out>
+									</label>
 								</div>
 							</c:when>
 							<c:when
 								test="${answer.answer == i && question.answer.answer != i}">
 								<div class="funkyradio-danger">
 									<form:radiobutton path="answer" value="${i}" checked="true" />
-									<label for="answer${theCount.count}"> <c:out value="${i}"></c:out></label>
+									<label for="answer${theCount.count}"> <c:out
+											value="${i}"></c:out></label>
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div class="funkyradio-default">
 									<form:radiobutton path="answer" value="${i}" disabled="true" />
-									<label for="answer${theCount.count}"> <c:out value="${i}"></c:out></label>
+									<label for="answer${theCount.count}"> <c:out
+											value="${i}"></c:out></label>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -50,4 +55,30 @@
 			</c:forEach>
 		</div>
 	</v:verbPractice>
+	<br>
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" href="#collapse1"><spring:message
+							code="question.multipleChoice.steps"></spring:message></a>
+				</h4>
+			</div>
+			<c:if test="${reviewing}">
+				<div id="collapse1" class="panel-collapse collapse">
+					<div class="panel-body">
+						<c:forEach var="i" items="${question.answer.getSteps()}">
+							<p>
+								<spring:message code="${i.left }" arguments="${i.middle}"></spring:message>
+							</p>
+							<blockquote>
+								<b>${i.right}</b>
+							</blockquote>
+							<br>
+						</c:forEach>
+					</div>
+				</div>
+			</c:if>
+		</div>
+	</div>
 </v:main>

@@ -28,6 +28,7 @@ abstract class RegularDeponentConjugator extends RegularActiveConjugator {
 						i.getInterProduct());
 				interProduct.addFirst(new MutableTriple<String, List<String>, String>(
 						SpecialI18NCodes.DEPONENT_TO_PRESENT_PASSIVE_INF, new LinkedList<String>(), second));
+				i.setInterProduct(interProduct);
 			}
 		}
 		return results;

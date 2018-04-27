@@ -26,7 +26,7 @@ public class NullRule implements VerbRule {
 		ConjugatedVerb[][] result = new ConjugatedVerb[row][column];
 		for (int i = 0; i < row; ++i) {
 			for (int j = 0; j < column; ++j) {
-				result[i][j] = new ConjugatedVerb(stem.getConjugated());
+				result[i][j] = new ConjugatedVerb(stem);
 				result[i][j].getInterProduct().add(new MutableTriple<String, List<String>, String>(NULLRULE,
 						Arrays.asList(result[i][j].getConjugated()), result[i][j].getConjugated()));
 			}

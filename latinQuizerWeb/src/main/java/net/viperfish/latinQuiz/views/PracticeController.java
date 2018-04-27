@@ -76,7 +76,7 @@ public class PracticeController {
 			Question[] generated = verbService.generateQuestions(verbForm.getAmount(), selectedConjugations,
 					verbForm.getTenses(), verbForm.getVoices(), verbForm.getMoods(), verbForm.getTypes(),
 					verbForm.getQuestionTypes());
-			Answer[] answers = new Answer[generated.length];
+			Answer<?>[] answers = new Answer[generated.length];
 			for (int i = 0; i < answers.length; ++i) {
 				switch (generated[i].getType()) {
 				case MULTIPLE_CHOICE: {
@@ -115,7 +115,7 @@ public class PracticeController {
 	@RequestMapping(value = "verb/{count}", method = RequestMethod.GET)
 	public String getVerbPractice(HttpSession session, @PathVariable("count") int count, Map<String, Object> model) {
 		Question[] questions = (Question[]) session.getAttribute("questions");
-		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
+		Answer<?>[] answers = (Answer[]) session.getAttribute("userAnswers");
 		if (answers == null) {
 			return "redirect:/practice";
 		}
@@ -142,7 +142,7 @@ public class PracticeController {
 	@RequestMapping(value = "verb/report", method = RequestMethod.GET)
 	public String verbReport(Map<String, Object> model, HttpSession session) {
 		Question[] questions = (Question[]) session.getAttribute("questions");
-		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
+		Answer<?>[] answers = (Answer[]) session.getAttribute("userAnswers");
 		if (answers == null) {
 			return "redirect:/practice";
 		}
@@ -164,8 +164,8 @@ public class PracticeController {
 		return "verbReport";
 	}
 
-	private String handleAnswerPOST(Answer singleTextualAnswer, HttpSession session, int count) {
-		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
+	private String handleAnswerPOST(Answer<?> singleTextualAnswer, HttpSession session, int count) {
+		Answer<?>[] answers = (Answer[]) session.getAttribute("userAnswers");
 		if (answers == null) {
 			return "redirect:/practice";
 		}

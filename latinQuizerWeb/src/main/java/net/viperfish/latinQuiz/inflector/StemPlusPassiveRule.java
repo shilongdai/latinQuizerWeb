@@ -1,6 +1,7 @@
 package net.viperfish.latinQuiz.inflector;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.MutableTriple;
@@ -32,6 +33,8 @@ public class StemPlusPassiveRule implements VerbRule {
 		for (int i = 0; i < endings.length; ++i) {
 			for (int j = 0; j < endings[i].length; ++j) {
 				returned[i][j] = new ConjugatedVerb(result[i][j]);
+				returned[i][j].setInterProduct(
+						new LinkedList<MutableTriple<String, List<String>, String>>(stem.getInterProduct()));
 				returned[i][j].getInterProduct().add(new MutableTriple<String, List<String>, String>(
 						STEM_PASSIVE_ENDINGS, Arrays.asList(endings[i][j]), result[i][j]));
 			}
