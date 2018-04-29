@@ -56,4 +56,36 @@
 			</c:choose>
 		</c:forEach>
 	</v:verbPractice>
+	<c:if test="${reviewing }">
+		<h4>
+			<spring:message code="question.multipleChoice.steps"></spring:message>
+		</h4>
+		<c:forEach items="${question.tenses}" var="i">
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" href="#collapse${i}"><spring:message
+									code="${i}"></spring:message></a>
+						</h4>
+					</div>
+
+					<div id="collapse${i}" class="panel-collapse collapse">
+						<div class="panel-body">
+							<c:forEach var="i" items="${question.steps[i]}">
+								<p>
+									<spring:message code="${i.left }" arguments="${i.middle}"></spring:message>
+								</p>
+								<blockquote>
+									<b>${i.right}</b>
+								</blockquote>
+								<br>
+							</c:forEach>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</c:forEach>
+	</c:if>
 </v:main>

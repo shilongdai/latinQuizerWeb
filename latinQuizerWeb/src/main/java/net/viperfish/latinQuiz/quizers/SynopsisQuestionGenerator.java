@@ -1,9 +1,9 @@
 package net.viperfish.latinQuiz.quizers;
 
 import java.security.SecureRandom;
+import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Triple;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -45,10 +45,9 @@ public class SynopsisQuestionGenerator implements QuestionGenerator {
 				ConjugatedVerb[][] conjugated = v.conjugate(randMood, randVoice, t);
 				if (conjugated.length != 0) {
 					questionResult.getTenses().add(t);
-					answer.getRows().put(t,
-							new MutablePair<String, List<? extends Triple<String, ? extends List<String>, String>>>(
-									conjugated[person][sgPl].getConjugated(),
-									conjugated[person][sgPl].getInterProduct()));
+					answer.getRows().put(t, conjugated[person][sgPl].getConjugated());
+					questionResult.getSteps().put(t, new LinkedList<Triple<String, List<String>, String>>(
+							conjugated[person][sgPl].getInterProduct()));
 				}
 			}
 		}

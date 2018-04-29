@@ -9,22 +9,34 @@ import org.apache.commons.lang3.tuple.Triple;
 public final class MultipleChoiceQuestion extends Question {
 
 	private Set<String> choices;
+	private List<? extends Triple<String, ? extends List<String>, String>> steps;
 
 	public MultipleChoiceQuestion(String question) {
 		super(null, question, QuestionType.MULTIPLE_CHOICE);
 		choices = new HashSet<>();
 	}
 
-	public void addChoice(String possibleAnswer, boolean isCorrect,
-			List<? extends Triple<String, ? extends List<String>, String>> steps) {
+	public void addChoice(String possibleAnswer, boolean isCorrect) {
 		choices.add(possibleAnswer);
 		if (isCorrect) {
-			this.setAnswer(new SingleTextualAnswer(possibleAnswer, steps));
+			this.setAnswer(new SingleTextualAnswer(possibleAnswer));
 		}
 	}
 
 	public HashSet<String> getChoices() {
 		return new HashSet<>(choices);
+	}
+
+	public List<? extends Triple<String, ? extends List<String>, String>> getSteps() {
+		return steps;
+	}
+
+	public void setSteps(List<? extends Triple<String, ? extends List<String>, String>> steps) {
+		this.steps = steps;
+	}
+
+	public void setChoices(Set<String> choices) {
+		this.choices = choices;
 	}
 
 	@Override

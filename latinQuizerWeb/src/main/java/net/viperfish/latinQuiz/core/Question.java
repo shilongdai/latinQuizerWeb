@@ -28,6 +28,7 @@ public abstract class Question {
 		return question;
 	}
 
+	// TODO Auto-generated constructor stub
 	public void setQuestion(String question) {
 		this.question = question;
 	}

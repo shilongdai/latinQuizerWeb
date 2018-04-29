@@ -12,7 +12,6 @@ import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.Conjugator;
 import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.VerbRule;
-import net.viperfish.latinQuiz.inflector.SpecialI18NCodes;
 
 abstract class RegularPassiveConjugator implements Conjugator {
 

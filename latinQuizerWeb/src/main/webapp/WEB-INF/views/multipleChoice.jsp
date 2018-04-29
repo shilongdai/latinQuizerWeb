@@ -56,18 +56,19 @@
 		</div>
 	</v:verbPractice>
 	<br>
-	<div class="panel-group">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse1"><spring:message
-							code="question.multipleChoice.steps"></spring:message></a>
-				</h4>
-			</div>
-			<c:if test="${reviewing}">
+	<c:if test="${reviewing}">
+		<div class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" href="#collapse1"><spring:message
+								code="question.multipleChoice.steps"></spring:message></a>
+					</h4>
+				</div>
+
 				<div id="collapse1" class="panel-collapse collapse">
 					<div class="panel-body">
-						<c:forEach var="i" items="${question.answer.getSteps()}">
+						<c:forEach var="i" items="${question.steps}">
 							<p>
 								<spring:message code="${i.left }" arguments="${i.middle}"></spring:message>
 							</p>
@@ -78,7 +79,8 @@
 						</c:forEach>
 					</div>
 				</div>
-			</c:if>
+
+			</div>
 		</div>
-	</div>
+	</c:if>
 </v:main>

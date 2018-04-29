@@ -1,4 +1,4 @@
-package net.viperfish.latinQuiz.inflector;
+package net.viperfish.latinQuiz.conjugators;
 
 public final class SpecialI18NCodes {
 
@@ -6,6 +6,6 @@ public final class SpecialI18NCodes {
 
 	public static final String REGULAR_PASSIVE_PRESENT_FIRST_SING = "verb.regular.passive.present.firstSig";
 
-	public static final String DEPONENT_TO_PRESENT_PASSIVE_INF = "verb.deponentToPassiveInf";
+	public static final String DEPONENT_PRESENT_ACTIVE_INF = "verb.deponentToActiveInf";
 
 }

@@ -8,7 +8,6 @@ import org.apache.commons.lang3.tuple.MutableTriple;
 import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.ConjugationMapper;
 import net.viperfish.latinQuiz.core.Tense;
-import net.viperfish.latinQuiz.inflector.SpecialI18NCodes;
 
 public class DeponentSubjunctiveConjugator extends SubjunctivePassiveConjugator {
 
@@ -28,7 +27,7 @@ public class DeponentSubjunctiveConjugator extends SubjunctivePassiveConjugator 
 				LinkedList<MutableTriple<String, List<String>, String>> interProduct = (LinkedList<MutableTriple<String, List<String>, String>>) i
 						.getInterProduct();
 				interProduct.addFirst(new MutableTriple<String, List<String>, String>(
-						SpecialI18NCodes.DEPONENT_TO_PRESENT_PASSIVE_INF, new LinkedList<String>(), second));
+						SpecialI18NCodes.DEPONENT_PRESENT_ACTIVE_INF, new LinkedList<String>(), second));
 				i.setInterProduct(interProduct);
 			}
 		}

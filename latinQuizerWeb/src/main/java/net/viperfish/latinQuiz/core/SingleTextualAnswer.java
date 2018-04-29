@@ -1,25 +1,15 @@
 package net.viperfish.latinQuiz.core;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.lang.model.type.NullType;
-
-import org.apache.commons.lang3.tuple.Triple;
-
-public class SingleTextualAnswer implements Answer<NullType> {
+public class SingleTextualAnswer implements Answer {
 
 	private String answer;
-	private List<? extends Triple<String, ? extends List<String>, String>> steps;
 
 	public SingleTextualAnswer() {
-		steps = new LinkedList<Triple<String, List<String>, String>>();
 	}
 
-	public SingleTextualAnswer(String answer, List<? extends Triple<String, ? extends List<String>, String>> steps) {
+	public SingleTextualAnswer(String answer) {
 		super();
 		this.answer = answer;
-		this.steps = steps;
 	}
 
 	public String getAnswer() {
@@ -28,15 +18,6 @@ public class SingleTextualAnswer implements Answer<NullType> {
 
 	public void setAnswer(String answer) {
 		this.answer = answer;
-	}
-
-	@Override
-	public List<? extends Triple<String, ? extends List<String>, String>> getSteps() {
-		return steps;
-	}
-
-	public void setSteps(List<? extends Triple<String, List<String>, String>> steps) {
-		this.steps = steps;
 	}
 
 	@Override
@@ -62,11 +43,6 @@ public class SingleTextualAnswer implements Answer<NullType> {
 		} else if (!answer.equals(other.answer))
 			return false;
 		return true;
-	}
-
-	@Override
-	public List<? extends Triple<String, ? extends List<String>, String>> getSteps(NullType key) {
-		return steps;
 	}
 
 }

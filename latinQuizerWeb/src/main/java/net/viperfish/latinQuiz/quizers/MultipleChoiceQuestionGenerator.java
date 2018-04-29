@@ -68,6 +68,7 @@ public class MultipleChoiceQuestionGenerator implements QuestionGenerator {
 		List<ConjugatedVerb> choiceList = new LinkedList<>(choices);
 		Collections.shuffle(choiceList);
 		MultipleChoiceQuestion questionResult = createMultipleChoice(question, choiceList, correctChoice);
+		questionResult.setSteps(correctChoice.getInterProduct());
 		return questionResult;
 	}
 
@@ -76,9 +77,9 @@ public class MultipleChoiceQuestionGenerator implements QuestionGenerator {
 		MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionStr);
 		for (int i = 0; i < choiceList.size(); ++i) {
 			if (choiceList.get(i).equals(correctChoice)) {
-				question.addChoice(choiceList.get(i).getConjugated(), true, choiceList.get(i).getInterProduct());
+				question.addChoice(choiceList.get(i).getConjugated(), true);
 			} else {
-				question.addChoice(choiceList.get(i).getConjugated(), false, null);
+				question.addChoice(choiceList.get(i).getConjugated(), false);
 			}
 		}
 		return question;
