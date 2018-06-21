@@ -38,7 +38,7 @@
 		<div class="btn-group">
 			<a href='<c:url value="/practice"></c:url>' class="btn btn-default"><spring:message
 					code="practice.report.return"></spring:message></a> <a
-				href='<c:url value="/practice/verb/0"></c:url>'
+				href='<c:url value="/practice/0"></c:url>'
 				class="btn btn-primary"><spring:message
 					code="practice.report.review"></spring:message></a>
 		</div>

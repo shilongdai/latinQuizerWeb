@@ -8,7 +8,7 @@ import net.viperfish.latinQuiz.core.Question;
 import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.Voice;
 
-public interface QuestionGenerator {
+public interface VerbQuestionGenerator {
 	public Question generate(LatinVerb v, Integer[] conjugations, List<Tense> tenses, List<Voice> voices,
 			List<Mood> moods);
 }

@@ -24,7 +24,7 @@
 	</p>
 
 </div>
-<c:url value="/practice/verb/${current}/${type}" var="postUrl"></c:url>
+<c:url value="/practice/${current}/${type}" var="postUrl"></c:url>
 <form:form action="${postUrl }" method="post" modelAttribute="answer" cssClass="form-horizontal">
 	<jsp:doBody></jsp:doBody>
 	<br>
@@ -35,7 +35,7 @@
 						code="question.prev"></spring:message></a>
 			</c:when>
 			<c:otherwise>
-				<a href='<c:url value="/practice/verb/${current-1}"></c:url>'
+				<a href='<c:url value="/practice/${current-1}"></c:url>'
 					class="btn btn-default"><spring:message code="question.prev"></spring:message></a>
 			</c:otherwise>
 		</c:choose>

@@ -5,7 +5,7 @@
 	prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <v:main>
-	<v:verbPractice type="synopsisAnswer">
+	<v:practice type="synopsisAnswer">
 		<c:forEach var="i" items="${question.tenses}">
 			<c:choose>
 				<c:when test="${reviewing }">
@@ -55,7 +55,7 @@
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-	</v:verbPractice>
+	</v:practice>
 	<c:if test="${reviewing }">
 		<h4>
 			<spring:message code="question.multipleChoice.steps"></spring:message>

@@ -17,12 +17,12 @@ import net.viperfish.latinQuiz.core.SynopsisQuestion;
 import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.Voice;
 
-public class SynopsisQuestionGenerator implements QuestionGenerator {
+public class VerbSynopsisQuestionGenerator implements VerbQuestionGenerator {
 
 	private SecureRandom rand;
 	private MessageSource i18n;
 
-	public SynopsisQuestionGenerator(MessageSource source) {
+	public VerbSynopsisQuestionGenerator(MessageSource source) {
 		rand = new SecureRandom();
 		this.i18n = source;
 	}

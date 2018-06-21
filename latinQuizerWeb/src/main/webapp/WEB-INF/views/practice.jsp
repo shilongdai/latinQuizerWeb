@@ -265,10 +265,104 @@
 
 				</form:form>
 			</div>
+
+			<c:set var="postNounUrl">
+				<c:url value="/practice/noun"></c:url>
+			</c:set>
+
 			<div class="tab-pane" id="2">
-				<p>
-					<spring:message code="practice.comingSoon"></spring:message>
-				</p>
+				<form:form action="${postNounUrl}" method="post"
+					class="form-horizontal" modelAttribute="nounForm">
+					<div class="form-group">
+						<form:label path="amount" cssClass="col-sm-2 control-label">
+							<spring:message code="practice.amount"></spring:message>
+						</form:label>
+						<div class="col-sm-8">
+							<form:input cssClass="form-control" path="amount"
+								placeholder="<spring:message code='practice.amount.placeholder'></spring:message>" />
+						</div>
+					</div>
+
+					<div class="panel-group" id="accordionNoun">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordionNoun"
+										href="#noun1"> <spring:message code="practice.declension"></spring:message></a>
+								</h4>
+							</div>
+							<div id="noun1" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<div class="form-group">
+										<div class="checkbox checkbox_left_margin">
+											<label> <form:checkbox path="declensions" value="0" />
+												<spring:message code="practice.firstDec"></spring:message>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordionNoun"
+										href="#noun2"> <spring:message code="practice.gender"></spring:message></a>
+								</h4>
+							</div>
+							<div id="noun2" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<div class="form-group">
+										<div class="checkbox checkbox_left_margin">
+											<label> <form:checkbox path="genders" value="F" />
+												<spring:message code="GENDER_F"></spring:message>
+											</label>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordionNoun"
+										href="#noun3"> <spring:message code="practice.type"></spring:message></a>
+								</h4>
+							</div>
+							<div id="noun3" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<div class="form-group">
+										<div class="checkbox checkbox_left_margin">
+											<label> <form:checkbox path="types" value="REGULAR" />
+												<spring:message code="REGULAR"></spring:message>
+											</label>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<form:errors path="amount" element="div"
+						cssClass="alert alert-danger alert-dismissible"></form:errors>
+					
+					<form:errors path="declensions" element="div"
+						cssClass="alert alert-danger alert-dismissible"></form:errors>
+					
+					<form:errors path="genders" element="div"
+						cssClass="alert alert-danger alert-dismissible"></form:errors>
+						
+					<form:errors path="types" element="div"
+						cssClass="alert alert-danger alert-dismissible"></form:errors>
+					
+					<button type="submit" class="btn btn-primary">
+						<spring:message code="practice.start"></spring:message>
+					</button>
+				</form:form>
 			</div>
 		</div>
 	</div>

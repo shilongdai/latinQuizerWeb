@@ -18,12 +18,12 @@ import net.viperfish.latinQuiz.core.Question;
 import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.Voice;
 
-public class MultipleChoiceQuestionGenerator implements QuestionGenerator {
+public class VerbMultipleChoiceQuestionGenerator implements VerbQuestionGenerator {
 
 	private MessageSource i18n;
 	private SecureRandom rand;
 
-	public MultipleChoiceQuestionGenerator(MessageSource msg) {
+	public VerbMultipleChoiceQuestionGenerator(MessageSource msg) {
 		rand = new SecureRandom();
 		i18n = msg;
 	}

@@ -5,7 +5,7 @@
 	prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <v:main>
-	<v:verbPractice type="singleTextualAnswer">
+	<v:practice type="singleTextualAnswer">
 		<div class="funkyradio">
 			<c:forEach items="${question.choices }" var="i" varStatus="theCount">
 				<c:choose>
@@ -54,7 +54,7 @@
 				</c:choose>
 			</c:forEach>
 		</div>
-	</v:verbPractice>
+	</v:practice>
 	<br>
 	<c:if test="${reviewing}">
 		<div class="panel-group">
@@ -66,19 +66,21 @@
 					</h4>
 				</div>
 
-				<div id="collapse1" class="panel-collapse collapse">
-					<div class="panel-body">
-						<c:forEach var="i" items="${question.steps}">
-							<p>
-								<spring:message code="${i.left }" arguments="${i.middle}"></spring:message>
-							</p>
-							<blockquote>
-								<b>${i.right}</b>
-							</blockquote>
-							<br>
-						</c:forEach>
+				<c:if test="${question.steps != null}">
+					<div id="collapse1" class="panel-collapse collapse">
+						<div class="panel-body">
+							<c:forEach var="i" items="${question.steps}">
+								<p>
+									<spring:message code="${i.left }" arguments="${i.middle}"></spring:message>
+								</p>
+								<blockquote>
+									<b>${i.right}</b>
+								</blockquote>
+								<br>
+							</c:forEach>
+						</div>
 					</div>
-				</div>
+				</c:if>
 
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 package net.viperfish.latinQuiz.views;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -25,6 +26,7 @@ import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.VerbType;
 import net.viperfish.latinQuiz.core.Voice;
 import net.viperfish.latinQuiz.errors.InsufficientWordBankException;
+import net.viperfish.latinQuiz.quizers.NounQuizerService;
 import net.viperfish.latinQuiz.quizers.VerbQuizerService;
 
 @Controller
@@ -33,6 +35,8 @@ public class PracticeController {
 
 	@Autowired
 	private VerbQuizerService verbService;
+	@Autowired
+	private NounQuizerService nounService;
 	private static final VerbStartPracticeForm DEFAULT;
 
 	static {
@@ -59,6 +63,7 @@ public class PracticeController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String startPracticePage(Map<String, Object> model) {
 		model.put("verbForm", DEFAULT);
+		model.put("nounForm", new NounStartPracticeForm());
 		return "practice";
 	}
 
@@ -92,7 +97,7 @@ public class PracticeController {
 			session.setAttribute("questions", generated);
 			session.setAttribute("userAnswers", answers);
 			session.setAttribute("begin", new Date().getTime());
-			return "redirect:/practice/verb/0";
+			return "redirect:/practice/0";
 		} catch (InsufficientWordBankException e) {
 			bindingResult.reject("amount", "error.verbForm");
 			model.put("verbForm", verbForm);
@@ -100,19 +105,56 @@ public class PracticeController {
 		}
 	}
 
-	@RequestMapping(value = "verb/{count}/singleTextualAnswer", method = RequestMethod.POST)
+	@RequestMapping(value = "noun", method = RequestMethod.POST)
+	public String startNounPractice(@ModelAttribute("nounForm") @Validated NounStartPracticeForm nounForm,
+			BindingResult bindingResult, HttpSession session, Map<String, Object> model) {
+		session.setAttribute("review", false);
+		if (bindingResult.hasErrors()) {
+			model.put("nounForm", nounForm);
+			return "practice";
+		}
+		try {
+			Integer[] selectedDeclensions = nounForm.getDeclensions()
+					.toArray(new Integer[nounForm.getDeclensions().size()]);
+			Question[] generated = nounService.generateQuestions(nounForm.getAmount(), selectedDeclensions,
+					nounForm.getGenders(), nounForm.getTypes(), Arrays.asList(QuestionType.MULTIPLE_CHOICE));
+			Answer[] answers = new Answer[generated.length];
+			for (int i = 0; i < answers.length; ++i) {
+				switch (generated[i].getType()) {
+				case MULTIPLE_CHOICE: {
+					answers[i] = new SingleTextualAnswer();
+					break;
+				}
+				case SYNOPSIS: {
+					answers[i] = new SynopsisAnswer();
+					break;
+				}
+				}
+			}
+			session.setAttribute("questions", generated);
+			session.setAttribute("userAnswers", answers);
+			session.setAttribute("begin", new Date().getTime());
+			return "redirect:/practice/0";
+		} catch (InsufficientWordBankException e) {
+			bindingResult.reject("amount", "error.verbForm");
+			model.put("nounForm", nounForm);
+			return "practice";
+		}
+	}
+
+	@RequestMapping(value = "{count}/singleTextualAnswer", method = RequestMethod.POST)
 	public String answerVerbPractice(SingleTextualAnswer singleTextualAnswer, HttpSession session,
 			@PathVariable("count") int count) {
 		return handleAnswerPOST(singleTextualAnswer, session, count);
 	}
 
-	@RequestMapping(value = "verb/{count}/synopsisAnswer", method = RequestMethod.POST)
+	@RequestMapping(value = "{count}/synopsisAnswer", method = RequestMethod.POST)
 	public String synopsisAnswerVerbPractice(SynopsisAnswer answer, HttpSession session,
 			@PathVariable("count") int count) {
 		return handleAnswerPOST(answer, session, count);
 	}
 
-	@RequestMapping(value = "verb/{count}", method = RequestMethod.GET)
+	@RequestMapping(value = "{count}", method = RequestMethod.GET)
 	public String getVerbPractice(HttpSession session, @PathVariable("count") int count, Map<String, Object> model) {
 		Question[] questions = (Question[]) session.getAttribute("questions");
 		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
@@ -139,7 +181,7 @@ public class PracticeController {
 		}
 	}
 
-	@RequestMapping(value = "verb/report", method = RequestMethod.GET)
+	@RequestMapping(value = "report", method = RequestMethod.GET)
 	public String verbReport(Map<String, Object> model, HttpSession session) {
 		Question[] questions = (Question[]) session.getAttribute("questions");
 		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
@@ -174,9 +216,9 @@ public class PracticeController {
 			if (!(boolean) session.getAttribute("review")) {
 				session.setAttribute("end", new Date().getTime());
 			}
-			return "redirect:/practice/verb/report";
+			return "redirect:/practice/report";
 		}
-		return "redirect:/practice/verb/" + (count + 1);
+		return "redirect:/practice/" + (count + 1);
 	}
 
 }

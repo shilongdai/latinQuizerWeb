@@ -28,7 +28,7 @@ public final class VerbQuizerService {
 
 	private SecureRandom rand;
 	private LatinVerbDatabase database;
-	private Map<QuestionType, QuestionGenerator> generators;
+	private Map<QuestionType, VerbQuestionGenerator> generators;
 
 	public VerbQuizerService() {
 		rand = new SecureRandom();
@@ -36,8 +36,8 @@ public final class VerbQuizerService {
 	}
 
 	private void init(MessageSource i18n) {
-		generators.put(QuestionType.MULTIPLE_CHOICE, new MultipleChoiceQuestionGenerator(i18n));
-		generators.put(QuestionType.SYNOPSIS, new SynopsisQuestionGenerator(i18n));
+		generators.put(QuestionType.MULTIPLE_CHOICE, new VerbMultipleChoiceQuestionGenerator(i18n));
+		generators.put(QuestionType.SYNOPSIS, new VerbSynopsisQuestionGenerator(i18n));
 	}
 
 	@Autowired
@@ -69,7 +69,7 @@ public final class VerbQuizerService {
 				k--;
 				continue;
 			}
-			QuestionGenerator gen = generators.get(questionType);
+			VerbQuestionGenerator gen = generators.get(questionType);
 			Question q = gen.generate(l, conjugations, tenses, voices, moods);
 
 			// if this question exists, generate another one

@@ -1,5 +1,7 @@
 package net.viperfish.latinQuiz.core;
 
+import org.junit.Assert;
+
 public final class TestUtils {
 	public static String[][] conjVerb2StringArray(ConjugatedVerb[][] array) {
 		String[][] result = new String[array.length][];
@@ -11,4 +13,11 @@ public final class TestUtils {
 		}
 		return result;
 	}
+
+	public static void test(String[][] expected, String[][] actual) {
+		for (int i = 0; i < 3; ++i) {
+			Assert.assertArrayEquals(expected[i], actual[i]);
+		}
+	}
+
 }
