@@ -13,6 +13,12 @@ import javax.persistence.Table;
 import org.apache.logging.log4j.LogManager;
 
 import net.viperfish.latinQuiz.declension.FirstGenericDeclension;
+import net.viperfish.latinQuiz.declension.SecondMDeclension;
+import net.viperfish.latinQuiz.declension.SecondNDeclension;
+import net.viperfish.latinQuiz.declension.ThirdIMFDeclension;
+import net.viperfish.latinQuiz.declension.ThirdINDeclension;
+import net.viperfish.latinQuiz.declension.ThirdMFDeclension;
+import net.viperfish.latinQuiz.declension.ThirdNDeclension;
 
 @Entity
 @Table(name = "Nouns")
@@ -36,6 +42,14 @@ public class LatinNoun {
 	private static void initDecliners() {
 		decliners.get(0).get(Gender.F).put(NounType.REGULAR, new FirstGenericDeclension());
 		decliners.get(0).get(Gender.M).put(NounType.REGULAR, new FirstGenericDeclension());
+		decliners.get(1).get(Gender.M).put(NounType.REGULAR, new SecondMDeclension());
+		decliners.get(1).get(Gender.N).put(NounType.REGULAR, new SecondNDeclension());
+		decliners.get(2).get(Gender.M).put(NounType.REGULAR, new ThirdMFDeclension());
+		decliners.get(2).get(Gender.F).put(NounType.REGULAR, new ThirdMFDeclension());
+		decliners.get(2).get(Gender.N).put(NounType.REGULAR, new ThirdNDeclension());
+		decliners.get(2).get(Gender.M).put(NounType.IA, new ThirdIMFDeclension());
+		decliners.get(2).get(Gender.F).put(NounType.IA, new ThirdIMFDeclension());
+		decliners.get(2).get(Gender.N).put(NounType.IA, new ThirdINDeclension());
 	}
 
 	private static void initGenitiveEndings() {
