@@ -69,6 +69,10 @@ public class NounQuizerService {
 			}
 			NounQuestionGenerator gen = generators.get(questionType);
 			Question q = gen.generate(n, declensions, genders, types);
+			if (q == null) {
+				--k;
+				continue;
+			}
 
 			// if this question exists, generate another one
 			if (buffer.contains(q.getQuestion())) {

@@ -10,9 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.apache.logging.log4j.LogManager;
-
 import net.viperfish.latinQuiz.declension.FirstGenericDeclension;
+import net.viperfish.latinQuiz.declension.FourthMDeclension;
+import net.viperfish.latinQuiz.declension.FourthNDeclension;
 import net.viperfish.latinQuiz.declension.SecondMDeclension;
 import net.viperfish.latinQuiz.declension.SecondNDeclension;
 import net.viperfish.latinQuiz.declension.ThirdIMFDeclension;
@@ -50,6 +50,8 @@ public class LatinNoun {
 		decliners.get(2).get(Gender.M).put(NounType.IA, new ThirdIMFDeclension());
 		decliners.get(2).get(Gender.F).put(NounType.IA, new ThirdIMFDeclension());
 		decliners.get(2).get(Gender.N).put(NounType.IA, new ThirdINDeclension());
+		decliners.get(3).get(Gender.M).put(NounType.REGULAR, new FourthMDeclension());
+		decliners.get(3).get(Gender.N).put(NounType.REGULAR, new FourthNDeclension());
 	}
 
 	private static void initGenitiveEndings() {
@@ -143,8 +145,12 @@ public class LatinNoun {
 	}
 
 	public String[][] inflect() {
-		LogManager.getLogger().warn(this.toString());
-		return decliners.get(declension).get(gender).get(type).decline(nomSing, createStem());
+		NounDecliner dec = decliners.get(declension).get(gender).get(type);
+		if (dec == null) {
+			return null;
+		}
+		return dec.decline(nomSing, createStem());
+
 	}
 
 	public String[][] inflect(int dec, Gender g, NounType n) {

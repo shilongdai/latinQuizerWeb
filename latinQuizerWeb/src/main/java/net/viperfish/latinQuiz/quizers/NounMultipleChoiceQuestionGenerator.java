@@ -35,6 +35,9 @@ public final class NounMultipleChoiceQuestionGenerator implements NounQuestionGe
 
 		// generate correct answer
 		String[][] declined = n.inflect();
+		if (declined == null) {
+			return null;
+		}
 		String correctChoice = declined[grammerPart][number];
 
 		// generate the question
