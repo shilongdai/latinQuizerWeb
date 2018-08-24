@@ -55,20 +55,22 @@ public final class NounMultipleChoiceQuestionGenerator implements NounQuestionGe
 		choices.add(correctChoice);
 
 		// generate the "related" choices
-		// CURRENTLY SKIPPING b/c not enough declension implemented
 		LogManager.getLogger().warn("generating related choice");
-		while (choices.size() < 1) {
+		while (choices.size() < 3) {
 			String related = null;
 			while (related == null) {
 				int dec = declinsions[rand.nextInt(declinsions.length)];
 				Gender g = genders.get(rand.nextInt(genders.size()));
 				NounType t = types.get(rand.nextInt(types.size()));
-				related = n.inflect(dec, g, t)[grammerPart][number];
+				String[][] declinedBuffer = n.inflect(dec, g, t);
+				if (declinedBuffer != null) {
+					related = declinedBuffer[grammerPart][number];
+				}
 			}
 			choices.add(related);
 		}
 		// generate the "unrelated" choice
-		String unrelated = "";
+		String unrelated = correctChoice;
 		LogManager.getLogger().warn("generating unrelated choice");
 		do {
 			grammerPart = rand.nextInt(5);
@@ -76,8 +78,11 @@ public final class NounMultipleChoiceQuestionGenerator implements NounQuestionGe
 			int dec = declinsions[rand.nextInt(declinsions.length)];
 			Gender g = genders.get(rand.nextInt(genders.size()));
 			NounType t = types.get(rand.nextInt(types.size()));
-			unrelated = n.inflect(dec, g, t)[grammerPart][number];
-		} while (unrelated.equals(correctChoice) && choices.contains(unrelated));
+			String[][] declinedBuffer = n.inflect(dec, g, t);
+			if (declinedBuffer != null) {
+				unrelated = declinedBuffer[grammerPart][number];
+			}
+		} while (unrelated.equals(correctChoice) || choices.contains(unrelated));
 		choices.add(unrelated);
 		List<String> choiceShuffled = new LinkedList<String>();
 		for (String i : choices) {

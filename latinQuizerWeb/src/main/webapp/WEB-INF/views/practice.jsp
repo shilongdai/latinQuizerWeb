@@ -271,7 +271,6 @@
 			</c:set>
 
 			<div class="tab-pane" id="2">
-				<span>Under Construction...</span>
 				<form:form action="${postNounUrl}" method="post"
 					class="form-horizontal" modelAttribute="nounForm">
 					<div class="form-group">
@@ -300,6 +299,21 @@
 												<spring:message code="practice.firstDec"></spring:message>
 											</label>
 										</div>
+										<div class="checkbox checkbox_left_margin">
+											<label> <form:checkbox path="declensions" value="1" />
+												<spring:message code="practice.secondDec"></spring:message>
+											</label>
+										</div>
+										<div class="checkbox checkbox_left_margin">
+											<label> <form:checkbox path="declensions" value="2" />
+												<spring:message code="practice.thirdDec"></spring:message>
+											</label>
+										</div>
+										<div class="checkbox checkbox_left_margin">
+											<label> <form:checkbox path="declensions" value="3" />
+												<spring:message code="practice.fourthDec"></spring:message>
+											</label>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -320,7 +334,16 @@
 												<spring:message code="GENDER_F"></spring:message>
 											</label>
 										</div>
-										
+										<div class="checkbox checkbox_left_margin">
+											<label> <form:checkbox path="genders" value="M" />
+												<spring:message code="GENDER_M"></spring:message>
+											</label>
+										</div>
+										<div class="checkbox checkbox_left_margin">
+											<label> <form:checkbox path="genders" value="N" />
+												<spring:message code="GENDER_N"></spring:message>
+											</label>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -341,7 +364,11 @@
 												<spring:message code="REGULAR"></spring:message>
 											</label>
 										</div>
-										
+										<div class="checkbox checkbox_left_margin">
+											<label> <form:checkbox path="types" value="IA" />
+												<spring:message code="IA"></spring:message>
+											</label>
+										</div>
 									</div>
 								</div>
 							</div>
