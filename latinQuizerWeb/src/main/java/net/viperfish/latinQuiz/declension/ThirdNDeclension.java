@@ -3,7 +3,7 @@ package net.viperfish.latinQuiz.declension;
 public class ThirdNDeclension extends Declension {
 
 	public ThirdNDeclension() {
-		super(new String[][] { { "x", "a" }, { "is", "um" }, { "ī", "ibus" }, { "x", "a" }, { "e", "ibus" } });
+		super(new String[][]{{"x", "a"}, {"is", "um"}, {"ī", "ibus"}, {"x", "a"}, {"e", "ibus"}});
 	}
 
 	@Override

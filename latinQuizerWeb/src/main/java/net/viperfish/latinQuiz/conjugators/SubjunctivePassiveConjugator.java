@@ -29,46 +29,47 @@ public class SubjunctivePassiveConjugator implements Conjugator {
 	}
 
 	@Override
-	public ConjugatedVerb[][] conjugate(Tense t, String first, String second, String third, String fourth) {
+	public ConjugatedVerb[][] conjugate(Tense t, String first, String second, String third,
+			String fourth) {
 		ConjugatedVerb[][] result = new ConjugatedVerb[0][0];
 		switch (t) {
-		case PRESENT: {
-			return present.inflect(first, new ConjugatedVerb(second));
-		}
-		case IMPERFECT: {
-			return imperfect.inflect(first, new ConjugatedVerb(second));
-		}
-		case PERFECT: {
-			return perfect.inflect(first, new ConjugatedVerb(fourth));
-		}
-		case PLUPERFECT:
-			return pluperfect.inflect(first, new ConjugatedVerb(fourth));
-		default:
-			break;
+			case PRESENT: {
+				return present.inflect(first, new ConjugatedVerb(second));
+			}
+			case IMPERFECT: {
+				return imperfect.inflect(first, new ConjugatedVerb(second));
+			}
+			case PERFECT: {
+				return perfect.inflect(first, new ConjugatedVerb(fourth));
+			}
+			case PLUPERFECT:
+				return pluperfect.inflect(first, new ConjugatedVerb(fourth));
+			default:
+				break;
 		}
 		return result;
 	}
 
 	private VerbRule presentRule(int conj) {
 		switch (conj) {
-		case ConjugationMapper.FIRST_CONJ: {
-			return new PresentStrapStemRule(new ReplaceStemRule("a", "e", new StemPlusPassiveRule()));
-		}
-		case ConjugationMapper.SECOND_CONJ: {
-			return new PresentStrapStemRule(new ReplaceStemRule("e", "ea", new StemPlusPassiveRule()));
-		}
-		case ConjugationMapper.THIRD_CONJ_O: {
-			return new PresentStrapStemRule(new ReplaceStemRule("e", "a", new StemPlusPassiveRule()));
-		}
-		case ConjugationMapper.THIRD_CONJ_IO: {
-			return new PresentStrapStemRule(new ReplaceStemRule("e", "ia", new StemPlusPassiveRule()));
-		}
-		case ConjugationMapper.FOURTH_CONJ: {
-			return new PresentStrapStemRule(new ReplaceStemRule("i", "ia", new StemPlusPassiveRule()));
-		}
-		default: {
-			return null;
-		}
+			case ConjugationMapper.FIRST_CONJ: {
+				return new PresentStrapStemRule(new ReplaceStemRule("a", "e", new StemPlusPassiveRule()));
+			}
+			case ConjugationMapper.SECOND_CONJ: {
+				return new PresentStrapStemRule(new ReplaceStemRule("e", "ea", new StemPlusPassiveRule()));
+			}
+			case ConjugationMapper.THIRD_CONJ_O: {
+				return new PresentStrapStemRule(new ReplaceStemRule("e", "a", new StemPlusPassiveRule()));
+			}
+			case ConjugationMapper.THIRD_CONJ_IO: {
+				return new PresentStrapStemRule(new ReplaceStemRule("e", "ia", new StemPlusPassiveRule()));
+			}
+			case ConjugationMapper.FOURTH_CONJ: {
+				return new PresentStrapStemRule(new ReplaceStemRule("i", "ia", new StemPlusPassiveRule()));
+			}
+			default: {
+				return null;
+			}
 		}
 	}
 

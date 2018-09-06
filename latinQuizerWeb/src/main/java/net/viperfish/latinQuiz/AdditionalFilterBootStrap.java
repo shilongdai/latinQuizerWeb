@@ -2,8 +2,6 @@ package net.viperfish.latinQuiz;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-
 import org.springframework.core.annotation.Order;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
@@ -16,9 +14,10 @@ public class AdditionalFilterBootStrap implements WebApplicationInitializer {
 	}
 
 	@Override
-	public void onStartup(ServletContext servletContext) throws ServletException {
+	public void onStartup(ServletContext servletContext) {
 
-		FilterRegistration.Dynamic method = servletContext.addFilter("hiddenMethod", new HiddenHttpMethodFilter());
+		FilterRegistration.Dynamic method = servletContext
+				.addFilter("hiddenMethod", new HiddenHttpMethodFilter());
 		method.addMappingForUrlPatterns(null, false, "/latinQuizer/*");
 	}
 

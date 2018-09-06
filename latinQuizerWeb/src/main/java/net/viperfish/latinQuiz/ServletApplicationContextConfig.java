@@ -2,7 +2,6 @@ package net.viperfish.latinQuiz;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;

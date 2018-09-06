@@ -29,19 +29,21 @@ public final class SynopsisAnswer implements Answer {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		SynopsisAnswer other = (SynopsisAnswer) obj;
 		if (rows == null) {
-			if (other.rows != null)
-				return false;
-		} else if (!rows.equals(other.rows))
-			return false;
-		return true;
+			return other.rows == null;
+		} else {
+			return rows.equals(other.rows);
+		}
 	}
 
 }

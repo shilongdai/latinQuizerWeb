@@ -1,9 +1,8 @@
 package net.viperfish.latinQuiz.views;
 
+import net.viperfish.latinQuiz.core.Tense;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-
-import net.viperfish.latinQuiz.core.Tense;
 
 @Component
 public class StringToTenseConverter implements Converter<String, Tense> {

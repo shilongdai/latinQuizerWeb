@@ -6,16 +6,14 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.logging.log4j.LogManager;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-
 import net.viperfish.latinQuiz.core.Gender;
 import net.viperfish.latinQuiz.core.LatinNoun;
 import net.viperfish.latinQuiz.core.MultipleChoiceQuestion;
 import net.viperfish.latinQuiz.core.NounType;
 import net.viperfish.latinQuiz.core.Question;
+import org.apache.logging.log4j.LogManager;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 public final class NounMultipleChoiceQuestionGenerator implements NounQuestionGenerator {
 
@@ -28,7 +26,8 @@ public final class NounMultipleChoiceQuestionGenerator implements NounQuestionGe
 	}
 
 	@Override
-	public Question generate(LatinNoun n, Integer[] declinsions, List<Gender> genders, List<NounType> types) {
+	public Question generate(LatinNoun n, Integer[] declinsions, List<Gender> genders,
+			List<NounType> types) {
 		// choose a form of the noun
 		int grammerPart = rand.nextInt(5);
 		int number = rand.nextInt(2);
@@ -41,13 +40,14 @@ public final class NounMultipleChoiceQuestionGenerator implements NounQuestionGe
 		String correctChoice = declined[grammerPart][number];
 
 		// generate the question
-		String localizedCase = i18n.getMessage(caseToKey(grammerPart), null, LocaleContextHolder.getLocale());
+		String localizedCase = i18n
+				.getMessage(caseToKey(grammerPart), null, LocaleContextHolder.getLocale());
 		String localizedNumber = i18n.getMessage(QuestionHelper.numberToKey(number), null,
 				LocaleContextHolder.getLocale());
 		String question = i18n
 				.getMessage(
-						"practice.noun.multipleChoice", new Object[] { n.getNomSing(), n.getGenitive(),
-								n.getGender().toString(), localizedCase, localizedNumber },
+						"practice.noun.multipleChoice", new Object[]{n.getNomSing(), n.getGenitive(),
+								n.getGender().toString(), localizedCase, localizedNumber},
 						LocaleContextHolder.getLocale());
 
 		// generate all other choices;
@@ -104,16 +104,16 @@ public final class NounMultipleChoiceQuestionGenerator implements NounQuestionGe
 
 	private String caseToKey(int dec) {
 		switch (dec) {
-		case 0:
-			return "nominative";
-		case 1:
-			return "genitive";
-		case 2:
-			return "dative";
-		case 3:
-			return "accusative";
-		case 4:
-			return "ablative";
+			case 0:
+				return "nominative";
+			case 1:
+				return "genitive";
+			case 2:
+				return "dative";
+			case 3:
+				return "accusative";
+			case 4:
+				return "ablative";
 		}
 		return "";
 	}

@@ -2,11 +2,9 @@ package net.viperfish.latinQuiz.inflector;
 
 import java.util.Arrays;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.MutableTriple;
-
 import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.VerbRule;
+import org.apache.commons.lang3.tuple.MutableTriple;
 
 abstract class ReplaceLastRule implements VerbRule {
 
@@ -37,8 +35,9 @@ abstract class ReplaceLastRule implements VerbRule {
 		}
 
 		result[row][column].setConjugated(sb.toString());
-		result[row][column].getInterProduct().add(new MutableTriple<String, List<String>, String>(REPLACE_RULE_I18N,
-				Arrays.asList(toReplace, replacement), sb.toString()));
+		result[row][column].getInterProduct()
+				.add(new MutableTriple<String, List<String>, String>(REPLACE_RULE_I18N,
+						Arrays.asList(toReplace, replacement), sb.toString()));
 
 		return result;
 	}

@@ -71,27 +71,33 @@ public class VerbReport {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		VerbReport other = (VerbReport) obj;
-		if (correct != other.correct)
+		if (correct != other.correct) {
 			return false;
-		if (incorrect != other.incorrect)
+		}
+		if (incorrect != other.incorrect) {
 			return false;
-		if (score != other.score)
+		}
+		if (score != other.score) {
 			return false;
+		}
 		if (time == null) {
-			if (other.time != null)
+			if (other.time != null) {
 				return false;
-		} else if (!time.equals(other.time))
+			}
+		} else if (!time.equals(other.time)) {
 			return false;
-		if (total != other.total)
-			return false;
-		return true;
+		}
+		return total == other.total;
 	}
 
 }

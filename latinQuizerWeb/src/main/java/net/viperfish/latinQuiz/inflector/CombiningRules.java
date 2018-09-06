@@ -2,11 +2,9 @@ package net.viperfish.latinQuiz.inflector;
 
 import java.util.Arrays;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.MutableTriple;
-
 import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.VerbRule;
+import org.apache.commons.lang3.tuple.MutableTriple;
 
 public class CombiningRules implements VerbRule {
 
@@ -31,7 +29,8 @@ public class CombiningRules implements VerbRule {
 			for (int j = 0; j < result1[i].length; ++j) {
 				finalResult[i][j] = new ConjugatedVerb();
 				finalResult[i][j]
-						.setConjugated(result1[i][j].getConjugated() + seperator + result2[i][j].getConjugated());
+						.setConjugated(
+								result1[i][j].getConjugated() + seperator + result2[i][j].getConjugated());
 				finalResult[i][j].getInterProduct().addAll(result1[i][j].getInterProduct());
 				finalResult[i][j].getInterProduct().addAll(result2[i][j].getInterProduct());
 				finalResult[i][j].getInterProduct()

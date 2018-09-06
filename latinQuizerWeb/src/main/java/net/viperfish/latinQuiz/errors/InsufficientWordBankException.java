@@ -3,7 +3,7 @@ package net.viperfish.latinQuiz.errors;
 public class InsufficientWordBankException extends Exception {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1205980000854920754L;
 

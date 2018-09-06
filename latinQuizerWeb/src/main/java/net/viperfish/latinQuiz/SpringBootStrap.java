@@ -2,9 +2,7 @@ package net.viperfish.latinQuiz;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
-
 import org.springframework.core.annotation.Order;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -16,7 +14,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class SpringBootStrap implements WebApplicationInitializer {
 
 	@Override
-	public void onStartup(ServletContext servletContext) throws ServletException {
+	public void onStartup(ServletContext servletContext) {
 		servletContext.getServletRegistration("default").addMapping("/resources/*");
 
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
@@ -31,7 +29,8 @@ public class SpringBootStrap implements WebApplicationInitializer {
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
 
-		FilterRegistration.Dynamic registration = servletContext.addFilter("preSecFilter", new PreSescLoggingFilter());
+		FilterRegistration.Dynamic registration = servletContext
+				.addFilter("preSecFilter", new PreSescLoggingFilter());
 		registration.addMappingForUrlPatterns(null, false, "/*");
 
 		FilterRegistration.Dynamic reg = servletContext.addFilter("encoding",

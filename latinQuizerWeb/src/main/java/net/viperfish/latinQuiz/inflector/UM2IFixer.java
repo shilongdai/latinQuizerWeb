@@ -2,16 +2,14 @@ package net.viperfish.latinQuiz.inflector;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.MutableTriple;
-
 import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.VerbRule;
+import org.apache.commons.lang3.tuple.MutableTriple;
 
 public class UM2IFixer implements VerbRule {
 
-	private VerbRule conj;
 	private static final String UM2IRule = "verb.replaceUm2I";
+	private VerbRule conj;
 
 	public UM2IFixer(VerbRule conj) {
 		super();
@@ -29,7 +27,8 @@ public class UM2IFixer implements VerbRule {
 			}
 			result[i][1].setConjugated(sb.toString());
 			result[i][1].getInterProduct().add(
-					new MutableTriple<String, List<String>, String>(UM2IRule, new LinkedList<String>(), sb.toString()));
+					new MutableTriple<String, List<String>, String>(UM2IRule, new LinkedList<String>(),
+							sb.toString()));
 		}
 		return result;
 	}

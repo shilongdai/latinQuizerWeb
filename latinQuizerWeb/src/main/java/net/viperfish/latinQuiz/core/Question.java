@@ -53,26 +53,31 @@ public abstract class Question {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Question other = (Question) obj;
 		if (answer == null) {
-			if (other.answer != null)
+			if (other.answer != null) {
 				return false;
-		} else if (!answer.equals(other.answer))
+			}
+		} else if (!answer.equals(other.answer)) {
 			return false;
+		}
 		if (question == null) {
-			if (other.question != null)
+			if (other.question != null) {
 				return false;
-		} else if (!question.equals(other.question))
+			}
+		} else if (!question.equals(other.question)) {
 			return false;
-		if (type != other.type)
-			return false;
-		return true;
+		}
+		return type == other.type;
 	}
 
 }

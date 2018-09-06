@@ -2,18 +2,15 @@ package net.viperfish.latinQuiz.inflector;
 
 import java.util.Arrays;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.MutableTriple;
-
 import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.VerbRule;
+import org.apache.commons.lang3.tuple.MutableTriple;
 
 public class NullRule implements VerbRule {
 
+	private static final String NULLRULE = "verb.nullRule";
 	private int row;
 	private int column;
-
-	private static final String NULLRULE = "verb.nullRule";
 
 	public NullRule(int row, int column) {
 		super();

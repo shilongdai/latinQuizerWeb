@@ -3,11 +3,6 @@ package net.viperfish.latinQuiz.quizers;
 import java.security.SecureRandom;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.Triple;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-
 import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.LatinVerb;
 import net.viperfish.latinQuiz.core.Mood;
@@ -16,6 +11,9 @@ import net.viperfish.latinQuiz.core.SynopsisAnswer;
 import net.viperfish.latinQuiz.core.SynopsisQuestion;
 import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.Voice;
+import org.apache.commons.lang3.tuple.Triple;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 public class VerbSynopsisQuestionGenerator implements VerbQuestionGenerator {
 
@@ -28,7 +26,8 @@ public class VerbSynopsisQuestionGenerator implements VerbQuestionGenerator {
 	}
 
 	@Override
-	public Question generate(LatinVerb v, Integer[] conjugations, List<Tense> tenses, List<Voice> voices,
+	public Question generate(LatinVerb v, Integer[] conjugations, List<Tense> tenses,
+			List<Voice> voices,
 			List<Mood> moods) {
 		SynopsisQuestion questionResult = new SynopsisQuestion();
 		SynopsisAnswer answer = new SynopsisAnswer();
@@ -54,13 +53,15 @@ public class VerbSynopsisQuestionGenerator implements VerbQuestionGenerator {
 
 		// generate the question
 		String localizedMood = i18n.getMessage(randMood.name(), null, LocaleContextHolder.getLocale());
-		String localizedVoice = i18n.getMessage(randVoice.name(), null, LocaleContextHolder.getLocale());
+		String localizedVoice = i18n
+				.getMessage(randVoice.name(), null, LocaleContextHolder.getLocale());
 		String localizedPerson = i18n.getMessage(QuestionHelper.personToKey(person), null,
 				LocaleContextHolder.getLocale());
 		String localizedNumber = i18n.getMessage(QuestionHelper.numberToKey(sgPl), null,
 				LocaleContextHolder.getLocale());
-		String question = i18n.getMessage("practice.verb.synopsis", new Object[] { v.getDictionaryEntry(),
-				localizedMood, localizedVoice, localizedPerson, localizedNumber }, LocaleContextHolder.getLocale());
+		String question = i18n.getMessage("practice.verb.synopsis", new Object[]{v.getDictionaryEntry(),
+						localizedMood, localizedVoice, localizedPerson, localizedNumber},
+				LocaleContextHolder.getLocale());
 
 		questionResult.setQuestion(question);
 		questionResult.setAnswer(answer);

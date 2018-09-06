@@ -6,10 +6,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-
 import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.LatinVerb;
 import net.viperfish.latinQuiz.core.Mood;
@@ -17,6 +13,8 @@ import net.viperfish.latinQuiz.core.MultipleChoiceQuestion;
 import net.viperfish.latinQuiz.core.Question;
 import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.Voice;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 public class VerbMultipleChoiceQuestionGenerator implements VerbQuestionGenerator {
 
@@ -29,7 +27,8 @@ public class VerbMultipleChoiceQuestionGenerator implements VerbQuestionGenerato
 	}
 
 	@Override
-	public Question generate(LatinVerb v, Integer[] conjugations, List<Tense> tenses, List<Voice> voices,
+	public Question generate(LatinVerb v, Integer[] conjugations, List<Tense> tenses,
+			List<Voice> voices,
 			List<Mood> moods) {
 		// select and conjugate a random tense, mood, voice
 		Tense t = tenses.get(rand.nextInt(tenses.size()));
@@ -48,7 +47,8 @@ public class VerbMultipleChoiceQuestionGenerator implements VerbQuestionGenerato
 
 		// generate the question
 		String localizedMood = i18n.getMessage(randMood.name(), null, LocaleContextHolder.getLocale());
-		String localizedVoice = i18n.getMessage(randVoice.name(), null, LocaleContextHolder.getLocale());
+		String localizedVoice = i18n
+				.getMessage(randVoice.name(), null, LocaleContextHolder.getLocale());
 		String localizedTense = i18n.getMessage(t.name(), null, LocaleContextHolder.getLocale());
 		String localizedPerson = i18n.getMessage(QuestionHelper.personToKey(personIndex), null,
 				LocaleContextHolder.getLocale());
@@ -56,8 +56,8 @@ public class VerbMultipleChoiceQuestionGenerator implements VerbQuestionGenerato
 				LocaleContextHolder.getLocale());
 		String question = i18n
 				.getMessage(
-						"practice.verb.multipleChoice", new Object[] { v.getDictionaryEntry(), localizedMood,
-								localizedVoice, localizedTense, localizedPerson, localizedNumber },
+						"practice.verb.multipleChoice", new Object[]{v.getDictionaryEntry(), localizedMood,
+								localizedVoice, localizedTense, localizedPerson, localizedNumber},
 						LocaleContextHolder.getLocale());
 
 		HashSet<ConjugatedVerb> choices = new HashSet<>();
@@ -67,12 +67,14 @@ public class VerbMultipleChoiceQuestionGenerator implements VerbQuestionGenerato
 		generateChoices(v, 4, choices);
 		List<ConjugatedVerb> choiceList = new LinkedList<>(choices);
 		Collections.shuffle(choiceList);
-		MultipleChoiceQuestion questionResult = createMultipleChoice(question, choiceList, correctChoice);
+		MultipleChoiceQuestion questionResult = createMultipleChoice(question, choiceList,
+				correctChoice);
 		questionResult.setSteps(correctChoice.getInterProduct());
 		return questionResult;
 	}
 
-	private MultipleChoiceQuestion createMultipleChoice(String questionStr, List<ConjugatedVerb> choiceList,
+	private MultipleChoiceQuestion createMultipleChoice(String questionStr,
+			List<ConjugatedVerb> choiceList,
 			ConjugatedVerb correctChoice) {
 		MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionStr);
 		for (int i = 0; i < choiceList.size(); ++i) {

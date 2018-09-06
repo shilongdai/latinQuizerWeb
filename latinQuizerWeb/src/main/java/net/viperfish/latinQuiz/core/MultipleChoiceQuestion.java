@@ -3,7 +3,6 @@ package net.viperfish.latinQuiz.core;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import org.apache.commons.lang3.tuple.Triple;
 
 public final class MultipleChoiceQuestion extends Question {
@@ -27,16 +26,16 @@ public final class MultipleChoiceQuestion extends Question {
 		return new HashSet<>(choices);
 	}
 
+	public void setChoices(Set<String> choices) {
+		this.choices = choices;
+	}
+
 	public List<? extends Triple<String, ? extends List<String>, String>> getSteps() {
 		return steps;
 	}
 
 	public void setSteps(List<? extends Triple<String, ? extends List<String>, String>> steps) {
 		this.steps = steps;
-	}
-
-	public void setChoices(Set<String> choices) {
-		this.choices = choices;
 	}
 
 	@Override
@@ -49,19 +48,21 @@ public final class MultipleChoiceQuestion extends Question {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (!super.equals(obj)) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		MultipleChoiceQuestion other = (MultipleChoiceQuestion) obj;
 		if (choices == null) {
-			if (other.choices != null)
-				return false;
-		} else if (!choices.equals(other.choices))
-			return false;
-		return true;
+			return other.choices == null;
+		} else {
+			return choices.equals(other.choices);
+		}
 	}
 
 }

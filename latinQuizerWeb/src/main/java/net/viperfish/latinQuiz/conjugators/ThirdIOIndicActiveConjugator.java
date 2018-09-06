@@ -22,14 +22,18 @@ public final class ThirdIOIndicActiveConjugator extends RegularActiveConjugator 
 		addRule(Tense.PRESENT, new PresentStrapStemRule(
 				new INT2IUNTFixer(new ConvertToIRule(new StemPlusPresentActiveEndingsRule()))));
 		addRule(Tense.IMPERFECT, new PresentStrapStemRule(
-				new AO2AmFixer(new ConvertToIRule(new AppendRule("eba", new StemPlusPresentActiveEndingsRule())))));
+				new AO2AmFixer(
+						new ConvertToIRule(new AppendRule("eba", new StemPlusPresentActiveEndingsRule())))));
 		addRule(Tense.FUTURE, new PresentStrapStemRule(
-				new EO2AMFixer(new ConvertToIRule(new AppendRule("e", new StemPlusPresentActiveEndingsRule())))));
+				new EO2AMFixer(
+						new ConvertToIRule(new AppendRule("e", new StemPlusPresentActiveEndingsRule())))));
 		addRule(Tense.PERFECT, new PerfectActiveStrapStemRule(new StemPlusPerfectActiveEndingsRule()));
 		addRule(Tense.PLUPERFECT,
-				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "", new EraConjugator()));
+				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "",
+						new EraConjugator()));
 		addRule(Tense.FUTURE_PERFECT,
-				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "", new EriConjugator()));
+				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "",
+						new EriConjugator()));
 	}
 
 }

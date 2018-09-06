@@ -2,14 +2,12 @@ package net.viperfish.latinQuiz.core;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import net.viperfish.latinQuiz.declension.FirstGenericDeclension;
 import net.viperfish.latinQuiz.declension.FourthMDeclension;
 import net.viperfish.latinQuiz.declension.FourthNDeclension;
@@ -26,6 +24,7 @@ public class LatinNoun {
 
 	private static final Map<Integer, Map<Gender, Map<NounType, NounDecliner>>> decliners;
 	private static final Map<Integer, String> genitiveEndings;
+
 	static {
 		decliners = new HashMap<Integer, Map<Gender, Map<NounType, NounDecliner>>>();
 		genitiveEndings = new HashMap<Integer, String>();
@@ -37,6 +36,31 @@ public class LatinNoun {
 		}
 		initDecliners();
 		initGenitiveEndings();
+	}
+
+	private String nomSing;
+	private String genitive;
+	private Gender gender;
+	private int declension;
+	private NounType type;
+	private long id;
+	public LatinNoun() {
+		this.id = -1;
+		nomSing = "";
+		genitive = "";
+		gender = Gender.N;
+		declension = -1;
+		type = NounType.IA;
+	}
+	public LatinNoun(String nomSing, String genitive, Gender gender, int declension, NounType type) {
+		super();
+		this.id = -1;
+		this.nomSing = nomSing;
+		this.genitive = genitive;
+		this.gender = gender;
+		this.declension = declension;
+		this.type = type;
+
 	}
 
 	private static void initDecliners() {
@@ -60,33 +84,6 @@ public class LatinNoun {
 		genitiveEndings.put(2, "is");
 		genitiveEndings.put(3, "ūs");
 		genitiveEndings.put(4, "eī");
-	}
-
-	private String nomSing;
-	private String genitive;
-	private Gender gender;
-	private int declension;
-	private NounType type;
-	private long id;
-
-	public LatinNoun() {
-		this.id = -1;
-		nomSing = "";
-		genitive = "";
-		gender = Gender.N;
-		declension = -1;
-		type = NounType.IA;
-	}
-
-	public LatinNoun(String nomSing, String genitive, Gender gender, int declension, NounType type) {
-		super();
-		this.id = -1;
-		this.nomSing = nomSing;
-		this.genitive = genitive;
-		this.gender = gender;
-		this.declension = declension;
-		this.type = type;
-
 	}
 
 	@Id
@@ -179,35 +176,43 @@ public class LatinNoun {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		LatinNoun other = (LatinNoun) obj;
-		if (declension != other.declension)
+		if (declension != other.declension) {
 			return false;
-		if (gender != other.gender)
+		}
+		if (gender != other.gender) {
 			return false;
+		}
 		if (genitive == null) {
-			if (other.genitive != null)
+			if (other.genitive != null) {
 				return false;
-		} else if (!genitive.equals(other.genitive))
+			}
+		} else if (!genitive.equals(other.genitive)) {
 			return false;
+		}
 		if (nomSing == null) {
-			if (other.nomSing != null)
+			if (other.nomSing != null) {
 				return false;
-		} else if (!nomSing.equals(other.nomSing))
+			}
+		} else if (!nomSing.equals(other.nomSing)) {
 			return false;
-		if (type != other.type)
-			return false;
-		return true;
+		}
+		return type == other.type;
 	}
 
 	@Override
 	public String toString() {
-		return "LatinNoun [nomSing=" + nomSing + ", genitive=" + genitive + ", gender=" + gender + ", declension="
+		return "LatinNoun [nomSing=" + nomSing + ", genitive=" + genitive + ", gender=" + gender
+				+ ", declension="
 				+ declension + ", type=" + type + ", id=" + id + "]";
 	}
 

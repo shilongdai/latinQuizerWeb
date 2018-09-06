@@ -3,11 +3,9 @@ package net.viperfish.latinQuiz.inflector;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.MutableTriple;
-
 import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.VerbRule;
+import org.apache.commons.lang3.tuple.MutableTriple;
 
 public class StemPlusPassiveRule implements VerbRule {
 
@@ -19,7 +17,7 @@ public class StemPlusPassiveRule implements VerbRule {
 
 	@Override
 	public ConjugatedVerb[][] inflect(String first, ConjugatedVerb stem) {
-		String[][] endings = { { "r", "mur" }, { "ris", "mini" }, { "tur", "ntur" } };
+		String[][] endings = {{"r", "mur"}, {"ris", "mini"}, {"tur", "ntur"}};
 		String[][] result = new String[endings.length][];
 		for (int i = 0; i < result.length; ++i) {
 			result[i] = new String[endings[i].length];

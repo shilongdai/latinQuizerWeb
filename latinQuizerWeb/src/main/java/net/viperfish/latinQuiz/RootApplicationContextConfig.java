@@ -8,12 +8,10 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
-
 import javax.persistence.SharedCacheMode;
 import javax.persistence.ValidationMode;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
@@ -47,9 +45,10 @@ import org.springframework.web.context.ServletContextAware;
 @EnableTransactionManagement(proxyTargetClass = true, order = Ordered.LOWEST_PRECEDENCE)
 @EnableScheduling
 @EnableJpaRepositories(basePackages = {
-		"net.viperfish.latinQuiz.core" }, entityManagerFactoryRef = "entityManagerFactoryBean", transactionManagerRef = "jpaTransactionManager")
+		"net.viperfish.latinQuiz.core"}, entityManagerFactoryRef = "entityManagerFactoryBean", transactionManagerRef = "jpaTransactionManager")
 @ComponentScan(basePackages = "net.viperfish.latinQuiz", excludeFilters = @ComponentScan.Filter(Controller.class))
-public class RootApplicationContextConfig implements AsyncConfigurer, SchedulingConfigurer, ServletContextAware {
+public class RootApplicationContextConfig implements AsyncConfigurer, SchedulingConfigurer,
+		ServletContextAware {
 
 	private Logger log = LogManager.getLogger();
 	private ServletContext context;
@@ -87,7 +86,8 @@ public class RootApplicationContextConfig implements AsyncConfigurer, Scheduling
 	}
 
 	@Bean
-	public MethodValidationPostProcessor methodValidationPostProcessor() throws ClassNotFoundException {
+	public MethodValidationPostProcessor methodValidationPostProcessor()
+			throws ClassNotFoundException {
 		MethodValidationPostProcessor processor = new MethodValidationPostProcessor();
 		processor.setValidator(this.localValidatorFactoryBean());
 		return processor;
@@ -130,7 +130,8 @@ public class RootApplicationContextConfig implements AsyncConfigurer, Scheduling
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		messageSource.setCacheSeconds(-1);
 		messageSource.setDefaultEncoding(StandardCharsets.UTF_8.name());
-		messageSource.setBasenames("WEB-INF/i18n/messages", "WEB-INF/i18n/errors", "WEB-INF/i18n/steps");
+		messageSource
+				.setBasenames("WEB-INF/i18n/messages", "WEB-INF/i18n/errors", "WEB-INF/i18n/steps");
 		return messageSource;
 	}
 

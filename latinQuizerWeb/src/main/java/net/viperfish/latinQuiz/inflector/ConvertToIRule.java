@@ -2,11 +2,9 @@ package net.viperfish.latinQuiz.inflector;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.MutableTriple;
-
 import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.VerbRule;
+import org.apache.commons.lang3.tuple.MutableTriple;
 
 public class ConvertToIRule implements VerbRule {
 

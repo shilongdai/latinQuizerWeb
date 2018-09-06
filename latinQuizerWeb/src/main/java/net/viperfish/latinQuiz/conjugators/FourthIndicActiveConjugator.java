@@ -18,16 +18,20 @@ public final class FourthIndicActiveConjugator extends RegularActiveConjugator {
 
 	@Override
 	protected void init() {
-		addRule(Tense.PRESENT, new PresentStrapStemRule(new INT2IUNTFixer(new StemPlusPresentActiveEndingsRule())));
+		addRule(Tense.PRESENT,
+				new PresentStrapStemRule(new INT2IUNTFixer(new StemPlusPresentActiveEndingsRule())));
 		addRule(Tense.IMPERFECT, new PresentStrapStemRule(
 				new AO2AmFixer(new AppendRule("eba", new StemPlusPresentActiveEndingsRule()))));
 		addRule(Tense.FUTURE,
-				new PresentStrapStemRule(new EO2AMFixer(new AppendRule("e", new StemPlusPresentActiveEndingsRule()))));
+				new PresentStrapStemRule(
+						new EO2AMFixer(new AppendRule("e", new StemPlusPresentActiveEndingsRule()))));
 		addRule(Tense.PERFECT, new PerfectActiveStrapStemRule(new StemPlusPerfectActiveEndingsRule()));
 		addRule(Tense.PLUPERFECT,
-				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "", new EraConjugator()));
+				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "",
+						new EraConjugator()));
 		addRule(Tense.FUTURE_PERFECT,
-				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "", new EriConjugator()));
+				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "",
+						new EriConjugator()));
 	}
 
 }

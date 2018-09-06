@@ -1,49 +1,55 @@
 @charset "UTF-8";
-@import('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css') 
+@import(
+
+'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css'
+)
 
 .material-switch > input[type="checkbox"] {
-    display: none;   
+  display: none;
 }
 
 .material-switch > label {
-    cursor: pointer;
-    height: 0px;
-    position: relative; 
-    width: 40px;  
+  cursor: pointer;
+  height: 0px;
+  position: relative;
+  width: 40px;
 }
 
 .material-switch > label::before {
-    background: rgb(0, 0, 0);
-    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    content: '';
-    height: 16px;
-    margin-top: -8px;
-    position:absolute;
-    opacity: 0.3;
-    transition: all 0.4s ease-in-out;
-    width: 40px;
+  background: rgb(0, 0, 0);
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  content: '';
+  height: 16px;
+  margin-top: -8px;
+  position: absolute;
+  opacity: 0.3;
+  transition: all 0.4s ease-in-out;
+  width: 40px;
 }
+
 .material-switch > label::after {
-    background: rgb(255, 255, 255);
-    border-radius: 16px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-    content: '';
-    height: 24px;
-    left: -4px;
-    margin-top: -8px;
-    position: absolute;
-    top: -4px;
-    transition: all 0.3s ease-in-out;
-    width: 24px;
+  background: rgb(255, 255, 255);
+  border-radius: 16px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  content: '';
+  height: 24px;
+  left: -4px;
+  margin-top: -8px;
+  position: absolute;
+  top: -4px;
+  transition: all 0.3s ease-in-out;
+  width: 24px;
 }
+
 .material-switch > input[type="checkbox"]:checked + label::before {
-    background: inherit;
-    opacity: 0.5;
+  background: inherit;
+  opacity: 0.5;
 }
+
 .material-switch > input[type="checkbox"]:checked + label::after {
-    background: inherit;
-    left: 20px;
+  background: inherit;
+  left: 20px;
 }
 
 .funkyradio div {
@@ -71,9 +77,9 @@
   margin-top: 2em;
   cursor: pointer;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .funkyradio input[type="radio"]:empty ~ label:before,
@@ -156,7 +162,7 @@
 }
 
 .checkbox_left_margin {
-	margin-left: 5%;
+  margin-left: 5%;
 }
 
 .btn-breadcrumb .btn:not(:last-child):after {
@@ -173,6 +179,7 @@
   left: 100%;
   z-index: 3;
 }
+
 .btn-breadcrumb .btn:not(:last-child):before {
   content: " ";
   display: block;
@@ -191,25 +198,30 @@
 
 /** The Spacing **/
 .btn-breadcrumb .btn {
-  padding:6px 12px 6px 24px;
+  padding: 6px 12px 6px 24px;
 }
+
 .btn-breadcrumb .btn:first-child {
-  padding:6px 6px 6px 10px;
+  padding: 6px 6px 6px 10px;
 }
+
 .btn-breadcrumb .btn:last-child {
-  padding:6px 18px 6px 24px;
+  padding: 6px 18px 6px 24px;
 }
 
 /** Default button **/
 .btn-breadcrumb .btn.btn-default:not(:last-child):after {
   border-left: 10px solid #fff;
 }
+
 .btn-breadcrumb .btn.btn-default:not(:last-child):before {
   border-left: 10px solid #ccc;
 }
+
 .btn-breadcrumb .btn.btn-default:hover:not(:last-child):after {
   border-left: 10px solid #ebebeb;
 }
+
 .btn-breadcrumb .btn.btn-default:hover:not(:last-child):before {
   border-left: 10px solid #adadad;
 }
@@ -218,12 +230,15 @@
 .btn-breadcrumb .btn.btn-primary:not(:last-child):after {
   border-left: 10px solid #428bca;
 }
+
 .btn-breadcrumb .btn.btn-primary:not(:last-child):before {
   border-left: 10px solid #357ebd;
 }
+
 .btn-breadcrumb .btn.btn-primary:hover:not(:last-child):after {
   border-left: 10px solid #3276b1;
 }
+
 .btn-breadcrumb .btn.btn-primary:hover:not(:last-child):before {
   border-left: 10px solid #285e8e;
 }
@@ -232,12 +247,15 @@
 .btn-breadcrumb .btn.btn-success:not(:last-child):after {
   border-left: 10px solid #5cb85c;
 }
+
 .btn-breadcrumb .btn.btn-success:not(:last-child):before {
   border-left: 10px solid #4cae4c;
 }
+
 .btn-breadcrumb .btn.btn-success:hover:not(:last-child):after {
   border-left: 10px solid #47a447;
 }
+
 .btn-breadcrumb .btn.btn-success:hover:not(:last-child):before {
   border-left: 10px solid #398439;
 }
@@ -246,12 +264,15 @@
 .btn-breadcrumb .btn.btn-danger:not(:last-child):after {
   border-left: 10px solid #d9534f;
 }
+
 .btn-breadcrumb .btn.btn-danger:not(:last-child):before {
   border-left: 10px solid #d43f3a;
 }
+
 .btn-breadcrumb .btn.btn-danger:hover:not(:last-child):after {
   border-left: 10px solid #d2322d;
 }
+
 .btn-breadcrumb .btn.btn-danger:hover:not(:last-child):before {
   border-left: 10px solid #ac2925;
 }
@@ -260,12 +281,15 @@
 .btn-breadcrumb .btn.btn-warning:not(:last-child):after {
   border-left: 10px solid #f0ad4e;
 }
+
 .btn-breadcrumb .btn.btn-warning:not(:last-child):before {
   border-left: 10px solid #eea236;
 }
+
 .btn-breadcrumb .btn.btn-warning:hover:not(:last-child):after {
   border-left: 10px solid #ed9c28;
 }
+
 .btn-breadcrumb .btn.btn-warning:hover:not(:last-child):before {
   border-left: 10px solid #d58512;
 }
@@ -274,12 +298,15 @@
 .btn-breadcrumb .btn.btn-info:not(:last-child):after {
   border-left: 10px solid #5bc0de;
 }
+
 .btn-breadcrumb .btn.btn-info:not(:last-child):before {
   border-left: 10px solid #46b8da;
 }
+
 .btn-breadcrumb .btn.btn-info:hover:not(:last-child):after {
   border-left: 10px solid #39b3d7;
 }
+
 .btn-breadcrumb .btn.btn-info:hover:not(:last-child):before {
   border-left: 10px solid #269abc;
 }

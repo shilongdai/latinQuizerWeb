@@ -3,6 +3,7 @@ package net.viperfish.latinQuiz.core;
 import org.junit.Assert;
 
 public final class TestUtils {
+
 	public static String[][] conjVerb2StringArray(ConjugatedVerb[][] array) {
 		String[][] result = new String[array.length][];
 		for (int i = 0; i < result.length; ++i) {

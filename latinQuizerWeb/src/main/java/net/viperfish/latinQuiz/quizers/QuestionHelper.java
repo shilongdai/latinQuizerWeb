@@ -11,18 +11,18 @@ final class QuestionHelper {
 
 	public static String personToKey(int num) {
 		switch (num) {
-		case 0: {
-			return "first";
-		}
-		case 1: {
-			return "second";
-		}
-		case 2: {
-			return "third";
-		}
-		default: {
-			throw new IllegalArgumentException();
-		}
+			case 0: {
+				return "first";
+			}
+			case 1: {
+				return "second";
+			}
+			case 2: {
+				return "third";
+			}
+			default: {
+				throw new IllegalArgumentException();
+			}
 		}
 	}
 

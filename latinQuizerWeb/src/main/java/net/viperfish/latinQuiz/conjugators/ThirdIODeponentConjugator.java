@@ -30,13 +30,17 @@ public final class ThirdIODeponentConjugator extends RegularDeponentConjugator {
 		addRule(Tense.PRESENT, new PresentStrapStemRule(new PassivePresentFixer(
 				new IR2ERFixer(new INT2IUNTFixer(new ConvertToIRule(new StemPlusPassiveRule()))))));
 		addRule(Tense.IMPERFECT,
-				new PresentStrapStemRule(new ConvertToIRule((new AppendRule("eba", new StemPlusPassiveRule())))));
+				new PresentStrapStemRule(
+						new ConvertToIRule((new AppendRule("eba", new StemPlusPassiveRule())))));
 		addRule(Tense.FUTURE, new PresentStrapStemRule(new E2EMacronFixer(
 				new ER2ARFixer(new ConvertToIRule(new AppendRule("e", new StemPlusPassiveRule()))))));
-		addRule(Tense.PERFECT, new CombiningRules(new UM2IFixer(new NullRule(3, 2)), " ", new SumRule()));
-		addRule(Tense.PLUPERFECT, new CombiningRules(new UM2IFixer(new NullRule(3, 2)), " ", new EraConjugator()));
+		addRule(Tense.PERFECT,
+				new CombiningRules(new UM2IFixer(new NullRule(3, 2)), " ", new SumRule()));
+		addRule(Tense.PLUPERFECT,
+				new CombiningRules(new UM2IFixer(new NullRule(3, 2)), " ", new EraConjugator()));
 		addRule(Tense.FUTURE_PERFECT,
-				new CombiningRules(new UM2IFixer(new NullRule(3, 2)), " ", new Int2UntFixer(new EriConjugator())));
+				new CombiningRules(new UM2IFixer(new NullRule(3, 2)), " ",
+						new Int2UntFixer(new EriConjugator())));
 	}
 
 }

@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration status="WARN">
-    <appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout
-                    pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
-        </Console>
-        <RollingFile name="latinQuiz" fileName="/tmp/latinQuiz.log"
-                     filePattern="/tmp/latinQuiz-%d{MM-dd-yyyy}-%i.log">
-            <PatternLayout>
-                <pattern>%d{HH:mm:ss.SSS} [%t] %X{id} %X{username} %-5level %c{36} %l: %msg%n</pattern>
-            </PatternLayout>
-            <Policies>
-                <SizeBasedTriggeringPolicy size="10 MB" />
-            </Policies>
-            <DefaultRolloverStrategy min="1" max="4" />
-        </RollingFile>
-    </appenders>
-    <loggers>
-        <logger name="net.viperfish" level="warn">
-            <appender-ref ref="latinQuiz" />
-        </logger>
-        <logger name="org.apache" level="warn">
-            <appender-ref ref="latinQuiz" />
-        </logger>
-        <logger name="org.springframework" level="warn">
-        	<appender-ref ref="latinQuiz"></appender-ref>
-        </logger>
-    </loggers>
+  <appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout
+        pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+    <RollingFile fileName="/tmp/latinQuiz.log" filePattern="/tmp/latinQuiz-%d{MM-dd-yyyy}-%i.log"
+      name="latinQuiz">
+      <PatternLayout>
+        <pattern>%d{HH:mm:ss.SSS} [%t] %X{id} %X{username} %-5level %c{36} %l: %msg%n</pattern>
+      </PatternLayout>
+      <Policies>
+        <SizeBasedTriggeringPolicy size="10 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="4" min="1"/>
+    </RollingFile>
+  </appenders>
+  <loggers>
+    <logger level="warn" name="net.viperfish">
+      <appender-ref ref="latinQuiz"/>
+    </logger>
+    <logger level="warn" name="org.apache">
+      <appender-ref ref="latinQuiz"/>
+    </logger>
+    <logger level="warn" name="org.springframework">
+      <appender-ref ref="latinQuiz"></appender-ref>
+    </logger>
+  </loggers>
 </configuration>

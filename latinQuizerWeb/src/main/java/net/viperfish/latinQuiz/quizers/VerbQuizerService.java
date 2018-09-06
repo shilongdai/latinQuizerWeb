@@ -8,11 +8,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Service;
-
 import net.viperfish.latinQuiz.core.LatinVerb;
 import net.viperfish.latinQuiz.core.LatinVerbDatabase;
 import net.viperfish.latinQuiz.core.Mood;
@@ -22,6 +17,9 @@ import net.viperfish.latinQuiz.core.Tense;
 import net.viperfish.latinQuiz.core.VerbType;
 import net.viperfish.latinQuiz.core.Voice;
 import net.viperfish.latinQuiz.errors.InsufficientWordBankException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Service;
 
 @Service("verbService")
 public final class VerbQuizerService {
@@ -50,7 +48,8 @@ public final class VerbQuizerService {
 		init(i18n);
 	}
 
-	public Question[] generateQuestions(int length, Integer[] conjugations, List<Tense> tenses, List<Voice> voices,
+	public Question[] generateQuestions(int length, Integer[] conjugations, List<Tense> tenses,
+			List<Voice> voices,
 			List<Mood> moods, List<VerbType> types, List<QuestionType> questionTypes)
 			throws InsufficientWordBankException {
 		// make sure that there are words in the word bank and that there are the
@@ -96,7 +95,8 @@ public final class VerbQuizerService {
 		return l;
 	}
 
-	private void checkParameters(int length, Integer[] conjugations) throws InsufficientWordBankException {
+	private void checkParameters(int length, Integer[] conjugations)
+			throws InsufficientWordBankException {
 		if (database.count() == 0) {
 			throw new InsufficientWordBankException();
 		}

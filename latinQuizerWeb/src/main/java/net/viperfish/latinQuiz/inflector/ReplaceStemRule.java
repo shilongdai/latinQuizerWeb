@@ -2,18 +2,16 @@ package net.viperfish.latinQuiz.inflector;
 
 import java.util.Arrays;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.MutableTriple;
-
 import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.VerbRule;
+import org.apache.commons.lang3.tuple.MutableTriple;
 
 public class ReplaceStemRule implements VerbRule {
 
+	private static final String REPLACE_STEM = "verb.replaceStem";
 	private String toReplace;
 	private String replacement;
 	private VerbRule rule;
-	private static final String REPLACE_STEM = "verb.replaceStem";
 
 	public ReplaceStemRule(String toReplace, String replacement, VerbRule rule) {
 		this.toReplace = toReplace;

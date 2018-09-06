@@ -20,14 +20,18 @@ public final class FirstSecondIndicActiveConjugator extends RegularActiveConjuga
 	protected void init() {
 		addRule(Tense.PRESENT, new PresentStrapStemRule(new StemPlusPresentActiveEndingsRule()));
 		addRule(Tense.IMPERFECT,
-				new PresentStrapStemRule(new AO2AmFixer(new AppendRule("ba", new StemPlusPresentActiveEndingsRule()))));
+				new PresentStrapStemRule(
+						new AO2AmFixer(new AppendRule("ba", new StemPlusPresentActiveEndingsRule()))));
 		addRule(Tense.FUTURE, new Int2UntFixer(
-				new PresentStrapStemRule(new IO2OFixer(new AppendRule("bi", new StemPlusPresentActiveEndingsRule())))));
+				new PresentStrapStemRule(
+						new IO2OFixer(new AppendRule("bi", new StemPlusPresentActiveEndingsRule())))));
 		addRule(Tense.PERFECT, new PerfectActiveStrapStemRule(new StemPlusPerfectActiveEndingsRule()));
 		addRule(Tense.PLUPERFECT,
-				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "", new EraConjugator()));
+				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "",
+						new EraConjugator()));
 		addRule(Tense.FUTURE_PERFECT,
-				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "", new EriConjugator()));
+				new CombiningRules(new PerfectActiveStrapStemRule(new NullRule(3, 2)), "",
+						new EriConjugator()));
 	}
 
 }

@@ -2,16 +2,14 @@ package net.viperfish.latinQuiz.inflector;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.MutableTriple;
-
 import net.viperfish.latinQuiz.core.ConjugatedVerb;
 import net.viperfish.latinQuiz.core.VerbRule;
+import org.apache.commons.lang3.tuple.MutableTriple;
 
 public final class PresentStrapStemRule implements VerbRule {
 
-	private VerbRule verbRule;
 	private static final String PRESENT_STRAP_STEM = "verb.presentStrapStem";
+	private VerbRule verbRule;
 
 	public PresentStrapStemRule(VerbRule src) {
 		this.verbRule = src;
@@ -20,7 +18,7 @@ public final class PresentStrapStemRule implements VerbRule {
 	@Override
 	public ConjugatedVerb[][] inflect(String first, ConjugatedVerb stem) {
 		String toInflect = stem.getConjugated();
-		if (toInflect.substring(toInflect.length() - 2, toInflect.length()).equalsIgnoreCase("re")) {
+		if (toInflect.substring(toInflect.length() - 2).equalsIgnoreCase("re")) {
 			toInflect = toInflect.substring(0, toInflect.length() - 2);
 		}
 

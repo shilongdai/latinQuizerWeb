@@ -2,10 +2,9 @@ package net.viperfish.latinQuiz.views;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Range;
-
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import net.viperfish.latinQuiz.core.Mood;
 import net.viperfish.latinQuiz.core.QuestionType;
 import net.viperfish.latinQuiz.core.Tense;
@@ -14,17 +13,23 @@ import net.viperfish.latinQuiz.core.Voice;
 
 public class VerbStartPracticeForm {
 
-	@Range(min = 1, max = 100, message = "{verbForm.inappAmount}")
+	@Max(value = 100, message = "{verbForm.inappAmount")
+	@Min(value = 1, message = "verbForm.inappAmount")
 	private int amount;
-	@NotEmpty(message = "{verbForm.emptyConj}")
+
+	@Size(min = 1, message = "{verbForm.emptyConj")
 	private List<Integer> conjugations;
-	@NotEmpty(message = "{verbForm.emptyTense}")
+
+	@Size(min = 1, message = "{verbForm.emptyTense}")
 	private List<Tense> tenses;
-	@NotEmpty(message = "{verbForm.emptyMood}")
+
+	@Size(min = 1, message = "{verbForm.emptyMood}")
 	private List<Mood> moods;
-	@NotEmpty(message = "{verbForm.emptyVoice}")
+
+	@Size(min = 1, message = "{verbForm.emptyVoice}")
 	private List<Voice> voices;
-	@NotEmpty(message = "{verbForm.emptyTypes}")
+
+	@Size(min = 1, message = "{verbForm.emptyTypes}")
 	private List<VerbType> types;
 
 	private List<QuestionType> questionTypes;
@@ -111,46 +116,59 @@ public class VerbStartPracticeForm {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		VerbStartPracticeForm other = (VerbStartPracticeForm) obj;
-		if (amount != other.amount)
+		if (amount != other.amount) {
 			return false;
+		}
 		if (conjugations == null) {
-			if (other.conjugations != null)
+			if (other.conjugations != null) {
 				return false;
-		} else if (!conjugations.equals(other.conjugations))
+			}
+		} else if (!conjugations.equals(other.conjugations)) {
 			return false;
+		}
 		if (moods == null) {
-			if (other.moods != null)
+			if (other.moods != null) {
 				return false;
-		} else if (!moods.equals(other.moods))
+			}
+		} else if (!moods.equals(other.moods)) {
 			return false;
+		}
 		if (questionTypes == null) {
-			if (other.questionTypes != null)
+			if (other.questionTypes != null) {
 				return false;
-		} else if (!questionTypes.equals(other.questionTypes))
+			}
+		} else if (!questionTypes.equals(other.questionTypes)) {
 			return false;
+		}
 		if (tenses == null) {
-			if (other.tenses != null)
+			if (other.tenses != null) {
 				return false;
-		} else if (!tenses.equals(other.tenses))
+			}
+		} else if (!tenses.equals(other.tenses)) {
 			return false;
+		}
 		if (types == null) {
-			if (other.types != null)
+			if (other.types != null) {
 				return false;
-		} else if (!types.equals(other.types))
+			}
+		} else if (!types.equals(other.types)) {
 			return false;
+		}
 		if (voices == null) {
-			if (other.voices != null)
-				return false;
-		} else if (!voices.equals(other.voices))
-			return false;
-		return true;
+			return other.voices == null;
+		} else {
+			return voices.equals(other.voices);
+		}
 	}
 
 }

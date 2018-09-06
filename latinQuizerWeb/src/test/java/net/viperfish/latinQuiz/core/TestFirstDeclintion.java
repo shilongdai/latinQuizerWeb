@@ -11,8 +11,8 @@ public class TestFirstDeclintion {
 	@Test
 	public void testFirstConjF() {
 		LatinNoun noun = new LatinNoun("causa", "causae", Gender.F, 0, NounType.REGULAR);
-		String[][] supposed = { { "causa", "causae" }, { "causae", "causārum" }, { "causae", "causīs" },
-				{ "causam", "causās" }, { "causā", "causīs" } };
+		String[][] supposed = {{"causa", "causae"}, {"causae", "causārum"}, {"causae", "causīs"},
+				{"causam", "causās"}, {"causā", "causīs"}};
 		String[][] inflected = noun.inflect();
 		TestUtils.test(supposed, inflected);
 	}

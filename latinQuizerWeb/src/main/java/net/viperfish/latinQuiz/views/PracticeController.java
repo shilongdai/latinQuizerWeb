@@ -4,18 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import net.viperfish.latinQuiz.core.Answer;
 import net.viperfish.latinQuiz.core.Mood;
 import net.viperfish.latinQuiz.core.Question;
@@ -28,15 +17,19 @@ import net.viperfish.latinQuiz.core.Voice;
 import net.viperfish.latinQuiz.errors.InsufficientWordBankException;
 import net.viperfish.latinQuiz.quizers.NounQuizerService;
 import net.viperfish.latinQuiz.quizers.VerbQuizerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value = "/practice")
 public class PracticeController {
 
-	@Autowired
-	private VerbQuizerService verbService;
-	@Autowired
-	private NounQuizerService nounService;
 	private static final VerbStartPracticeForm DEFAULT;
 
 	static {
@@ -57,6 +50,11 @@ public class PracticeController {
 		DEFAULT.getQuestionTypes().add(QuestionType.SYNOPSIS);
 	}
 
+	@Autowired
+	private VerbQuizerService verbService;
+	@Autowired
+	private NounQuizerService nounService;
+
 	public PracticeController() {
 	}
 
@@ -68,7 +66,8 @@ public class PracticeController {
 	}
 
 	@RequestMapping(value = "verb", method = RequestMethod.POST)
-	public String startVerbPractice(@ModelAttribute("verbForm") @Validated VerbStartPracticeForm verbForm,
+	public String startVerbPractice(
+			@ModelAttribute("verbForm") @Validated VerbStartPracticeForm verbForm,
 			BindingResult bindingResult, HttpSession session, Map<String, Object> model) {
 		session.setAttribute("review", false);
 		if (bindingResult.hasErrors()) {
@@ -78,20 +77,21 @@ public class PracticeController {
 		try {
 			Integer[] selectedConjugations = verbForm.getConjugations()
 					.toArray(new Integer[verbForm.getConjugations().size()]);
-			Question[] generated = verbService.generateQuestions(verbForm.getAmount(), selectedConjugations,
-					verbForm.getTenses(), verbForm.getVoices(), verbForm.getMoods(), verbForm.getTypes(),
-					verbForm.getQuestionTypes());
+			Question[] generated = verbService
+					.generateQuestions(verbForm.getAmount(), selectedConjugations,
+							verbForm.getTenses(), verbForm.getVoices(), verbForm.getMoods(), verbForm.getTypes(),
+							verbForm.getQuestionTypes());
 			Answer[] answers = new Answer[generated.length];
 			for (int i = 0; i < answers.length; ++i) {
 				switch (generated[i].getType()) {
-				case MULTIPLE_CHOICE: {
-					answers[i] = new SingleTextualAnswer();
-					break;
-				}
-				case SYNOPSIS: {
-					answers[i] = new SynopsisAnswer();
-					break;
-				}
+					case MULTIPLE_CHOICE: {
+						answers[i] = new SingleTextualAnswer();
+						break;
+					}
+					case SYNOPSIS: {
+						answers[i] = new SynopsisAnswer();
+						break;
+					}
 				}
 			}
 			session.setAttribute("questions", generated);
@@ -106,7 +106,8 @@ public class PracticeController {
 	}
 
 	@RequestMapping(value = "noun", method = RequestMethod.POST)
-	public String startNounPractice(@ModelAttribute("nounForm") @Validated NounStartPracticeForm nounForm,
+	public String startNounPractice(
+			@ModelAttribute("nounForm") @Validated NounStartPracticeForm nounForm,
 			BindingResult bindingResult, HttpSession session, Map<String, Object> model) {
 		session.setAttribute("review", false);
 		if (bindingResult.hasErrors()) {
@@ -116,19 +117,21 @@ public class PracticeController {
 		try {
 			Integer[] selectedDeclensions = nounForm.getDeclensions()
 					.toArray(new Integer[nounForm.getDeclensions().size()]);
-			Question[] generated = nounService.generateQuestions(nounForm.getAmount(), selectedDeclensions,
-					nounForm.getGenders(), nounForm.getTypes(), Arrays.asList(QuestionType.MULTIPLE_CHOICE));
+			Question[] generated = nounService
+					.generateQuestions(nounForm.getAmount(), selectedDeclensions,
+							nounForm.getGenders(), nounForm.getTypes(),
+							Arrays.asList(QuestionType.MULTIPLE_CHOICE));
 			Answer[] answers = new Answer[generated.length];
 			for (int i = 0; i < answers.length; ++i) {
 				switch (generated[i].getType()) {
-				case MULTIPLE_CHOICE: {
-					answers[i] = new SingleTextualAnswer();
-					break;
-				}
-				case SYNOPSIS: {
-					answers[i] = new SynopsisAnswer();
-					break;
-				}
+					case MULTIPLE_CHOICE: {
+						answers[i] = new SingleTextualAnswer();
+						break;
+					}
+					case SYNOPSIS: {
+						answers[i] = new SynopsisAnswer();
+						break;
+					}
 				}
 			}
 			session.setAttribute("questions", generated);
@@ -155,7 +158,8 @@ public class PracticeController {
 	}
 
 	@RequestMapping(value = "{count}", method = RequestMethod.GET)
-	public String getVerbPractice(HttpSession session, @PathVariable("count") int count, Map<String, Object> model) {
+	public String getVerbPractice(HttpSession session, @PathVariable("count") int count,
+			Map<String, Object> model) {
 		Question[] questions = (Question[]) session.getAttribute("questions");
 		Answer[] answers = (Answer[]) session.getAttribute("userAnswers");
 		if (answers == null) {
@@ -169,15 +173,15 @@ public class PracticeController {
 			model.put("reviewing", true);
 		}
 		switch (questions[count].getType()) {
-		case MULTIPLE_CHOICE: {
-			return "multipleChoice";
-		}
-		case SYNOPSIS: {
-			return "synopsis";
-		}
-		default: {
-			return "404";
-		}
+			case MULTIPLE_CHOICE: {
+				return "multipleChoice";
+			}
+			case SYNOPSIS: {
+				return "synopsis";
+			}
+			default: {
+				return "404";
+			}
 		}
 	}
 

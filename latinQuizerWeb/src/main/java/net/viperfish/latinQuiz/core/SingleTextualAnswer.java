@@ -30,19 +30,21 @@ public class SingleTextualAnswer implements Answer {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		SingleTextualAnswer other = (SingleTextualAnswer) obj;
 		if (answer == null) {
-			if (other.answer != null)
-				return false;
-		} else if (!answer.equals(other.answer))
-			return false;
-		return true;
+			return other.answer == null;
+		} else {
+			return answer.equals(other.answer);
+		}
 	}
 
 }

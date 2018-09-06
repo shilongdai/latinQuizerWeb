@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.commons.lang3.tuple.Triple;
 
 public final class SynopsisQuestion extends Question {
@@ -30,7 +29,8 @@ public final class SynopsisQuestion extends Question {
 		return steps;
 	}
 
-	public void setSteps(Map<Tense, List<? extends Triple<String, ? extends List<String>, String>>> steps) {
+	public void setSteps(
+			Map<Tense, List<? extends Triple<String, ? extends List<String>, String>>> steps) {
 		this.steps = steps;
 	}
 
@@ -44,19 +44,21 @@ public final class SynopsisQuestion extends Question {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (!super.equals(obj)) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		SynopsisQuestion other = (SynopsisQuestion) obj;
 		if (tenses == null) {
-			if (other.tenses != null)
-				return false;
-		} else if (!tenses.equals(other.tenses))
-			return false;
-		return true;
+			return other.tenses == null;
+		} else {
+			return tenses.equals(other.tenses);
+		}
 	}
 
 }
